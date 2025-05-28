@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-mono: "JetBrains Mono", monospace;
+    
+    /* Monochrome Dark Theme - Professional Black/Gray/White */
+    --background: 0 0% 8%; /* Deep black #141414 */
+    --foreground: 0 0% 100%; /* Pure white text */
+    --card: 0 0% 12%; /* Dark gray cards #1F1F1F */
+    --card-foreground: 0 0% 100%; /* White text on dark cards */
+    --popover: 0 0% 8%; /* Deep black popover background */
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%; /* White primary */
+    --primary-foreground: 0 0% 8%; /* Black text on white */
+    --secondary: 0 0% 20%; /* Dark gray #333333 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%; /* Medium dark gray #262626 */
+    --muted-foreground: 0 0% 65%; /* Light gray text #A6A6A6 */
+    --accent: 0 0% 100%; /* White accent */
+    --accent-foreground: 0 0% 8%; /* Black text on white accent */
+    --destructive: 0 0% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 25%; /* Medium gray borders #404040 */
+    --input: 0 0% 15%; /* Dark inputs */
+    --ring: 0 0% 100%; /* White focus ring */
+    --radius: 0rem; /* Pixel art aesthetic - square corners */
+    --chart-1: 0 0% 100%; /* White */
+    --chart-2: 0 0% 65%; /* Light gray */
+    --chart-3: 0 0% 40%; /* Medium gray */
+    --chart-4: 0 0% 25%; /* Dark gray */
+    --chart-5: 0 0% 15%; /* Very dark gray */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-mono);
+    line-height: 1.6;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbar - Monochrome theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--accent)); /* White scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0 0% 85%); /* Light gray on hover */
+}
+
+/* Pixel art styling - Monochrome theme */
+.pixel-borders {
+  image-rendering: pixelated;
+  border: 2px solid hsl(var(--foreground));
+  box-shadow: 2px 2px 0 hsla(0, 0%, 100%, 0.3); /* White shadow */
+}
+
+@media (min-width: 640px) {
+  .pixel-borders {
+    box-shadow: 4px 4px 0 hsla(0, 0%, 100%, 0.3);
+  }
+}
+
+.pixel-button {
+  text-transform: uppercase;
+  border: 2px solid hsl(var(--foreground));
+  background: transparent;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  transition: all 0.2s ease;
+  position: relative;
+  color: hsl(var(--foreground));
+  font-size: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .pixel-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+.pixel-button:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 hsl(var(--foreground));
+}
+
+@media (min-width: 640px) {
+  .pixel-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 hsl(var(--foreground));
+  }
+}
+
+.pixel-button:active {
+  transform: translate(0px, 0px);
+  box-shadow: 0px 0px 0 hsl(var(--foreground));
+}
+
+/* Modern theme alternative */
+.modern-card {
+  border-radius: 8px;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modern-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Selection - Monochrome theme */
+::selection {
+  background: hsl(var(--accent)); /* White selection */
+  color: hsl(var(--accent-foreground)); /* Black text on white selection */
+}
