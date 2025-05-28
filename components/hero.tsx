@@ -15,60 +15,60 @@ export function Hero() {
       {/* ML/Math Background Equations - Floating with random angles and positions */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Randomly positioned equations with varied angles and asymmetric positioning */}
-        <div className="absolute top-16 left-2 sm:left-6 md:left-10 text-accent/[0.02] font-mono text-xs sm:text-sm lg:text-base transform -rotate-[23deg] animate-float" style={{ animationDelay: '0s', animationDuration: '8.3s' }}>
+        <div className="absolute top-16 left-2 sm:left-6 md:left-10 text-accent/20 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[23deg] animate-float" style={{ animationDelay: '0s', animationDuration: '8.3s' }}>
           θ = θ - α∇J(θ)
         </div>
         
-        <div className="absolute top-28 right-8 sm:right-14 md:right-20 text-accent/[0.015] font-mono text-xs sm:text-sm lg:text-base transform rotate-[17deg] animate-float" style={{ animationDelay: '2.7s', animationDuration: '9.8s' }}>
+        <div className="absolute top-28 right-8 sm:right-14 md:right-20 text-accent/15 font-mono text-xs sm:text-sm lg:text-base transform rotate-[17deg] animate-float" style={{ animationDelay: '2.7s', animationDuration: '9.8s' }}>
           L = -∑(y·log(ŷ))
         </div>
         
-        <div className="absolute top-[28%] left-12 sm:left-20 md:left-28 text-accent/[0.015] font-mono text-xs sm:text-sm lg:text-base transform rotate-[31deg] hidden sm:block animate-float" style={{ animationDelay: '1.2s', animationDuration: '7.6s' }}>
+        <div className="absolute top-[28%] left-12 sm:left-20 md:left-28 text-accent/15 font-mono text-xs sm:text-sm lg:text-base transform rotate-[31deg] hidden sm:block animate-float" style={{ animationDelay: '1.2s', animationDuration: '7.6s' }}>
           y = mx + b
         </div>
         
-        <div className="absolute top-[42%] right-4 sm:right-8 md:right-16 text-accent/[0.02] font-mono text-xs sm:text-sm lg:text-base transform rotate-[8deg] hidden sm:block animate-float" style={{ animationDelay: '3.9s', animationDuration: '10.2s' }}>
+        <div className="absolute top-[42%] right-4 sm:right-8 md:right-16 text-accent/20 font-mono text-xs sm:text-sm lg:text-base transform rotate-[8deg] hidden sm:block animate-float" style={{ animationDelay: '3.9s', animationDuration: '10.2s' }}>
           ∇²f = ∂²f/∂x²
         </div>
         
-        <div className="absolute bottom-32 left-16 sm:left-24 md:left-32 text-accent/[0.015] font-mono text-xs sm:text-sm lg:text-base transform -rotate-[19deg] animate-float" style={{ animationDelay: '5.1s', animationDuration: '8.7s' }}>
+        <div className="absolute bottom-32 left-16 sm:left-24 md:left-32 text-accent/12 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[19deg] animate-float" style={{ animationDelay: '5.1s', animationDuration: '8.7s' }}>
           A = UΣV^T
         </div>
         
-        <div className="absolute bottom-40 right-2 sm:right-12 md:right-18 text-accent/[0.02] font-mono text-xs sm:text-sm lg:text-base transform rotate-[26deg] animate-float" style={{ animationDelay: '0.8s', animationDuration: '9.4s' }}>
+        <div className="absolute bottom-40 right-2 sm:right-12 md:right-18 text-accent/18 font-mono text-xs sm:text-sm lg:text-base transform rotate-[26deg] animate-float" style={{ animationDelay: '0.8s', animationDuration: '9.4s' }}>
           ∇f(x) = lim[h→0]
         </div>
         
-        <div className="absolute top-[18%] left-[22%] text-accent/[0.01] font-mono text-sm lg:text-base transform rotate-[42deg] hidden lg:block animate-float" style={{ animationDelay: '4.3s', animationDuration: '7.1s' }}>
+        <div className="absolute top-[18%] left-[22%] text-accent/10 font-mono text-sm lg:text-base transform rotate-[42deg] hidden lg:block animate-float" style={{ animationDelay: '4.3s', animationDuration: '7.1s' }}>
           σ(z) = 1/(1+e^(-z))
         </div>
         
-        <div className="absolute top-[65%] right-[28%] text-accent/[0.015] font-mono text-sm lg:text-base transform -rotate-[14deg] hidden lg:block animate-float" style={{ animationDelay: '6.8s', animationDuration: '8.9s' }}>
+        <div className="absolute top-[65%] right-[28%] text-accent/12 font-mono text-sm lg:text-base transform -rotate-[14deg] hidden lg:block animate-float" style={{ animationDelay: '6.8s', animationDuration: '8.9s' }}>
           ReLU(x) = max(0,x)
         </div>
         
-        <div className="absolute top-[52%] left-[15%] text-accent/[0.01] font-mono text-sm lg:text-base transform rotate-[35deg] hidden xl:block animate-float" style={{ animationDelay: '2.4s', animationDuration: '9.6s' }}>
+        <div className="absolute top-[52%] left-[15%] text-accent/10 font-mono text-sm lg:text-base transform rotate-[35deg] hidden xl:block animate-float" style={{ animationDelay: '2.4s', animationDuration: '9.6s' }}>
           MSE = (1/n)∑(yᵢ - ŷᵢ)²
         </div>
         
-        <div className="absolute bottom-[48%] right-[18%] text-accent/[0.02] font-mono text-sm lg:text-base transform -rotate-[29deg] hidden xl:block animate-float" style={{ animationDelay: '7.2s', animationDuration: '8.1s' }}>
+        <div className="absolute bottom-[48%] right-[18%] text-accent/18 font-mono text-sm lg:text-base transform -rotate-[29deg] hidden xl:block animate-float" style={{ animationDelay: '7.2s', animationDuration: '8.1s' }}>
           Adam: β₁m + (1-β₁)g
         </div>
         
         {/* Additional scattered equations for more organic feel */}
-        <div className="absolute top-[75%] left-[8%] text-accent/[0.015] font-mono text-xs sm:text-sm lg:text-base transform rotate-[21deg] animate-float" style={{ animationDelay: '3.6s', animationDuration: '7.8s' }}>
+        <div className="absolute top-[75%] left-[8%] text-accent/12 font-mono text-xs sm:text-sm lg:text-base transform rotate-[21deg] animate-float" style={{ animationDelay: '3.6s', animationDuration: '7.8s' }}>
           f'(x) = lim[h→0]
         </div>
         
-        <div className="absolute top-[38%] right-[32%] text-accent/[0.01] font-mono text-xs sm:text-sm lg:text-base transform -rotate-[37deg] hidden md:block animate-float" style={{ animationDelay: '1.9s', animationDuration: '10.5s' }}>
+        <div className="absolute top-[38%] right-[32%] text-accent/10 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[37deg] hidden md:block animate-float" style={{ animationDelay: '1.9s', animationDuration: '10.5s' }}>
           ∇·F = div F
         </div>
         
-        <div className="absolute bottom-[25%] left-[25%] text-accent/[0.015] font-mono text-sm lg:text-base transform rotate-[16deg] hidden lg:block animate-float" style={{ animationDelay: '5.7s', animationDuration: '8.4s' }}>
+        <div className="absolute bottom-[25%] left-[25%] text-accent/12 font-mono text-sm lg:text-base transform rotate-[16deg] hidden lg:block animate-float" style={{ animationDelay: '5.7s', animationDuration: '8.4s' }}>
           H(X,Y) = -∑p(x,y)log
         </div>
         
-        <div className="absolute top-[85%] right-[12%] text-accent/[0.02] font-mono text-xs sm:text-sm lg:text-base transform -rotate-[11deg] animate-float" style={{ animationDelay: '4.8s', animationDuration: '9.1s' }}>
+        <div className="absolute top-[85%] right-[12%] text-accent/18 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[11deg] animate-float" style={{ animationDelay: '4.8s', animationDuration: '9.1s' }}>
           ∂L/∂w = δE/δw
         </div>
       </div>
