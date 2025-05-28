@@ -83,11 +83,26 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'float': {
+  				'0%, 100%': {
+  					transform: 'translateY(0px) translateX(0px)'
+  				},
+  				'25%': {
+  					transform: 'translateY(-10px) translateX(5px)'
+  				},
+  				'50%': {
+  					transform: 'translateY(-20px) translateX(-5px)'
+  				},
+  				'75%': {
+  					transform: 'translateY(-10px) translateX(3px)'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'float': 'float 6s ease-in-out infinite'
   		}
   	}
   },

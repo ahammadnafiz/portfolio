@@ -55,7 +55,7 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
               >
-                Portfolio
+                Blog
               </a>
               <a
                 href="tel:+8801619960303"

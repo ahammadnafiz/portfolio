@@ -11,6 +11,82 @@ export function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-16 sm:pt-20">
+      {/* ML/Math Background Equations - Floating */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Top Left - Gradient Descent */}
+        <div className="absolute top-20 left-10 text-accent/10 font-mono text-sm transform -rotate-12 hidden md:block animate-float" style={{ animationDelay: '0s', animationDuration: '6s' }}>
+          θ = θ - α∇J(θ)
+        </div>
+        
+        {/* Top Right - Neural Network */}
+        <div className="absolute top-32 right-16 text-accent/15 font-mono text-xs transform rotate-6 hidden lg:block animate-float" style={{ animationDelay: '1s', animationDuration: '8s' }}>
+          f(x) = σ(W·x + b)
+        </div>
+        
+        {/* Left Middle - Backpropagation */}
+        <div className="absolute top-1/3 left-6 text-accent/8 font-mono text-xs transform -rotate-6 hidden md:block animate-float" style={{ animationDelay: '2s', animationDuration: '7s' }}>
+          ∂L/∂w = ∂L/∂y · ∂y/∂w
+        </div>
+        
+        {/* Right Middle - Loss Function */}
+        <div className="absolute top-1/2 right-8 text-accent/12 font-mono text-sm transform rotate-12 hidden lg:block animate-float" style={{ animationDelay: '0.5s', animationDuration: '9s' }}>
+          L = -∑(y·log(ŷ))
+        </div>
+        
+        {/* Bottom Left - Linear Regression */}
+        <div className="absolute bottom-32 left-12 text-accent/10 font-mono text-xs transform rotate-3 hidden md:block animate-float" style={{ animationDelay: '3s', animationDuration: '6.5s' }}>
+          y = mx + b + ε
+        </div>
+        
+        {/* Bottom Right - Probability */}
+        <div className="absolute bottom-20 right-20 text-accent/15 font-mono text-sm transform -rotate-9 hidden lg:block animate-float" style={{ animationDelay: '1.5s', animationDuration: '8.5s' }}>
+          P(A|B) = P(B|A)·P(A)/P(B)
+        </div>
+        
+        {/* Center Scattered Equations */}
+        <div className="absolute top-1/4 left-1/3 text-accent/6 font-mono text-xs transform rotate-45 hidden xl:block animate-float" style={{ animationDelay: '4s', animationDuration: '7.5s' }}>
+          ∇²f = ∂²f/∂x² + ∂²f/∂y²
+        </div>
+        
+        <div className="absolute top-3/4 left-1/4 text-accent/8 font-mono text-xs transform -rotate-30 hidden xl:block animate-float" style={{ animationDelay: '2.5s', animationDuration: '6s' }}>
+          E[X] = ∑x·P(x)
+        </div>
+        
+        <div className="absolute top-1/6 right-1/4 text-accent/7 font-mono text-xs transform rotate-20 hidden xl:block animate-float" style={{ animationDelay: '5s', animationDuration: '9s' }}>
+          σ(z) = 1/(1+e^(-z))
+        </div>
+        
+        <div className="absolute bottom-1/3 left-1/6 text-accent/9 font-mono text-xs transform rotate-15 hidden xl:block animate-float" style={{ animationDelay: '3.5s', animationDuration: '7s' }}>
+          Var(X) = E[X²] - (E[X])²
+        </div>
+        
+        <div className="absolute bottom-1/4 right-1/3 text-accent/11 font-mono text-xs transform -rotate-25 hidden xl:block animate-float" style={{ animationDelay: '1s', animationDuration: '8s' }}>
+          ||x||₂ = √(∑xᵢ²)
+        </div>
+        
+        {/* Advanced ML Equations */}
+        <div className="absolute top-1/3 right-1/6 text-accent/6 font-mono text-xs transform rotate-8 hidden xl:block animate-float" style={{ animationDelay: '6s', animationDuration: '6.5s' }}>
+          KL(P||Q) = ∑P(x)log(P(x)/Q(x))
+        </div>
+        
+        <div className="absolute bottom-1/6 left-1/3 text-accent/10 font-mono text-xs transform -rotate-18 hidden xl:block animate-float" style={{ animationDelay: '4.5s', animationDuration: '8.5s' }}>
+          J = ½∑(hθ(x) - y)²
+        </div>
+        
+        <div className="absolute top-2/3 right-1/5 text-accent/8 font-mono text-xs transform rotate-35 hidden xl:block animate-float" style={{ animationDelay: '2s', animationDuration: '7.5s' }}>
+          A = UΣV^T
+        </div>
+        
+        {/* Faded Complex Formulas */}
+        <div className="absolute top-1/5 left-1/5 text-accent/5 font-mono text-xs transform -rotate-12 hidden 2xl:block animate-float" style={{ animationDelay: '7s', animationDuration: '9.5s' }}>
+          ∂J/∂θⱼ = (1/m)∑(hθ(x^(i)) - y^(i))x_j^(i)
+        </div>
+        
+        <div className="absolute bottom-1/5 right-1/6 text-accent/7 font-mono text-xs transform rotate-28 hidden 2xl:block animate-float" style={{ animationDelay: '5.5s', animationDuration: '8s' }}>
+          H(X) = -∑P(x)log₂P(x)
+        </div>
+      </div>
+      
       {/* Center content container */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
         {/* Left decorative element */}
