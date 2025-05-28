@@ -51,7 +51,7 @@ export function Skills() {
           </div>
           <div className="mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-4 uppercase">
-              <span className="text-accent">S</span>kills
+              <span className="text-accent">T</span>ech & <span className="text-accent">S</span>tack
             </h2>
           </div>
 

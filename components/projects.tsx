@@ -1,28 +1,140 @@
+"use client"
+
+import { useEffect, useState } from "react"
+
 const projects = [
   {
     title: "Predicta",
     description: "End-to-end ML pipeline for data analysis and prediction, featuring automated feature engineering and model selection. Built with advanced AI agents for intelligent automation.",
     tech: ["Python", "Scikit-learn", "Pandas", "Streamlit", "LangChain"],
-    link: "https://github.com/ahammadnafiz",
-    year: "2024 - Current"
+    link: "https://github.com/ahammadnafiz/Predicta",
+    year: "2024 - Current",
+    animationType: "neural_network" // Neural network propagation
   },
   {
     title: "FizTorch",
     description: "Educational deep learning framework inspired by PyTorch. Implements autograd, optimization algorithms, and core ML components with comprehensive documentation for beginners.",
     tech: ["Python", "NumPy", "Linear Algebra", "Deep Learning"],
-    link: "https://github.com/ahammadnafiz",
-    year: "2024"
+    link: "https://github.com/ahammadnafiz/FizTorch",
+    year: "2024",
+    animationType: "gradient_descent" // Gradient descent optimization
   },
   {
     title: "Personal Knowledge Assistant",
     description: "Multi-Agent RAG system combining document processing, smart confidence-based routing, and web fusion. Features LLM integration and modern web interface.",
     tech: ["LangChain", "Hugging Face", "Groq LLM", "FAISS", "FastAPI", "Next.js", "Tailwind"],
-    link: "https://github.com/ahammadnafiz",
-    year: "2025"
+    link: "https://github.com/ahammadnafiz/Personal-Knowledge-Assistant",
+    year: "2025",
+    animationType: "attention_mechanism" // Attention/transformer pattern
   },
 ]
 
 export function Projects() {
+  const [animationSteps, setAnimationSteps] = useState<{[key: number]: number}>({})
+  
+  useEffect(() => {
+    const intervals: NodeJS.Timeout[] = []
+    
+    projects.forEach((_, index) => {
+      const interval = setInterval(() => {
+        setAnimationSteps(prev => ({
+          ...prev,
+          [index]: (prev[index] || 0) + 1
+        }))
+      }, 200 + index * 50) // Different speeds for each project
+      intervals.push(interval)
+    })
+    
+    return () => intervals.forEach(clearInterval)
+  }, [])
+  
+  // Neural Network Animation - Forward propagation pattern
+  const getNeuralNetworkPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
+    const row = Math.floor(i / gridCols)
+    const col = i % gridCols
+    const waveProgress = (step % (gridCols + gridRows)) / (gridCols + gridRows)
+    const distanceFromStart = (row + col) / (gridCols + gridRows - 2)
+    
+    if (Math.abs(distanceFromStart - waveProgress) < 0.2) {
+      return "bg-accent opacity-80"
+    } else if (Math.abs(distanceFromStart - waveProgress) < 0.4) {
+      return "bg-accent opacity-40"
+    }
+    return "bg-transparent"
+  }
+  
+  // Gradient Descent Animation - Optimization path
+  const getGradientDescentPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
+    const row = Math.floor(i / gridCols)
+    const col = i % gridCols
+    const centerRow = Math.floor(gridRows / 2)
+    const centerCol = Math.floor(gridCols / 2)
+    
+    // Create a "loss landscape" with global minimum at center
+    const distanceFromCenter = Math.abs(row - centerRow) + Math.abs(col - centerCol)
+    const maxDistance = centerRow + centerCol
+    const normalizedDistance = distanceFromCenter / maxDistance
+    
+    // Animated "descent" towards center
+    const descentProgress = (step % 100) / 100
+    const currentRadius = (1 - descentProgress) * maxDistance
+    
+    if (Math.abs(distanceFromCenter - currentRadius) < 1.5) {
+      return "bg-accent opacity-90"
+    } else if (normalizedDistance > 0.7) {
+      return "bg-accent opacity-20" // High loss areas
+    } else if (normalizedDistance < 0.3) {
+      return "bg-accent opacity-60" // Low loss areas
+    }
+    return "bg-transparent"
+  }
+  
+  // Attention Mechanism Animation - Focus patterns
+  const getAttentionPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
+    const row = Math.floor(i / gridRows)
+    const col = i % gridCols
+    
+    // Create multiple attention heads focusing on different areas
+    const attentionCycle = Math.floor(step / 20) % 4
+    const intensity = (step % 20) / 20
+    
+    let focused = false
+    
+    switch (attentionCycle) {
+      case 0: // Top-left attention
+        focused = row < gridRows / 2 && col < gridCols / 2
+        break
+      case 1: // Top-right attention
+        focused = row < gridRows / 2 && col >= gridCols / 2
+        break
+      case 2: // Bottom-left attention
+        focused = row >= gridRows / 2 && col < gridCols / 2
+        break
+      case 3: // Bottom-right attention
+        focused = row >= gridRows / 2 && col >= gridCols / 2
+        break
+    }
+    
+    if (focused) {
+      return `bg-accent opacity-${Math.floor(intensity * 80 + 20)}`
+    }
+    
+    // Background attention
+    return Math.random() > 0.8 ? "bg-accent opacity-10" : "bg-transparent"
+  }
+  
+  const getAnimationPattern = (animationType: string, step: number, i: number, gridCols: number, gridRows: number) => {
+    switch (animationType) {
+      case "neural_network":
+        return getNeuralNetworkPattern(step, i, gridCols, gridRows)
+      case "gradient_descent":
+        return getGradientDescentPattern(step, i, gridCols, gridRows)
+      case "attention_mechanism":
+        return getAttentionPattern(step, i, gridCols, gridRows)
+      default:
+        return "bg-transparent"
+    }
+  }
   return (
     <section id="projects" className="py-16 sm:py-20 lg:py-24 relative">
       {/* Center content container */}
@@ -51,41 +163,45 @@ export function Projects() {
                 className="group border-2 border-accent hover:border-accent bg-secondary/10 transition-all duration-300 p-4 sm:p-6 lg:p-8 pixel-borders"
               >
                 <div className="aspect-video bg-background mb-4 sm:mb-6 relative overflow-hidden border border-accent/30">
-                  {/* Pixel art project preview - Responsive */}
+                  {/* ML/AI Themed Pixel Art Animations */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Mobile: 4x3 grid for video aspect */}
-                    <div className="grid grid-cols-4 gap-0 w-full h-full sm:hidden">
-                      {Array.from({ length: 12 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`aspect-square ${
-                            Math.random() > 0.6 ? "bg-accent opacity-40" : "bg-transparent"
-                          } group-hover:bg-accent transition-colors duration-500`}
-                          style={{ transitionDelay: `${i * 30}ms` }}
-                        />
-                      ))}
+                    {/* Animation Label */}
+                    <div className="absolute top-1 left-1 text-xs font-mono text-accent bg-background/80 px-1">
+                      {project.animationType === "neural_network" && "Neural Net"}
+                      {project.animationType === "gradient_descent" && "Gradient Descent"}
+                      {project.animationType === "attention_mechanism" && "Attention"}
                     </div>
-                    {/* Small screens: 6x4 grid */}
-                    <div className="hidden sm:grid md:hidden grid-cols-6 gap-0 w-full h-full">
+                    
+                    {/* Mobile: 6x4 grid for video aspect */}
+                    <div className="grid grid-cols-6 gap-0 w-full h-full sm:hidden">
                       {Array.from({ length: 24 }).map((_, i) => (
                         <div
                           key={i}
-                          className={`aspect-square ${
-                            Math.random() > 0.6 ? "bg-accent opacity-40" : "bg-transparent"
-                          } group-hover:bg-accent transition-colors duration-500`}
-                          style={{ transitionDelay: `${i * 25}ms` }}
+                          className={`aspect-square transition-all duration-300 ${
+                            getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 6, 4)
+                          }`}
                         />
                       ))}
                     </div>
-                    {/* Medium and larger screens: 8x5 grid */}
-                    <div className="hidden md:grid grid-cols-8 gap-0 w-full h-full">
+                    {/* Small screens: 8x5 grid */}
+                    <div className="hidden sm:grid md:hidden grid-cols-8 gap-0 w-full h-full">
                       {Array.from({ length: 40 }).map((_, i) => (
                         <div
                           key={i}
-                          className={`aspect-square ${
-                            Math.random() > 0.6 ? "bg-accent opacity-40" : "bg-transparent"
-                          } group-hover:bg-accent transition-colors duration-500`}
-                          style={{ transitionDelay: `${i * 20}ms` }}
+                          className={`aspect-square transition-all duration-300 ${
+                            getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 8, 5)
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    {/* Medium and larger screens: 10x6 grid */}
+                    <div className="hidden md:grid grid-cols-10 gap-0 w-full h-full">
+                      {Array.from({ length: 60 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className={`aspect-square transition-all duration-300 ${
+                            getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 10, 6)
+                          }`}
                         />
                       ))}
                     </div>

@@ -1,4 +1,76 @@
+"use client"
+
+import { useEffect, useState } from "react"
+
 export function About() {
+  const [filterPosition, setFilterPosition] = useState({ row: 0, col: 0 })
+  const [animationCycle, setAnimationCycle] = useState(0) // 0: input, 1: filtering, 2: output
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFilterPosition(prev => {
+        const gridSize = 12 // Using largest grid for calculation
+        const maxPosition = gridSize - 3 // 3x3 filter
+        
+        if (prev.col < maxPosition) {
+          return { ...prev, col: prev.col + 1 }
+        } else if (prev.row < maxPosition) {
+          return { row: prev.row + 1, col: 0 }
+        } else {
+          // Reset and cycle through animation phases
+          setAnimationCycle(c => (c + 1) % 3)
+          return { row: 0, col: 0 }
+        }
+      })
+    }, 150) // Faster animation for smoother CNN visualization
+    
+    return () => clearInterval(interval)
+  }, [])
+  
+  // Generate static input pattern (represents input image)
+  const getInputPattern = (i: number, gridSize: number) => {
+    const row = Math.floor(i / gridSize)
+    const col = i % gridSize
+    // Create a simple pattern that looks like image data
+    return ((row + col) % 3 === 0 || (row % 2 === 1 && col % 2 === 1)) ? "bg-accent opacity-40" : "bg-transparent"
+  }
+  
+  // Check if current pixel is under the 3x3 filter
+  const isUnderFilter = (i: number, gridSize: number, filterRow: number, filterCol: number) => {
+    const row = Math.floor(i / gridSize)
+    const col = i % gridSize
+    return row >= filterRow && row < filterRow + 3 && col >= filterCol && col < filterCol + 3
+  }
+  
+  // Generate output feature map (activated areas where filter was applied)
+  const getOutputPattern = (i: number, gridSize: number) => {
+    const row = Math.floor(i / gridSize)
+    const col = i % gridSize
+    // Show feature map as a sparser, processed version
+    const maxPos = gridSize - 3
+    const normalizedRow = Math.floor((row / gridSize) * (maxPos + 1))
+    const normalizedCol = Math.floor((col / gridSize) * (maxPos + 1))
+    return (normalizedRow % 2 === 0 && normalizedCol % 2 === 0) ? "bg-accent opacity-70" : "bg-transparent"
+  }
+  
+  // Get the pattern based on current animation cycle
+  const getCNNPattern = (i: number, gridSize: number) => {
+    const scaledFilterRow = Math.floor((filterPosition.row / (12 - 3)) * Math.max(0, gridSize - 3))
+    const scaledFilterCol = Math.floor((filterPosition.col / (12 - 3)) * Math.max(0, gridSize - 3))
+    
+    switch (animationCycle) {
+      case 0: // Input phase - show input data
+        return getInputPattern(i, gridSize)
+      case 1: // Filtering phase - show filter moving over input
+        const basePattern = getInputPattern(i, gridSize)
+        const underFilter = isUnderFilter(i, gridSize, scaledFilterRow, scaledFilterCol)
+        return underFilter ? "bg-accent opacity-90" : basePattern
+      case 2: // Output phase - show feature map
+        return getOutputPattern(i, gridSize)
+      default:
+        return "bg-transparent"
+    }
+  }
   return (
     <section id="about" className="py-16 sm:py-20 lg:py-24 bg-secondary/20 relative">
       {/* Center content container */}
@@ -45,17 +117,28 @@ export function About() {
 
             <div className="relative order-1 lg:order-2">
               <div className="group aspect-square bg-background relative overflow-hidden border-2 sm:border-4 border-accent pixel-borders w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[320px] xl:max-w-[350px] mx-auto">
-                {/* Pixel Art Pattern - Responsive Grid with hover animation */}
+                {/* CNN Animation Labels */}
+                <div className="absolute -top-8 left-0 right-0 text-center">
+                  <span className="text-xs font-mono text-accent bg-background px-2 py-1 border border-accent">
+                    {['Input Layer', 'Convolution (3x3)', 'Feature Map'][animationCycle]}
+                  </span>
+                </div>
+                
+                {/* Filter Position Indicator */}
+                <div className="absolute -bottom-12 left-0 right-0 text-center">
+                  <span className="text-xs font-mono text-muted-foreground">
+                    Filter: ({filterPosition.row}, {filterPosition.col})
+                  </span>
+                </div>
+                
+                {/* CNN Pixel Art Pattern - Responsive Grid with actual CNN animation */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   {/* Mobile: 6x6 grid */}
                   <div className="grid grid-cols-6 gap-0 w-full h-full sm:hidden">
                     {Array.from({ length: 36 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square ${
-                          Math.random() > 0.7 ? "bg-accent opacity-50" : "bg-transparent"
-                        } group-hover:bg-accent transition-colors duration-500`}
-                        style={{ transitionDelay: `${i * 15}ms` }}
+                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 6)}`}
                       />
                     ))}
                   </div>
@@ -64,10 +147,7 @@ export function About() {
                     {Array.from({ length: 64 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square ${
-                          Math.random() > 0.7 ? "bg-accent opacity-50" : "bg-transparent"
-                        } group-hover:bg-accent transition-colors duration-500`}
-                        style={{ transitionDelay: `${i * 12}ms` }}
+                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 8)}`}
                       />
                     ))}
                   </div>
@@ -76,10 +156,7 @@ export function About() {
                     {Array.from({ length: 100 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square ${
-                          Math.random() > 0.7 ? "bg-accent opacity-50" : "bg-transparent"
-                        } group-hover:bg-accent transition-colors duration-500`}
-                        style={{ transitionDelay: `${i * 10}ms` }}
+                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 10)}`}
                       />
                     ))}
                   </div>
@@ -88,13 +165,22 @@ export function About() {
                     {Array.from({ length: 144 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square ${
-                          Math.random() > 0.7 ? "bg-accent opacity-50" : "bg-transparent"
-                        } group-hover:bg-accent transition-colors duration-500`}
-                        style={{ transitionDelay: `${i * 8}ms` }}
+                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 12)}`}
                       />
                     ))}
                   </div>
+                </div>
+                
+                {/* CNN Process Indicators */}
+                <div className="absolute bottom-2 left-2 right-2 flex justify-center space-x-1">
+                  {[0, 1, 2].map((step) => (
+                    <div
+                      key={step}
+                      className={`w-2 h-2 border border-accent transition-all duration-300 ${
+                        step === animationCycle ? 'bg-accent' : 'bg-transparent'
+                      }`}
+                    />
+                  ))}
                 </div>
               </div>
               
