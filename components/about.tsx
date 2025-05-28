@@ -5,8 +5,10 @@ import { useEffect, useState } from "react"
 export function About() {
   const [filterPosition, setFilterPosition] = useState({ row: 0, col: 0 })
   const [animationCycle, setAnimationCycle] = useState(0) // 0: input, 1: filtering, 2: output
+  const [mounted, setMounted] = useState(false)
   
   useEffect(() => {
+    setMounted(true)
     const interval = setInterval(() => {
       setFilterPosition(prev => {
         const gridSize = 12 // Using largest grid for calculation
@@ -134,38 +136,50 @@ export function About() {
                 {/* CNN Pixel Art Pattern - Responsive Grid with actual CNN animation */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   {/* Mobile: 6x6 grid */}
-                  <div className="grid grid-cols-6 gap-0 w-full h-full sm:hidden">
+                  <div className={`grid grid-cols-6 gap-0 w-full h-full sm:hidden ${!mounted ? 'cnn-animation-grid' : ''}`}>
                     {Array.from({ length: 36 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 6)}`}
+                        className={`aspect-square transition-all duration-150 ${
+                          mounted ? getCNNPattern(i, 6) : 'bg-accent opacity-40'
+                        }`}
+                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
                     ))}
                   </div>
                   {/* Small screens: 8x8 grid */}
-                  <div className="hidden sm:grid md:hidden grid-cols-8 gap-0 w-full h-full">
+                  <div className={`hidden sm:grid md:hidden grid-cols-8 gap-0 w-full h-full ${!mounted ? 'cnn-animation-grid' : ''}`}>
                     {Array.from({ length: 64 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 8)}`}
+                        className={`aspect-square transition-all duration-150 ${
+                          mounted ? getCNNPattern(i, 8) : 'bg-accent opacity-40'
+                        }`}
+                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
                     ))}
                   </div>
                   {/* Medium screens: 10x10 grid */}
-                  <div className="hidden md:grid lg:hidden grid-cols-10 gap-0 w-full h-full">
+                  <div className={`hidden md:grid lg:hidden grid-cols-10 gap-0 w-full h-full ${!mounted ? 'cnn-animation-grid' : ''}`}>
                     {Array.from({ length: 100 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 10)}`}
+                        className={`aspect-square transition-all duration-150 ${
+                          mounted ? getCNNPattern(i, 10) : 'bg-accent opacity-40'
+                        }`}
+                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
                     ))}
                   </div>
                   {/* Large screens: 12x12 grid */}
-                  <div className="hidden lg:grid grid-cols-12 gap-0 w-full h-full">
+                  <div className={`hidden lg:grid grid-cols-12 gap-0 w-full h-full ${!mounted ? 'cnn-animation-grid' : ''}`}>
                     {Array.from({ length: 144 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-150 ${getCNNPattern(i, 12)}`}
+                        className={`aspect-square transition-all duration-150 ${
+                          mounted ? getCNNPattern(i, 12) : 'bg-accent opacity-40'
+                        }`}
+                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
                     ))}
                   </div>

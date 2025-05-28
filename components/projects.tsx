@@ -31,8 +31,10 @@ const projects = [
 
 export function Projects() {
   const [animationSteps, setAnimationSteps] = useState<{[key: number]: number}>({})
+  const [mounted, setMounted] = useState(false)
   
   useEffect(() => {
+    setMounted(true)
     const intervals: NodeJS.Timeout[] = []
     
     projects.forEach((_, index) => {
@@ -173,35 +175,62 @@ export function Projects() {
                     </div>
                     
                     {/* Mobile: 6x4 grid for video aspect */}
-                    <div className="grid grid-cols-6 gap-0 w-full h-full sm:hidden">
+                    <div className={`grid grid-cols-6 gap-0 w-full h-full sm:hidden ${
+                      !mounted ? `project-${project.animationType.replace('_', '-')}` : ''
+                    }`}>
                       {Array.from({ length: 24 }).map((_, i) => (
                         <div
                           key={i}
                           className={`aspect-square transition-all duration-300 ${
-                            getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 6, 4)
+                            mounted 
+                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 6, 4)
+                              : 'bg-accent opacity-30'
                           }`}
+                          style={!mounted ? { 
+                            '--wave-delay': i,
+                            '--descent-delay': i,
+                            '--attention-delay': i
+                          } as React.CSSProperties : {}}
                         />
                       ))}
                     </div>
                     {/* Small screens: 8x5 grid */}
-                    <div className="hidden sm:grid md:hidden grid-cols-8 gap-0 w-full h-full">
+                    <div className={`hidden sm:grid md:hidden grid-cols-8 gap-0 w-full h-full ${
+                      !mounted ? `project-${project.animationType.replace('_', '-')}` : ''
+                    }`}>
                       {Array.from({ length: 40 }).map((_, i) => (
                         <div
                           key={i}
                           className={`aspect-square transition-all duration-300 ${
-                            getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 8, 5)
+                            mounted 
+                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 8, 5)
+                              : 'bg-accent opacity-30'
                           }`}
+                          style={!mounted ? { 
+                            '--wave-delay': i,
+                            '--descent-delay': i,
+                            '--attention-delay': i
+                          } as React.CSSProperties : {}}
                         />
                       ))}
                     </div>
                     {/* Medium and larger screens: 10x6 grid */}
-                    <div className="hidden md:grid grid-cols-10 gap-0 w-full h-full">
+                    <div className={`hidden md:grid grid-cols-10 gap-0 w-full h-full ${
+                      !mounted ? `project-${project.animationType.replace('_', '-')}` : ''
+                    }`}>
                       {Array.from({ length: 60 }).map((_, i) => (
                         <div
                           key={i}
                           className={`aspect-square transition-all duration-300 ${
-                            getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 10, 6)
+                            mounted 
+                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 10, 6)
+                              : 'bg-accent opacity-30'
                           }`}
+                          style={!mounted ? { 
+                            '--wave-delay': i,
+                            '--descent-delay': i,
+                            '--attention-delay': i
+                          } as React.CSSProperties : {}}
                         />
                       ))}
                     </div>
