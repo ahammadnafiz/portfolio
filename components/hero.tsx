@@ -135,7 +135,7 @@ export function Hero() {
               </button>
               
               <a
-                href="/Nafiz CV Updated.pdf"
+                href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/Nafiz CV Updated.pdf`}
                 download="Nafiz_CV_Updated.pdf"
                 className="pixel-button uppercase text-sm sm:text-base"
               >
