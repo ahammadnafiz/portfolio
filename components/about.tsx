@@ -21,17 +21,13 @@ export function About() {
             <div className="order-2 lg:order-1">
               <div className="space-y-4 sm:space-y-6 font-mono text-foreground leading-relaxed text-sm sm:text-base text-left">
                 <p className="border-l-2 sm:border-l-4 border-accent pl-3 sm:pl-4">
-                  I'm a passionate Data Scientist and AI Developer currently pursuing B.Sc. in Data Science at 
-                  United International University. My work focuses on building intelligent solutions using machine 
-                  learning, deep learning, and AI technologies.
+                  I'm a Data Science student with a strong interest in AI research—especially Natural Language Processing and Reinforcement Learning. I focus on understanding machine learning from both theoretical and practical angles, currently diving deep into Transformer architectures by implementing them from scratch.
                 </p>
                 <p>
-                  As Head of R&D at UIU Data Science Club and an Undergraduate Teaching Assistant, I lead collaborative 
-                  projects, organize educational workshops, and mentor fellow students in programming and data science concepts.
+                  As Head of R&D at UIU Data Science Club, I lead workshops and projects to help others learn alongside me. I also build educational tools like FizTorch (a deep learning framework) and Predicta (an AutoML pipeline) to make complex AI concepts more accessible.
                 </p>
                 <p>
-                  With expertise in Python, ML frameworks like PyTorch and Scikit-learn, and AI technologies including 
-                  LangChain and LLM agents, I enjoy creating end-to-end solutions that solve real-world problems.
+                  I believe in learning AI through research papers, code, and collaboration—and I'm always looking to connect with mentors and contribute to open-source projects.
                 </p>
                 
                 {/* Resume Download Button */}

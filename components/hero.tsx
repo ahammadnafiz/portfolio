@@ -43,11 +43,13 @@ export function Hero() {
                 {/* Image container */}
                 <div className="absolute inset-4 rounded-full overflow-hidden bg-gradient-to-br from-background to-muted">
                   <Image
-                    src="public/psyco-v1.png"
+                    src={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/psyco-v1.png`}
                     alt="Profile"
                     fill
                     className="object-cover transition-transform duration-700 hover:scale-110"
                     priority
+                    onError={(e) => console.error('Image failed to load:', e)}
+                    onLoad={() => console.log('Image loaded successfully')}
                   />
                   
                   {/* Overlay blend effect */}
@@ -74,9 +76,9 @@ export function Hero() {
             <div className="w-16 sm:w-20 md:w-24 h-1 sm:h-2 bg-accent mx-auto mb-8"></div>
             
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-mono text-muted-foreground mb-8 leading-relaxed uppercase max-w-2xl">
-              Jr ML Engineer
+              ML Researcher | Python Developer
               <br />
-              <span className="text-accent">Building intelligent solutions with ML & AI</span>
+              <span className="text-accent">Building AI Skills Through Code, Research, and Community</span>
             </p>
 
             {/* Social Media Links */}
