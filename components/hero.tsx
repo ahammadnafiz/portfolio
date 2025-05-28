@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 
 export function Hero() {
   const [mounted, setMounted] = useState(false)
@@ -42,12 +41,10 @@ export function Hero() {
                 
                 {/* Image container */}
                 <div className="absolute inset-4 rounded-full overflow-hidden bg-gradient-to-br from-background to-muted">
-                  <Image
-                    src={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/profile.png`}
+                  <img
+                    src={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/psyco-v1.png`}
                     alt="Profile"
-                    fill
-                    className="object-cover transition-transform duration-700 hover:scale-110"
-                    priority
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                     onError={(e) => console.error('Image failed to load:', e)}
                     onLoad={() => console.log('Image loaded successfully')}
                   />
