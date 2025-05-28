@@ -43,7 +43,7 @@ export function Hero() {
                 {/* Image container */}
                 <div className="absolute inset-4 rounded-full overflow-hidden bg-gradient-to-br from-background to-muted">
                   <Image
-                    src="/psyco-v1.png"
+                    src={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/psyco-v1.png`}
                     alt="Profile"
                     fill
                     className="object-cover transition-transform duration-700 hover:scale-110"
