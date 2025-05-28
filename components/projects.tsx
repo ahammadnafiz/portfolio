@@ -43,29 +43,29 @@ export function Projects() {
           ...prev,
           [index]: (prev[index] || 0) + 1
         }))
-      }, 200 + index * 50) // Different speeds for each project
+      }, 400 + index * 100) // Slower, more optimized animation
       intervals.push(interval)
     })
     
     return () => intervals.forEach(clearInterval)
   }, [])
   
-  // Neural Network Animation - Forward propagation pattern
+  // Neural Network Animation - Forward propagation pattern (optimized)
   const getNeuralNetworkPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridCols)
     const col = i % gridCols
     const waveProgress = (step % (gridCols + gridRows)) / (gridCols + gridRows)
     const distanceFromStart = (row + col) / (gridCols + gridRows - 2)
     
-    if (Math.abs(distanceFromStart - waveProgress) < 0.2) {
-      return "bg-accent opacity-80"
-    } else if (Math.abs(distanceFromStart - waveProgress) < 0.4) {
-      return "bg-accent opacity-40"
+    if (Math.abs(distanceFromStart - waveProgress) < 0.3) {
+      return "bg-accent opacity-60"
+    } else if (Math.abs(distanceFromStart - waveProgress) < 0.5) {
+      return "bg-accent opacity-20"
     }
     return "bg-transparent"
   }
   
-  // Gradient Descent Animation - Optimization path
+  // Gradient Descent Animation - Optimization path (optimized)
   const getGradientDescentPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridCols)
     const col = i % gridCols
@@ -75,30 +75,29 @@ export function Projects() {
     // Create a "loss landscape" with global minimum at center
     const distanceFromCenter = Math.abs(row - centerRow) + Math.abs(col - centerCol)
     const maxDistance = centerRow + centerCol
-    const normalizedDistance = distanceFromCenter / maxDistance
     
     // Animated "descent" towards center
-    const descentProgress = (step % 100) / 100
+    const descentProgress = (step % 80) / 80
     const currentRadius = (1 - descentProgress) * maxDistance
     
-    if (Math.abs(distanceFromCenter - currentRadius) < 1.5) {
-      return "bg-accent opacity-90"
-    } else if (normalizedDistance > 0.7) {
-      return "bg-accent opacity-20" // High loss areas
-    } else if (normalizedDistance < 0.3) {
-      return "bg-accent opacity-60" // Low loss areas
+    if (Math.abs(distanceFromCenter - currentRadius) < 2) {
+      return "bg-accent opacity-70"
+    } else if (distanceFromCenter > maxDistance * 0.7) {
+      return "bg-accent opacity-15" // High loss areas
+    } else if (distanceFromCenter < maxDistance * 0.3) {
+      return "bg-accent opacity-40" // Low loss areas
     }
     return "bg-transparent"
   }
   
-  // Attention Mechanism Animation - Focus patterns
+  // Attention Mechanism Animation - Focus patterns (optimized)
   const getAttentionPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridRows)
     const col = i % gridCols
     
     // Create multiple attention heads focusing on different areas
-    const attentionCycle = Math.floor(step / 20) % 4
-    const intensity = (step % 20) / 20
+    const attentionCycle = Math.floor(step / 30) % 4
+    const intensity = Math.min((step % 30) / 30, 0.6)
     
     let focused = false
     
@@ -118,11 +117,11 @@ export function Projects() {
     }
     
     if (focused) {
-      return `bg-accent opacity-${Math.floor(intensity * 80 + 20)}`
+      return `bg-accent opacity-${Math.floor(intensity * 50 + 15)}`
     }
     
-    // Background attention
-    return Math.random() > 0.8 ? "bg-accent opacity-10" : "bg-transparent"
+    // Background attention (reduced frequency)
+    return Math.random() > 0.95 ? "bg-accent opacity-5" : "bg-transparent"
   }
   
   const getAnimationPattern = (animationType: string, step: number, i: number, gridCols: number, gridRows: number) => {
@@ -181,10 +180,10 @@ export function Projects() {
                       {Array.from({ length: 24 }).map((_, i) => (
                         <div
                           key={i}
-                          className={`aspect-square transition-all duration-300 ${
+                          className={`aspect-square transition-all duration-500 ${
                             mounted 
                               ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 6, 4)
-                              : 'bg-accent opacity-30'
+                              : 'bg-accent opacity-15'
                           }`}
                           style={!mounted ? { 
                             '--wave-delay': i,
@@ -201,10 +200,10 @@ export function Projects() {
                       {Array.from({ length: 40 }).map((_, i) => (
                         <div
                           key={i}
-                          className={`aspect-square transition-all duration-300 ${
+                          className={`aspect-square transition-all duration-500 ${
                             mounted 
                               ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 8, 5)
-                              : 'bg-accent opacity-30'
+                              : 'bg-accent opacity-15'
                           }`}
                           style={!mounted ? { 
                             '--wave-delay': i,
@@ -221,10 +220,10 @@ export function Projects() {
                       {Array.from({ length: 60 }).map((_, i) => (
                         <div
                           key={i}
-                          className={`aspect-square transition-all duration-300 ${
+                          className={`aspect-square transition-all duration-500 ${
                             mounted 
                               ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 10, 6)
-                              : 'bg-accent opacity-30'
+                              : 'bg-accent opacity-15'
                           }`}
                           style={!mounted ? { 
                             '--wave-delay': i,

@@ -8,100 +8,38 @@ export function Hero() {
   useEffect(() => {
     setMounted(true)
   }, [])
-  
+
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-16 sm:pt-20">
-      {/* ML/Math Background Equations - Floating */}
+      {/* ML/Math Background Equations - Floating - Optimized and positioned away from main content */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Top Row - Distributed */}
-        <div className="absolute top-16 left-8 text-accent/6 font-mono text-sm transform -rotate-12 hidden md:block animate-float" style={{ animationDelay: '0s', animationDuration: '6s' }}>
+        {/* Far edges only - avoiding center content areas */}
+        <div className="absolute top-16 left-8 text-accent/3 font-mono text-sm transform -rotate-12 hidden xl:block animate-float" style={{ animationDelay: '0s', animationDuration: '8s' }}>
           θ = θ - α∇J(θ)
         </div>
         
-        <div className="absolute top-24 left-1/3 text-accent/5 font-mono text-xs transform rotate-15 hidden lg:block animate-float" style={{ animationDelay: '2s', animationDuration: '7s' }}>
-          f(x) = σ(W·x + b)
-        </div>
-        
-        <div className="absolute top-20 right-1/4 text-accent/7 font-mono text-xs transform -rotate-8 hidden lg:block animate-float" style={{ animationDelay: '1s', animationDuration: '8s' }}>
-          ∂L/∂w = ∂L/∂y · ∂y/∂w
-        </div>
-        
-        <div className="absolute top-28 right-12 text-accent/6 font-mono text-sm transform rotate-6 hidden md:block animate-float" style={{ animationDelay: '3s', animationDuration: '9s' }}>
+        <div className="absolute top-28 right-12 text-accent/2 font-mono text-xs transform rotate-6 hidden xl:block animate-float" style={{ animationDelay: '3s', animationDuration: '10s' }}>
           L = -∑(y·log(ŷ))
         </div>
         
-        {/* Upper Middle Row */}
-        <div className="absolute top-1/3 left-16 text-accent/8 font-mono text-xs transform rotate-20 hidden lg:block animate-float" style={{ animationDelay: '1.5s', animationDuration: '6.5s' }}>
+        {/* Far left side only */}
+        <div className="absolute top-1/3 left-8 text-accent/3 font-mono text-xs transform rotate-20 hidden 2xl:block animate-float" style={{ animationDelay: '1.5s', animationDuration: '9s' }}>
           y = mx + b + ε
         </div>
         
-        <div className="absolute top-1/3 left-2/3 text-accent/5 font-mono text-xs transform -rotate-25 hidden xl:block animate-float" style={{ animationDelay: '4s', animationDuration: '7.5s' }}>
-          P(A|B) = P(B|A)·P(A)/P(B)
+        {/* Far right side only */}
+        <div className="absolute top-1/3 right-8 text-accent/2 font-mono text-xs transform rotate-10 hidden 2xl:block animate-float" style={{ animationDelay: '2.5s', animationDuration: '11s' }}>
+          ∇²f = ∂²f/∂x²
         </div>
         
-        <div className="absolute top-1/3 right-8 text-accent/9 font-mono text-xs transform rotate-10 hidden lg:block animate-float" style={{ animationDelay: '2.5s', animationDuration: '8s' }}>
-          ∇²f = ∂²f/∂x² + ∂²f/∂y²
-        </div>
-        
-        {/* Center Row - Balanced Distribution */}
-        <div className="absolute top-1/2 left-6 text-accent/7 font-mono text-xs transform -rotate-15 hidden lg:block animate-float" style={{ animationDelay: '3.5s', animationDuration: '6s' }}>
-          E[X] = ∑x·P(x)
-        </div>
-        
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 text-accent/4 font-mono text-xs rotate-0 hidden xl:block animate-float" style={{ animationDelay: '5s', animationDuration: '9s' }}>
-          σ(z) = 1/(1+e^(-z))
-        </div>
-        
-        <div className="absolute top-1/2 right-6 text-accent/8 font-mono text-xs transform rotate-18 hidden lg:block animate-float" style={{ animationDelay: '1s', animationDuration: '7s' }}>
-          Var(X) = E[X²] - (E[X])²
-        </div>
-        
-        {/* Lower Middle Row */}
-        <div className="absolute top-2/3 left-1/4 text-accent/6 font-mono text-xs transform rotate-12 hidden xl:block animate-float" style={{ animationDelay: '0.5s', animationDuration: '8.5s' }}>
-          ||x||₂ = √(∑xᵢ²)
-        </div>
-        
-        <div className="absolute top-2/3 right-1/3 text-accent/7 font-mono text-xs transform -rotate-20 hidden xl:block animate-float" style={{ animationDelay: '6s', animationDuration: '6.5s' }}>
-          KL(P||Q) = ∑P(x)log(P(x)/Q(x))
-        </div>
-        
-        <div className="absolute top-2/3 right-16 text-accent/5 font-mono text-xs transform rotate-8 hidden lg:block animate-float" style={{ animationDelay: '4.5s', animationDuration: '8.5s' }}>
-          J = ½∑(hθ(x) - y)²
-        </div>
-        
-        {/* Bottom Row */}
-        <div className="absolute bottom-32 left-12 text-accent/8 font-mono text-xs transform -rotate-10 hidden md:block animate-float" style={{ animationDelay: '2s', animationDuration: '7.5s' }}>
+        {/* Bottom corners only */}
+        <div className="absolute bottom-32 left-12 text-accent/3 font-mono text-xs transform -rotate-10 hidden xl:block animate-float" style={{ animationDelay: '2s', animationDuration: '9s' }}>
           A = UΣV^T
         </div>
         
-        <div className="absolute bottom-24 left-1/3 text-accent/6 font-mono text-xs transform rotate-25 hidden lg:block animate-float" style={{ animationDelay: '7s', animationDuration: '9.5s' }}>
-          ∂J/∂θⱼ = (1/m)∑(hθ(x^(i)) - y^(i))x_j^(i)
-        </div>
-        
-        <div className="absolute bottom-28 right-1/4 text-accent/7 font-mono text-xs transform -rotate-18 hidden lg:block animate-float" style={{ animationDelay: '5.5s', animationDuration: '8s' }}>
-          H(X) = -∑P(x)log₂P(x)
-        </div>
-        
-        <div className="absolute bottom-20 right-8 text-accent/9 font-mono text-xs transform rotate-14 hidden md:block animate-float" style={{ animationDelay: '3s', animationDuration: '6.5s' }}>
-          ∇f(x) = lim[h→0](f(x+h)-f(x))/h
-        </div>
-        
-        {/* Additional Scattered Equations for Balance */}
-        <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 text-accent/4 font-mono text-xs transform rotate-30 hidden 2xl:block animate-float" style={{ animationDelay: '6.5s', animationDuration: '7s' }}>
-          ReLU(x) = max(0,x)
-        </div>
-        
-        <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 text-accent/5 font-mono text-xs transform -rotate-12 hidden 2xl:block animate-float" style={{ animationDelay: '8s', animationDuration: '8.5s' }}>
-          Attention(Q,K,V) = softmax(QK^T/√d_k)V
-        </div>
-        
-        <div className="absolute top-3/5 left-1/5 text-accent/6 font-mono text-xs transform rotate-22 hidden 2xl:block animate-float" style={{ animationDelay: '9s', animationDuration: '7.5s' }}>
-          MSE = (1/n)∑(yᵢ - ŷᵢ)²
-        </div>
-        
-        <div className="absolute top-3/5 right-1/5 text-accent/5 font-mono text-xs transform -rotate-16 hidden 2xl:block animate-float" style={{ animationDelay: '10s', animationDuration: '9s' }}>
-          Adam: m = β₁m + (1-β₁)g
+        <div className="absolute bottom-20 right-8 text-accent/2 font-mono text-xs transform rotate-14 hidden xl:block animate-float" style={{ animationDelay: '4s', animationDuration: '8s' }}>
+          ∇f(x) = lim[h→0]
         </div>
       </div>
       

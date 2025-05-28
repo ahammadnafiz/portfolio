@@ -147,30 +147,31 @@ html {
   color: hsl(var(--accent-foreground)); /* Black text on white selection */
 }
 
-/* Floating animation for background elements */
+/* Floating animation for background elements - Optimized */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px) translateX(0px);
   }
   25% {
-    transform: translateY(-10px) translateX(5px);
+    transform: translateY(-5px) translateX(2px);
   }
   50% {
-    transform: translateY(-20px) translateX(-5px);
+    transform: translateY(-8px) translateX(-2px);
   }
   75% {
-    transform: translateY(-10px) translateX(3px);
+    transform: translateY(-3px) translateX(1px);
   }
 }
 
 .animate-float {
   animation: float linear infinite;
+  will-change: transform;
 }
 
-/* CNN Convolution Animation */
+/* CNN Convolution Animation - Optimized */
 @keyframes cnn-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.9; }
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.6; }
 }
 
 @keyframes cnn-filter-sweep {
@@ -181,46 +182,46 @@ html {
   100% { transform: translateX(100%) translateY(50%); }
 }
 
-.cnn-animation-grid .aspect-square:nth-child(3n) {
-  animation: cnn-pulse 2s ease-in-out infinite;
-  animation-delay: calc(var(--animation-delay, 0) * 100ms);
-}
-
-.cnn-animation-grid .aspect-square:nth-child(4n+1) {
-  animation: cnn-pulse 2.5s ease-in-out infinite;
+.cnn-animation-grid .aspect-square:nth-child(5n) {
+  animation: cnn-pulse 3s ease-in-out infinite;
   animation-delay: calc(var(--animation-delay, 0) * 150ms);
 }
 
-/* Project Animations */
+.cnn-animation-grid .aspect-square:nth-child(7n+1) {
+  animation: cnn-pulse 3.5s ease-in-out infinite;
+  animation-delay: calc(var(--animation-delay, 0) * 200ms);
+}
+
+/* Project Animations - Optimized */
 @keyframes neural-wave {
-  0% { opacity: 0; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.8); }
+  0% { opacity: 0; transform: scale(0.9); }
+  50% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.9); }
 }
 
 @keyframes gradient-descent {
-  0% { opacity: 0.2; }
-  50% { opacity: 0.9; }
-  100% { opacity: 0.2; }
+  0% { opacity: 0.1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.1; }
 }
 
 @keyframes attention-pattern {
-  0%, 100% { opacity: 0.1; }
-  33% { opacity: 0.3; }
-  66% { opacity: 0.2; }
+  0%, 100% { opacity: 0.05; }
+  33% { opacity: 0.2; }
+  66% { opacity: 0.15; }
 }
 
-.project-neural-network .aspect-square:nth-child(odd) {
-  animation: neural-wave 3s ease-in-out infinite;
-  animation-delay: calc(var(--wave-delay, 0) * 200ms);
+.project-neural-network .aspect-square:nth-child(7n) {
+  animation: neural-wave 4s ease-in-out infinite;
+  animation-delay: calc(var(--wave-delay, 0) * 300ms);
 }
 
-.project-gradient-descent .aspect-square:nth-child(even) {
-  animation: gradient-descent 4s ease-in-out infinite;
-  animation-delay: calc(var(--descent-delay, 0) * 300ms);
+.project-gradient-descent .aspect-square:nth-child(5n) {
+  animation: gradient-descent 5s ease-in-out infinite;
+  animation-delay: calc(var(--descent-delay, 0) * 400ms);
 }
 
-.project-attention .aspect-square:nth-child(3n) {
-  animation: attention-pattern 5s ease-in-out infinite;
-  animation-delay: calc(var(--attention-delay, 0) * 100ms);
+.project-attention .aspect-square:nth-child(6n) {
+  animation: attention-pattern 6s ease-in-out infinite;
+  animation-delay: calc(var(--attention-delay, 0) * 200ms);
 }
