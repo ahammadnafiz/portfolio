@@ -12,34 +12,51 @@ export function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-16 sm:pt-20">
-      {/* ML/Math Background Equations - Floating - Optimized and positioned away from main content */}
+      {/* ML/Math Background Equations - Floating - Responsive with larger size, moved more towards center */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Far edges only - avoiding center content areas */}
-        <div className="absolute top-16 left-8 text-accent/3 font-mono text-sm transform -rotate-12 hidden xl:block animate-float" style={{ animationDelay: '0s', animationDuration: '8s' }}>
+        {/* Mobile and tablet equations - positioned more centered */}
+        <div className="absolute top-20 left-4 sm:left-8 md:left-12 text-accent/4 font-mono text-xs sm:text-sm lg:text-base transform -rotate-12 animate-float" style={{ animationDelay: '0s', animationDuration: '8s' }}>
           θ = θ - α∇J(θ)
         </div>
         
-        <div className="absolute top-28 right-12 text-accent/2 font-mono text-xs transform rotate-6 hidden xl:block animate-float" style={{ animationDelay: '3s', animationDuration: '10s' }}>
+        <div className="absolute top-32 right-4 sm:right-8 md:right-12 text-accent/3 font-mono text-xs sm:text-sm lg:text-base transform rotate-6 animate-float" style={{ animationDelay: '3s', animationDuration: '10s' }}>
           L = -∑(y·log(ŷ))
         </div>
         
-        {/* Far left side only */}
-        <div className="absolute top-1/3 left-8 text-accent/3 font-mono text-xs transform rotate-20 hidden 2xl:block animate-float" style={{ animationDelay: '1.5s', animationDuration: '9s' }}>
-          y = mx + b + ε
+        {/* Middle equations - positioned closer to center on larger screens */}
+        <div className="absolute top-1/3 left-8 sm:left-12 md:left-16 text-accent/4 font-mono text-xs sm:text-sm lg:text-base transform rotate-20 hidden sm:block animate-float" style={{ animationDelay: '1.5s', animationDuration: '9s' }}>
+          y = mx + b
         </div>
         
-        {/* Far right side only */}
-        <div className="absolute top-1/3 right-8 text-accent/2 font-mono text-xs transform rotate-10 hidden 2xl:block animate-float" style={{ animationDelay: '2.5s', animationDuration: '11s' }}>
+        <div className="absolute top-1/3 right-8 sm:right-12 md:right-16 text-accent/3 font-mono text-xs sm:text-sm lg:text-base transform rotate-10 hidden sm:block animate-float" style={{ animationDelay: '2.5s', animationDuration: '11s' }}>
           ∇²f = ∂²f/∂x²
         </div>
         
-        {/* Bottom corners only */}
-        <div className="absolute bottom-32 left-12 text-accent/3 font-mono text-xs transform -rotate-10 hidden xl:block animate-float" style={{ animationDelay: '2s', animationDuration: '9s' }}>
+        {/* Bottom equations - moved closer to center */}
+        <div className="absolute bottom-36 left-6 sm:left-10 md:left-14 text-accent/4 font-mono text-xs sm:text-sm lg:text-base transform -rotate-10 animate-float" style={{ animationDelay: '2s', animationDuration: '9s' }}>
           A = UΣV^T
         </div>
         
-        <div className="absolute bottom-20 right-8 text-accent/2 font-mono text-xs transform rotate-14 hidden xl:block animate-float" style={{ animationDelay: '4s', animationDuration: '8s' }}>
+        <div className="absolute bottom-24 right-6 sm:right-10 md:right-14 text-accent/3 font-mono text-xs sm:text-sm lg:text-base transform rotate-14 animate-float" style={{ animationDelay: '4s', animationDuration: '8s' }}>
           ∇f(x) = lim[h→0]
+        </div>
+        
+        {/* Additional equations for larger screens - positioned closer to center */}
+        <div className="absolute top-1/4 left-1/5 text-accent/2 font-mono text-sm lg:text-base transform rotate-8 hidden lg:block animate-float" style={{ animationDelay: '5s', animationDuration: '7s' }}>
+          σ(z) = 1/(1+e^(-z))
+        </div>
+        
+        <div className="absolute bottom-1/3 right-1/5 text-accent/2 font-mono text-sm lg:text-base transform -rotate-15 hidden lg:block animate-float" style={{ animationDelay: '6s', animationDuration: '9s' }}>
+          ReLU(x) = max(0,x)
+        </div>
+        
+        {/* Extra equations for better distribution on very large screens */}
+        <div className="absolute top-2/5 left-1/6 text-accent/2 font-mono text-sm lg:text-base transform rotate-25 hidden xl:block animate-float" style={{ animationDelay: '7s', animationDuration: '10s' }}>
+          MSE = (1/n)∑(yᵢ - ŷᵢ)²
+        </div>
+        
+        <div className="absolute bottom-2/5 right-1/6 text-accent/2 font-mono text-sm lg:text-base transform -rotate-20 hidden xl:block animate-float" style={{ animationDelay: '8s', animationDuration: '8s' }}>
+          Adam: β₁m + (1-β₁)g
         </div>
       </div>
       

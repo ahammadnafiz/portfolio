@@ -3,71 +3,97 @@
 import { useEffect, useState } from "react"
 
 export function About() {
-  const [filterPosition, setFilterPosition] = useState({ row: 0, col: 0 })
+  const [animationStep, setAnimationStep] = useState(0)
   const [animationCycle, setAnimationCycle] = useState(0) // 0: input, 1: filtering, 2: output
   const [mounted, setMounted] = useState(false)
   
   useEffect(() => {
     setMounted(true)
     const interval = setInterval(() => {
-      setFilterPosition(prev => {
-        const gridSize = 12 // Using largest grid for calculation
-        const maxPosition = gridSize - 3 // 3x3 filter
-        
-        if (prev.col < maxPosition) {
-          return { ...prev, col: prev.col + 1 }
-        } else if (prev.row < maxPosition) {
-          return { row: prev.row + 1, col: 0 }
-        } else {
-          // Reset and cycle through animation phases
+      setAnimationStep(prev => {
+        const newStep = prev + 1
+        // Change cycle every 60 steps for smooth transitions
+        if (newStep % 60 === 0) {
           setAnimationCycle(c => (c + 1) % 3)
-          return { row: 0, col: 0 }
         }
+        return newStep
       })
-    }, 250) // Slower, more optimized animation
+    }, 200) // Smooth animation timing
     
     return () => clearInterval(interval)
   }, [])
   
-  // Generate static input pattern (represents input image) - Optimized
-  const getInputPattern = (i: number, gridSize: number) => {
+  // CNN Input Pattern - Static input data visualization
+  const getCNNInputPattern = (step: number, i: number, gridSize: number) => {
     const row = Math.floor(i / gridSize)
     const col = i % gridSize
-    // Simplified pattern calculation
-    return ((row + col) % 4 === 0 || (row % 3 === 1 && col % 3 === 1)) ? "bg-accent opacity-30" : "bg-transparent"
-  }
-  
-  // Check if current pixel is under the 3x3 filter - Optimized
-  const isUnderFilter = (i: number, gridSize: number, filterRow: number, filterCol: number) => {
-    const row = Math.floor(i / gridSize)
-    const col = i % gridSize
-    return row >= filterRow && row < filterRow + 3 && col >= filterCol && col < filterCol + 3
-  }
-  
-  // Generate output feature map - Optimized
-  const getOutputPattern = (i: number, gridSize: number) => {
-    const row = Math.floor(i / gridSize)
-    const col = i % gridSize
-    // Simplified feature map pattern
-    return (row % 3 === 0 && col % 3 === 0) ? "bg-accent opacity-50" : "bg-transparent"
-  }
-  
-  // Get the pattern based on current animation cycle - Optimized
-  const getCNNPattern = (i: number, gridSize: number) => {
-    // Use cached calculations for better performance
-    const maxFilter = Math.max(0, gridSize - 3)
-    const scaledFilterRow = maxFilter > 0 ? Math.floor((filterPosition.row / 9) * maxFilter) : 0
-    const scaledFilterCol = maxFilter > 0 ? Math.floor((filterPosition.col / 9) * maxFilter) : 0
     
+    // Create a pattern that looks like image data
+    const pattern1 = (row + col) % 4 === 0
+    const pattern2 = (row % 3 === 1 && col % 3 === 1)
+    const pattern3 = (row % 2 === 0 && col % 4 === 0)
+    
+    if (pattern1 || pattern2 || pattern3) {
+      return "bg-accent opacity-25"
+    }
+    return "bg-transparent"
+  }
+  
+  // CNN Convolution Pattern - Moving filter simulation
+  const getCNNConvolutionPattern = (step: number, i: number, gridSize: number) => {
+    const row = Math.floor(i / gridSize)
+    const col = i % gridSize
+    
+    // Calculate filter position based on animation step
+    const totalPositions = (gridSize - 2) * (gridSize - 2)
+    const filterStep = step % totalPositions
+    const filterRow = Math.floor(filterStep / (gridSize - 2))
+    const filterCol = filterStep % (gridSize - 2)
+    
+    // Base input pattern
+    const basePattern = getCNNInputPattern(step, i, gridSize)
+    
+    // Check if pixel is under 3x3 filter
+    const underFilter = row >= filterRow && row < filterRow + 3 && 
+                       col >= filterCol && col < filterCol + 3
+    
+    if (underFilter) {
+      return "bg-accent opacity-70"
+    }
+    
+    return basePattern
+  }
+  
+  // CNN Feature Map Pattern - Output visualization
+  const getCNNFeatureMapPattern = (step: number, i: number, gridSize: number) => {
+    const row = Math.floor(i / gridSize)
+    const col = i % gridSize
+    
+    // Animated feature activation
+    const activationWave = (step % 40) / 40
+    const distanceFromCenter = Math.abs(row - gridSize/2) + Math.abs(col - gridSize/2)
+    const maxDistance = gridSize
+    const normalizedDistance = distanceFromCenter / maxDistance
+    
+    // Create wave effect from center
+    if (Math.abs(normalizedDistance - activationWave) < 0.3) {
+      return "bg-accent opacity-60"
+    } else if ((row % 3 === 0 && col % 3 === 0)) {
+      return "bg-accent opacity-30"
+    }
+    
+    return "bg-transparent"
+  }
+  
+  // Get the pattern based on current animation cycle
+  const getCNNPattern = (i: number, gridSize: number) => {
     switch (animationCycle) {
-      case 0: // Input phase - show input data
-        return getInputPattern(i, gridSize)
-      case 1: // Filtering phase - show filter moving over input
-        const basePattern = getInputPattern(i, gridSize)
-        const underFilter = isUnderFilter(i, gridSize, scaledFilterRow, scaledFilterCol)
-        return underFilter ? "bg-accent opacity-70" : basePattern
-      case 2: // Output phase - show feature map
-        return getOutputPattern(i, gridSize)
+      case 0: // Input phase
+        return getCNNInputPattern(animationStep, i, gridSize)
+      case 1: // Convolution phase
+        return getCNNConvolutionPattern(animationStep, i, gridSize)
+      case 2: // Feature map phase
+        return getCNNFeatureMapPattern(animationStep, i, gridSize)
       default:
         return "bg-transparent"
     }
@@ -125,10 +151,10 @@ export function About() {
                   </span>
                 </div>
                 
-                {/* Filter Position Indicator */}
+                {/* Animation Progress Indicator */}
                 <div className="absolute -bottom-12 left-0 right-0 text-center">
                   <span className="text-xs font-mono text-muted-foreground">
-                    Filter: ({filterPosition.row}, {filterPosition.col})
+                    Step: {animationStep % 60} | Cycle: {animationCycle + 1}/3
                   </span>
                 </div>
                 
@@ -139,8 +165,8 @@ export function About() {
                     {Array.from({ length: 36 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-300 ${
-                          mounted ? getCNNPattern(i, 6) : 'bg-accent opacity-20'
+                        className={`aspect-square transition-all duration-500 ${
+                          mounted ? getCNNPattern(i, 6) : 'bg-accent opacity-15'
                         }`}
                         style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
@@ -151,8 +177,8 @@ export function About() {
                     {Array.from({ length: 64 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-300 ${
-                          mounted ? getCNNPattern(i, 8) : 'bg-accent opacity-20'
+                        className={`aspect-square transition-all duration-500 ${
+                          mounted ? getCNNPattern(i, 8) : 'bg-accent opacity-15'
                         }`}
                         style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
@@ -163,8 +189,8 @@ export function About() {
                     {Array.from({ length: 100 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-300 ${
-                          mounted ? getCNNPattern(i, 10) : 'bg-accent opacity-20'
+                        className={`aspect-square transition-all duration-500 ${
+                          mounted ? getCNNPattern(i, 10) : 'bg-accent opacity-15'
                         }`}
                         style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
@@ -175,8 +201,8 @@ export function About() {
                     {Array.from({ length: 144 }).map((_, i) => (
                       <div 
                         key={i} 
-                        className={`aspect-square transition-all duration-300 ${
-                          mounted ? getCNNPattern(i, 12) : 'bg-accent opacity-20'
+                        className={`aspect-square transition-all duration-500 ${
+                          mounted ? getCNNPattern(i, 12) : 'bg-accent opacity-15'
                         }`}
                         style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
                       />
