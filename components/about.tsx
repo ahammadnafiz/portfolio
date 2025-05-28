@@ -168,13 +168,6 @@ export function About() {
 
             <div className="relative order-1 lg:order-2">
               <div className="group aspect-square bg-background relative overflow-hidden border-2 sm:border-4 border-accent pixel-borders w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[320px] xl:max-w-[350px] mx-auto">
-                {/* CNN Animation Label */}
-                <div className="absolute -top-8 left-0 right-0 text-center">
-                  <span className="text-xs font-mono text-accent bg-background px-2 py-1 border border-accent">
-                    Edge Detection CNN • Real-time Processing
-                  </span>
-                </div>
-                
                 {/* Filter Position & Performance Indicator */}
                 <div className="absolute -bottom-12 left-0 right-0 text-center">
                   <span className="text-xs font-mono text-muted-foreground">

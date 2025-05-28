@@ -9,12 +9,11 @@ export function Hero() {
     setMounted(true)
   }, [])
 
-
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-16 sm:pt-20">
-      {/* ML/Math Background Equations - Floating with random angles and positions */}
+      {/* ML/Math Background with Data Visualization - Floating with random angles and positions */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Randomly positioned equations with varied angles and asymmetric positioning */}
+        {/* Kept essential ML equations */}
         <div className="absolute top-16 left-2 sm:left-6 md:left-10 text-accent/20 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[23deg] animate-float" style={{ animationDelay: '0s', animationDuration: '8.3s' }}>
           θ = θ - α∇J(θ)
         </div>
@@ -23,49 +22,142 @@ export function Hero() {
           L = -∑(y·log(ŷ))
         </div>
         
-        <div className="absolute top-[28%] left-12 sm:left-20 md:left-28 text-accent/15 font-mono text-xs sm:text-sm lg:text-base transform rotate-[31deg] hidden sm:block animate-float" style={{ animationDelay: '1.2s', animationDuration: '7.6s' }}>
-          y = mx + b
+        {/* Mini Line Chart - Top Left */}
+        <div className="absolute top-[28%] left-12 sm:left-20 md:left-28 transform rotate-[12deg] hidden sm:block animate-float" style={{ animationDelay: '1.2s', animationDuration: '7.6s' }}>
+          <svg width="60" height="35" className="text-accent/15">
+            <polyline 
+              points="5,30 15,25 25,15 35,20 45,8 55,12" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="1.5"
+            />
+            <circle cx="5" cy="30" r="1" fill="currentColor" />
+            <circle cx="15" cy="25" r="1" fill="currentColor" />
+            <circle cx="25" cy="15" r="1" fill="currentColor" />
+            <circle cx="35" cy="20" r="1" fill="currentColor" />
+            <circle cx="45" cy="8" r="1" fill="currentColor" />
+            <circle cx="55" cy="12" r="1" fill="currentColor" />
+          </svg>
         </div>
         
-        <div className="absolute top-[42%] right-4 sm:right-8 md:right-16 text-accent/20 font-mono text-xs sm:text-sm lg:text-base transform rotate-[8deg] hidden sm:block animate-float" style={{ animationDelay: '3.9s', animationDuration: '10.2s' }}>
-          ∇²f = ∂²f/∂x²
+        {/* Bar Chart - Top Right */}
+        <div className="absolute top-[42%] right-4 sm:right-8 md:right-16 transform rotate-[8deg] hidden sm:block animate-float" style={{ animationDelay: '3.9s', animationDuration: '10.2s' }}>
+          <svg width="50" height="40" className="text-accent/20">
+            <rect x="5" y="25" width="6" height="15" fill="currentColor" opacity="0.7" />
+            <rect x="15" y="15" width="6" height="25" fill="currentColor" opacity="0.5" />
+            <rect x="25" y="20" width="6" height="20" fill="currentColor" opacity="0.8" />
+            <rect x="35" y="10" width="6" height="30" fill="currentColor" opacity="0.6" />
+          </svg>
         </div>
         
         <div className="absolute bottom-32 left-16 sm:left-24 md:left-32 text-accent/12 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[19deg] animate-float" style={{ animationDelay: '5.1s', animationDuration: '8.7s' }}>
           A = UΣV^T
         </div>
         
-        <div className="absolute bottom-40 right-2 sm:right-12 md:right-18 text-accent/18 font-mono text-xs sm:text-sm lg:text-base transform rotate-[26deg] animate-float" style={{ animationDelay: '0.8s', animationDuration: '9.4s' }}>
-          ∇f(x) = lim[h→0]
+        {/* Scatter Plot - Bottom Right */}
+        <div className="absolute bottom-40 right-2 sm:right-12 md:right-18 transform rotate-[26deg] animate-float" style={{ animationDelay: '0.8s', animationDuration: '9.4s' }}>
+          <svg width="55" height="45" className="text-accent/18">
+            <circle cx="10" cy="35" r="1.5" fill="currentColor" opacity="0.6" />
+            <circle cx="18" cy="25" r="1.5" fill="currentColor" opacity="0.8" />
+            <circle cx="25" cy="30" r="1.5" fill="currentColor" opacity="0.5" />
+            <circle cx="32" cy="20" r="1.5" fill="currentColor" opacity="0.7" />
+            <circle cx="40" cy="15" r="1.5" fill="currentColor" opacity="0.9" />
+            <circle cx="48" cy="18" r="1.5" fill="currentColor" opacity="0.6" />
+            <circle cx="15" cy="40" r="1.5" fill="currentColor" opacity="0.4" />
+            <circle cx="35" cy="35" r="1.5" fill="currentColor" opacity="0.7" />
+          </svg>
         </div>
         
         <div className="absolute top-[18%] left-[22%] text-accent/10 font-mono text-sm lg:text-base transform rotate-[42deg] hidden lg:block animate-float" style={{ animationDelay: '4.3s', animationDuration: '7.1s' }}>
           σ(z) = 1/(1+e^(-z))
         </div>
         
-        <div className="absolute top-[65%] right-[28%] text-accent/12 font-mono text-sm lg:text-base transform -rotate-[14deg] hidden lg:block animate-float" style={{ animationDelay: '6.8s', animationDuration: '8.9s' }}>
-          ReLU(x) = max(0,x)
+        {/* Pie Chart - Center Right */}
+        <div className="absolute top-[65%] right-[28%] transform -rotate-[14deg] hidden lg:block animate-float" style={{ animationDelay: '6.8s', animationDuration: '8.9s' }}>
+          <svg width="45" height="45" className="text-accent/12">
+            <circle cx="22.5" cy="22.5" r="20" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+            <path d="M 22.5 2.5 A 20 20 0 0 1 42.5 22.5 L 22.5 22.5 Z" fill="currentColor" opacity="0.4" />
+            <path d="M 42.5 22.5 A 20 20 0 0 1 22.5 42.5 L 22.5 22.5 Z" fill="currentColor" opacity="0.6" />
+            <path d="M 22.5 42.5 A 20 20 0 0 1 2.5 22.5 L 22.5 22.5 Z" fill="currentColor" opacity="0.3" />
+          </svg>
         </div>
         
-        <div className="absolute top-[52%] left-[15%] text-accent/10 font-mono text-sm lg:text-base transform rotate-[35deg] hidden xl:block animate-float" style={{ animationDelay: '2.4s', animationDuration: '9.6s' }}>
-          MSE = (1/n)∑(yᵢ - ŷᵢ)²
+        {/* Area Chart - Left Center */}
+        <div className="absolute top-[52%] left-[15%] transform rotate-[35deg] hidden xl:block animate-float" style={{ animationDelay: '2.4s', animationDuration: '9.6s' }}>
+          <svg width="65" height="40" className="text-accent/10">
+            <polygon 
+              points="5,35 15,25 25,15 35,20 45,8 55,12 60,35 5,35" 
+              fill="currentColor" 
+              opacity="0.2"
+            />
+            <polyline 
+              points="5,35 15,25 25,15 35,20 45,8 55,12" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="1.5" 
+              opacity="0.6"
+            />
+          </svg>
         </div>
         
-        <div className="absolute bottom-[48%] right-[18%] text-accent/18 font-mono text-sm lg:text-base transform -rotate-[29deg] hidden xl:block animate-float" style={{ animationDelay: '7.2s', animationDuration: '8.1s' }}>
-          Adam: β₁m + (1-β₁)g
+        {/* Neural Network Visualization - Bottom Right */}
+        <div className="absolute bottom-[48%] right-[18%] transform -rotate-[29deg] hidden xl:block animate-float" style={{ animationDelay: '7.2s', animationDuration: '8.1s' }}>
+          <svg width="60" height="35" className="text-accent/18">
+            {/* Input layer */}
+            <circle cx="8" cy="8" r="2" fill="currentColor" opacity="0.6" />
+            <circle cx="8" cy="18" r="2" fill="currentColor" opacity="0.6" />
+            <circle cx="8" cy="28" r="2" fill="currentColor" opacity="0.6" />
+            
+            {/* Hidden layer */}
+            <circle cx="30" cy="12" r="2" fill="currentColor" opacity="0.7" />
+            <circle cx="30" cy="24" r="2" fill="currentColor" opacity="0.7" />
+            
+            {/* Output layer */}
+            <circle cx="52" cy="18" r="2" fill="currentColor" opacity="0.8" />
+            
+            {/* Connections */}
+            <line x1="10" y1="8" x2="28" y2="12" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+            <line x1="10" y1="18" x2="28" y2="12" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+            <line x1="10" y1="28" x2="28" y2="24" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+            <line x1="32" y1="12" x2="50" y2="18" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+            <line x1="32" y1="24" x2="50" y2="18" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+          </svg>
         </div>
         
-        {/* Additional scattered equations for more organic feel */}
-        <div className="absolute top-[75%] left-[8%] text-accent/12 font-mono text-xs sm:text-sm lg:text-base transform rotate-[21deg] animate-float" style={{ animationDelay: '3.6s', animationDuration: '7.8s' }}>
-          f'(x) = lim[h→0]
+        {/* Heatmap visualization - Top Center */}
+        <div className="absolute top-[75%] left-[8%] transform rotate-[21deg] animate-float" style={{ animationDelay: '3.6s', animationDuration: '7.8s' }}>
+          <svg width="40" height="30" className="text-accent/12">
+            <rect x="2" y="2" width="6" height="6" fill="currentColor" opacity="0.3" />
+            <rect x="10" y="2" width="6" height="6" fill="currentColor" opacity="0.7" />
+            <rect x="18" y="2" width="6" height="6" fill="currentColor" opacity="0.4" />
+            <rect x="26" y="2" width="6" height="6" fill="currentColor" opacity="0.9" />
+            <rect x="2" y="10" width="6" height="6" fill="currentColor" opacity="0.6" />
+            <rect x="10" y="10" width="6" height="6" fill="currentColor" opacity="0.2" />
+            <rect x="18" y="10" width="6" height="6" fill="currentColor" opacity="0.8" />
+            <rect x="26" y="10" width="6" height="6" fill="currentColor" opacity="0.5" />
+            <rect x="2" y="18" width="6" height="6" fill="currentColor" opacity="0.4" />
+            <rect x="10" y="18" width="6" height="6" fill="currentColor" opacity="0.8" />
+            <rect x="18" y="18" width="6" height="6" fill="currentColor" opacity="0.3" />
+            <rect x="26" y="18" width="6" height="6" fill="currentColor" opacity="0.6" />
+          </svg>
         </div>
         
-        <div className="absolute top-[38%] right-[32%] text-accent/10 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[37deg] hidden md:block animate-float" style={{ animationDelay: '1.9s', animationDuration: '10.5s' }}>
-          ∇·F = div F
+        {/* Histogram - Right Center */}
+        <div className="absolute top-[38%] right-[32%] transform -rotate-[37deg] hidden md:block animate-float" style={{ animationDelay: '1.9s', animationDuration: '10.5s' }}>
+          <svg width="50" height="35" className="text-accent/10">
+            <rect x="5" y="20" width="4" height="15" fill="currentColor" opacity="0.4" />
+            <rect x="10" y="15" width="4" height="20" fill="currentColor" opacity="0.6" />
+            <rect x="15" y="10" width="4" height="25" fill="currentColor" opacity="0.8" />
+            <rect x="20" y="5" width="4" height="30" fill="currentColor" opacity="0.9" />
+            <rect x="25" y="8" width="4" height="27" fill="currentColor" opacity="0.7" />
+            <rect x="30" y="12" width="4" height="23" fill="currentColor" opacity="0.5" />
+            <rect x="35" y="18" width="4" height="17" fill="currentColor" opacity="0.4" />
+            <rect x="40" y="25" width="4" height="10" fill="currentColor" opacity="0.3" />
+          </svg>
         </div>
         
         <div className="absolute bottom-[25%] left-[25%] text-accent/12 font-mono text-sm lg:text-base transform rotate-[16deg] hidden lg:block animate-float" style={{ animationDelay: '5.7s', animationDuration: '8.4s' }}>
-          H(X,Y) = -∑p(x,y)log
+          ReLU(x) = max(0,x)
         </div>
         
         <div className="absolute top-[85%] right-[12%] text-accent/18 font-mono text-xs sm:text-sm lg:text-base transform -rotate-[11deg] animate-float" style={{ animationDelay: '4.8s', animationDuration: '9.1s' }}>
