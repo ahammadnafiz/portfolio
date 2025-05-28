@@ -15,32 +15,52 @@ export function About() {
     return () => clearInterval(interval)
   }, [])
   
-  // CNN Input Pattern - Static input data visualization (always visible as base)
+  // CNN Input Pattern - Realistic image data visualization
   const getCNNInputPattern = (i: number, gridSize: number) => {
     const row = Math.floor(i / gridSize)
     const col = i % gridSize
     
-    // Create a more complex pattern that looks like image data
-    const pattern1 = (row + col) % 5 === 0
-    const pattern2 = (row % 3 === 1 && col % 3 === 1)
-    const pattern3 = (row % 4 === 0 && col % 2 === 0)
-    const pattern4 = (Math.abs(row - gridSize/2) + Math.abs(col - gridSize/2)) % 6 === 0
+    // Create realistic image-like patterns (simulating edges, textures, objects)
+    const centerX = gridSize / 2
+    const centerY = gridSize / 2
+    const distanceFromCenter = Math.sqrt((row - centerY) ** 2 + (col - centerX) ** 2)
     
-    if (pattern1 || pattern2 || pattern3 || pattern4) {
-      return "bg-accent/20"
+    // Simulate a circular object (like a digit or shape)
+    const isCircularObject = distanceFromCenter > gridSize * 0.15 && distanceFromCenter < gridSize * 0.35
+    
+    // Simulate edges and textures
+    const hasVerticalEdge = Math.abs(col - gridSize * 0.3) < 1 || Math.abs(col - gridSize * 0.7) < 1
+    const hasHorizontalEdge = Math.abs(row - gridSize * 0.4) < 1 || Math.abs(row - gridSize * 0.6) < 1
+    
+    // Simulate noise/texture patterns (deterministic)
+    const hasTexture = (row + col * 3) % 7 === 0 && (row * col) % 5 === 0
+    
+    // Simulate corner features
+    const isCornerFeature = (row < 2 && col < 2) || (row > gridSize - 3 && col > gridSize - 3)
+    
+    // Different intensity levels like real grayscale images
+    if (isCircularObject) {
+      return "bg-accent/40" // Main object - higher intensity
+    } else if (hasVerticalEdge || hasHorizontalEdge) {
+      return "bg-accent/30" // Edges - medium intensity
+    } else if (hasTexture) {
+      return "bg-accent/15" // Texture - low intensity
+    } else if (isCornerFeature) {
+      return "bg-accent/25" // Corner features
     }
-    return "bg-background"
+    
+    return "bg-background" // Background pixels
   }
   
-  // Continuous CNN Convolution Pattern - Always moving 3x3 filter
+  // Continuous CNN Convolution Pattern - Realistic computer vision processing
   const getContinuousCNNPattern = (step: number, i: number, gridSize: number) => {
     const row = Math.floor(i / gridSize)
     const col = i % gridSize
     
     // Calculate filter positions for smooth movement
     const filterSize = 3
-    const maxFilterRow = gridSize - filterSize
-    const maxFilterCol = gridSize - filterSize
+    const maxFilterRow = gridSize - filterSize + 1  // Fix: ensure full coverage
+    const maxFilterCol = gridSize - filterSize + 1  // Fix: ensure full coverage
     const totalPositions = maxFilterRow * maxFilterCol
     
     // Use step to create smooth continuous movement
@@ -48,26 +68,37 @@ export function About() {
     const filterRow = Math.floor(currentPosition / maxFilterCol)
     const filterCol = currentPosition % maxFilterCol
     
-    // Get base input pattern
+    // Get base input pattern (realistic image data)
     const basePattern = getCNNInputPattern(i, gridSize)
     
-    // Check if current pixel is under the 3x3 filter
+    // Check if current pixel is under the filter kernel
     const underFilter = row >= filterRow && row < filterRow + filterSize && 
                        col >= filterCol && col < filterCol + filterSize
     
-    // Filter highlight effects
+    // Realistic CNN filter effects
     if (underFilter) {
-      // Center of filter (most active)
+      // Center of filter (convolution computation happening)
       const isCenter = row === filterRow + 1 && col === filterCol + 1
       if (isCenter) {
-        return "bg-accent bg-opacity-90 border border-accent/50"
+        return "bg-red-500/80 border-2 border-red-400 shadow-lg shadow-red-500/50 animate-pulse" // Active computation
       }
-      // Edge of filter
-      return "bg-accent/60 border border-accent/30"
+      
+      // Filter kernel positions with realistic highlighting
+      const relativeRow = row - filterRow
+      const relativeCol = col - filterCol
+      
+      // Simulate different kernel weights (edge detection filter)
+      if ((relativeRow === 0 || relativeRow === 2) && relativeCol === 1) {
+        return "bg-yellow-400/70 border border-yellow-300" // Vertical edge detection
+      } else if ((relativeCol === 0 || relativeCol === 2) && relativeRow === 1) {
+        return "bg-blue-400/70 border border-blue-300" // Horizontal edge detection
+      } else {
+        return "bg-accent/70 border border-accent/50" // Other kernel positions
+      }
     }
     
-    // Show recently processed areas with fading effect
-    const recentSteps = 8
+    // Show feature activation from recently processed areas
+    const recentSteps = 6
     for (let i = 1; i <= recentSteps; i++) {
       const pastPosition = (step - i + totalPositions) % totalPositions
       const pastFilterRow = Math.floor(pastPosition / maxFilterCol)
@@ -77,8 +108,15 @@ export function About() {
                                       col >= pastFilterCol && col < pastFilterCol + filterSize
       
       if (wasPreviouslyUnderFilter) {
-        const opacity = (recentSteps - i) / recentSteps * 0.3
-        return `bg-accent/10 border border-accent/10`
+        // Simulate feature map activation with fading intensity
+        const intensity = (recentSteps - i) / recentSteps
+        const wasCenterPreviously = row === pastFilterRow + 1 && col === pastFilterCol + 1
+        
+        if (wasCenterPreviously && intensity > 0.5) {
+          return `bg-green-400/${Math.floor(intensity * 40)} border border-green-300/30` // Strong feature detected
+        } else if (intensity > 0.3) {
+          return `bg-accent/${Math.floor(intensity * 20)} border border-accent/20` // Moderate activation
+        }
       }
     }
     
@@ -133,22 +171,22 @@ export function About() {
                 {/* CNN Animation Label */}
                 <div className="absolute -top-8 left-0 right-0 text-center">
                   <span className="text-xs font-mono text-accent bg-background px-2 py-1 border border-accent">
-                    Continuous Convolution (3×3 Filter)
+                    Edge Detection CNN • Real-time Processing
                   </span>
                 </div>
                 
-                {/* Filter Position Indicator */}
+                {/* Filter Position & Performance Indicator */}
                 <div className="absolute -bottom-12 left-0 right-0 text-center">
                   <span className="text-xs font-mono text-muted-foreground">
                     {mounted && (
                       <>
-                        Filter Position: {(() => {
+                        Kernel Position: {(() => {
                           const gridSize = typeof window !== 'undefined' 
                             ? window.innerWidth < 640 ? 6 : window.innerWidth < 768 ? 8 : window.innerWidth < 1024 ? 10 : 12
                             : 12;
-                          const maxPos = (gridSize - 3) * (gridSize - 3);
+                          const maxPos = (gridSize - 3 + 1) * (gridSize - 3 + 1);
                           const currentPos = animationStep % maxPos;
-                          return `${Math.floor(currentPos / (gridSize - 3))},${currentPos % (gridSize - 3)}`;
+                          return `[${Math.floor(currentPos / (gridSize - 3 + 1))},${currentPos % (gridSize - 3 + 1)}]`;
                         })()}
                       </>
                     )}
@@ -209,9 +247,13 @@ export function About() {
                 
                 {/* Filter Status Indicator */}
                 <div className="absolute bottom-2 left-2 right-2 flex justify-center">
-                  <div className="flex items-center space-x-2 text-xs font-mono text-accent bg-background/80 px-2 py-1 border border-accent/30">
-                    <div className="w-2 h-2 bg-accent animate-pulse"></div>
-                    <span>3×3 Filter Active</span>
+                  <div className="flex items-center space-x-2 text-xs font-mono text-accent bg-background/90 px-2 py-1 border border-accent/30 rounded">
+                    <div className="flex space-x-1">
+                      <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                    </div>
+                    <span>Edge Detection Active</span>
                   </div>
                 </div>
               </div>
