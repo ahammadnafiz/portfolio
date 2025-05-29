@@ -14,10 +14,9 @@ const nextConfig = {
   basePath: '/portfolio',
   assetPrefix: '/portfolio',
   
-  // Cache busting configuration
-  generateBuildId: async () => {
-    // Use timestamp for unique build ID to force cache invalidation
-    return `build-${Date.now()}`
+  // Enable Next.js built-in asset optimization and hashing
+  experimental: {
+    optimizeCss: true,
   }
 }
 

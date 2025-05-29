@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { CacheBuster } from "../components/cache-buster"
+import { ServiceWorkerRegistration } from "../components/service-worker-registration"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -38,18 +39,10 @@ export default function RootLayout({
           rel="stylesheet" 
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" 
         />
-        {/* Cache busting meta tags */}
-        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta httpEquiv="Pragma" content="no-cache" />
-        <meta httpEquiv="Expires" content="0" />
+        {/* Proper cache control headers - no aggressive cache busting for HTML */}
+        <meta httpEquiv="Cache-Control" content="no-cache, max-age=0" />
         <meta name="version" content={process.env.NEXT_PUBLIC_BUILD_ID || "dev"} />
         <meta name="build-time" content={process.env.NEXT_PUBLIC_BUILD_TIME || ""} />
-        
-        {/* Cache busting script */}
-        <script 
-          src={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/cache-buster.js?v=${process.env.NEXT_PUBLIC_BUILD_ID || Date.now()}`}
-          defer
-        />
         
         {/* Additional favicon meta tags for better browser support */}
         <link rel="icon" type="image/x-icon" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon.ico`} />
@@ -59,6 +52,7 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/icon.png`} />
       </head>
       <body className={inter.className}>
+        <ServiceWorkerRegistration />
         <CacheBuster />
         {children}
       </body>
