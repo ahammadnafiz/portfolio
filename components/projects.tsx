@@ -50,38 +50,42 @@ export function Projects() {
     return () => intervals.forEach(clearInterval)
   }, [])
   
-  // Neural Network Animation - Forward propagation pattern with RGB pixels
+  // Neural Network Animation - Forward propagation pattern with vibrant colors
   const getNeuralNetworkPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridCols)
     const col = i % gridCols
     const waveProgress = (step % (gridCols + gridRows)) / (gridCols + gridRows)
     const distanceFromStart = (row + col) / (gridCols + gridRows - 2)
     
-    // RGB color cycling for active neurons
-    const colorPhase = (step + i) % 3
+    // Vibrant color cycling for active neurons
+    const colorPhase = (step + i) % 4
     
     if (Math.abs(distanceFromStart - waveProgress) < 0.3) {
-      if (colorPhase === 0) return "bg-red-500 opacity-70"
-      if (colorPhase === 1) return "bg-green-500 opacity-70"
-      return "bg-blue-500 opacity-70"
+      if (colorPhase === 0) return "bg-violet-500 opacity-70" // Electric violet
+      if (colorPhase === 1) return "bg-emerald-500 opacity-70" // Vibrant emerald
+      if (colorPhase === 2) return "bg-cyan-500 opacity-70" // Electric cyan
+      return "bg-fuchsia-500 opacity-70" // Bright fuchsia
     } else if (Math.abs(distanceFromStart - waveProgress) < 0.5) {
-      if (colorPhase === 0) return "bg-red-400 opacity-30"
-      if (colorPhase === 1) return "bg-green-400 opacity-30"
-      return "bg-blue-400 opacity-30"
+      if (colorPhase === 0) return "bg-violet-400 opacity-35"
+      if (colorPhase === 1) return "bg-emerald-400 opacity-35"
+      if (colorPhase === 2) return "bg-cyan-400 opacity-35"
+      return "bg-fuchsia-400 opacity-35"
     }
     
-    // Random RGB sparkles
+    // Random vibrant sparkles
     if (Math.random() > 0.98) {
-      const sparkleColor = Math.floor(Math.random() * 3)
-      if (sparkleColor === 0) return "bg-red-300 opacity-20"
-      if (sparkleColor === 1) return "bg-green-300 opacity-20"
-      return "bg-blue-300 opacity-20"
+      const sparkleColor = Math.floor(Math.random() * 5)
+      if (sparkleColor === 0) return "bg-rose-400 opacity-25" // Vibrant rose
+      if (sparkleColor === 1) return "bg-amber-400 opacity-25" // Golden amber
+      if (sparkleColor === 2) return "bg-indigo-400 opacity-25" // Deep indigo
+      if (sparkleColor === 3) return "bg-teal-400 opacity-25" // Ocean teal
+      return "bg-pink-400 opacity-25" // Electric pink
     }
     
     return "bg-transparent"
   }
   
-  // Gradient Descent Animation - Optimization path with RGB heat map
+  // Gradient Descent Animation - Optimization path with vibrant heat map
   const getGradientDescentPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridCols)
     const col = i % gridCols
@@ -96,59 +100,63 @@ export function Projects() {
     const descentProgress = (step % 80) / 80
     const currentRadius = (1 - descentProgress) * maxDistance
     
-    // RGB heat map based on loss/distance
+    // Vibrant heat map based on loss/distance
     if (Math.abs(distanceFromCenter - currentRadius) < 2) {
-      return "bg-cyan-400 opacity-80" // Current optimization point
+      return "bg-sky-400 opacity-85" // Bright sky blue for current optimization point
     } else if (distanceFromCenter > maxDistance * 0.7) {
-      return "bg-red-500 opacity-40" // High loss areas (red)
+      return "bg-rose-500 opacity-45" // Vibrant rose for high loss areas
     } else if (distanceFromCenter < maxDistance * 0.3) {
-      return "bg-green-500 opacity-50" // Low loss areas (green)
+      return "bg-lime-500 opacity-55" // Electric lime for low loss areas
     } else {
-      return "bg-yellow-400 opacity-25" // Medium loss areas (yellow)
+      return "bg-orange-400 opacity-30" // Warm orange for medium loss areas
     }
   }
   
-  // Attention Mechanism Animation - RGB focus patterns
+  // Attention Mechanism Animation - Vibrant focus patterns
   const getAttentionPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridRows)
     const col = i % gridCols
     
-    // Create multiple attention heads focusing on different areas with RGB colors
+    // Create multiple attention heads focusing on different areas with vibrant colors
     const attentionCycle = Math.floor(step / 30) % 4
-    const intensity = Math.min((step % 30) / 30, 0.7)
+    const intensity = Math.min((step % 30) / 30, 0.75)
     
     let focused = false
     let colorClass = ""
     
     switch (attentionCycle) {
-      case 0: // Top-left attention (Red)
+      case 0: // Top-left attention (Vibrant rose)
         focused = row < gridRows / 2 && col < gridCols / 2
-        colorClass = "bg-red-500"
+        colorClass = "bg-rose-500"
         break
-      case 1: // Top-right attention (Green)
+      case 1: // Top-right attention (Electric emerald)
         focused = row < gridRows / 2 && col >= gridCols / 2
-        colorClass = "bg-green-500"
+        colorClass = "bg-emerald-500"
         break
-      case 2: // Bottom-left attention (Blue)
+      case 2: // Bottom-left attention (Sapphire blue)
         focused = row >= gridRows / 2 && col < gridCols / 2
-        colorClass = "bg-blue-500"
+        colorClass = "bg-blue-600"
         break
-      case 3: // Bottom-right attention (Purple)
+      case 3: // Bottom-right attention (Vibrant purple)
         focused = row >= gridRows / 2 && col >= gridCols / 2
-        colorClass = "bg-purple-500"
+        colorClass = "bg-purple-600"
         break
     }
     
     if (focused) {
-      const opacityLevel = Math.floor(intensity * 60 + 20)
+      const opacityLevel = Math.floor(intensity * 65 + 25)
       return `${colorClass} opacity-${opacityLevel}`
     }
     
-    // Background RGB noise
+    // Background vibrant noise
     if (Math.random() > 0.96) {
-      const noiseColors = ["bg-red-300", "bg-green-300", "bg-blue-300", "bg-yellow-300", "bg-pink-300", "bg-cyan-300"]
+      const noiseColors = [
+        "bg-rose-300", "bg-amber-300", "bg-emerald-300", 
+        "bg-sky-300", "bg-violet-300", "bg-fuchsia-300",
+        "bg-teal-300", "bg-indigo-300"
+      ]
       const randomColor = noiseColors[Math.floor(Math.random() * noiseColors.length)]
-      return `${randomColor} opacity-10`
+      return `${randomColor} opacity-12`
     }
     
     return "bg-transparent"
