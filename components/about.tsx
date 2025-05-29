@@ -182,13 +182,13 @@ export function About() {
       <div className="flex justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl text-center relative">
           {/* Left decorative element */}
-          <div className="hidden lg:flex absolute -left-12 xl:-left-16 2xl:-left-20 top-1/2 transform -translate-y-1/2">
-            <div className="w-6 h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 bg-accent opacity-30"></div>
+          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2">
+            <div className="w-6 h-6 lg:w-8 lg:h-8 bg-accent opacity-30"></div>
           </div>
           
           {/* Right decorative element */}
-          <div className="hidden lg:flex absolute -right-12 xl:-right-16 2xl:-right-20 top-1/2 transform -translate-y-1/2">
-            <div className="w-6 h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 border-2 border-accent opacity-30"></div>
+          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2">
+            <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-accent opacity-30"></div>
           </div>
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-8 sm:mb-12 uppercase">
@@ -221,22 +221,19 @@ export function About() {
               </div>
             </div>
 
-            <div className="relative order-1 lg:order-2 mb-20 sm:mb-24 md:mb-28 lg:mb-20">
+            <div className="relative order-1 lg:order-2">
               <div className="group aspect-square bg-background relative overflow-hidden border-2 sm:border-4 border-accent pixel-borders w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[320px] xl:max-w-[350px] mx-auto">
                 
                 {/* Enhanced CNN Processing Info */}
-                <div className="absolute -top-14 sm:-top-16 md:-top-18 lg:-top-20 xl:-top-22 left-0 right-0 text-center space-y-1 sm:space-y-2">
-                  <div className={`text-xs sm:text-sm font-mono px-2 sm:px-3 py-1 sm:py-1.5 border border-accent/30 rounded inline-block cnn-processing-indicator ${mounted ? getCurrentFilterInfo(animationStep, 12).class : ''}`}>
+                <div className="absolute -top-20 left-0 right-0 text-center space-y-2">
+                  <div className={`text-xs font-mono px-3 py-1 border border-accent/30 rounded inline-block cnn-processing-indicator ${mounted ? getCurrentFilterInfo(animationStep, 12).class : ''}`}>
                     <span className={mounted ? getCurrentFilterInfo(animationStep, 12).color : 'text-accent'}>
-                      <span className="hidden sm:inline">{mounted && getCurrentFilterInfo(animationStep, 12).name}</span>
-                      <span className="sm:hidden text-xs truncate max-w-[120px] inline-block">
-                        {mounted && getCurrentFilterInfo(animationStep, 12).name.split(' ')[0]}
-                      </span>
+                      {mounted && getCurrentFilterInfo(animationStep, 12).name}
                     </span>
                   </div>
                   <div className="text-xs font-mono text-muted-foreground">
-                    <span className="bg-background/90 px-1 sm:px-2 py-0.5 sm:py-1 border border-muted-foreground/20 rounded text-xs">
-                      <span className="hidden sm:inline">Progress: </span>{mounted && getCurrentFilterInfo(animationStep, 12).progress}%
+                    <span className="bg-background/90 px-2 py-1 border border-muted-foreground/20 rounded">
+                      Progress: {mounted && getCurrentFilterInfo(animationStep, 12).progress}%
                     </span>
                   </div>
                 </div>
@@ -297,17 +294,10 @@ export function About() {
                 </div>
                 
                 {/* Enhanced Status Panel */}
-                <div className="absolute bottom-1 sm:bottom-2 md:bottom-3 lg:bottom-2 left-1 sm:left-2 right-1 sm:right-2">
-                  <div className="flex items-center justify-between text-xs font-mono gap-1 sm:gap-2">
-                    {/* Processing Status with Data Stream */}
-                    <div className="flex items-center space-x-1 sm:space-x-2 text-accent bg-background/95 px-1 sm:px-2 py-0.5 sm:py-1 border border-accent/30 rounded overflow-hidden min-w-0 flex-shrink">
-                      <div className="cnn-data-stream w-6 sm:w-8 md:w-12 h-1 rounded-full flex-shrink-0"></div>
-                      <span className="hidden sm:inline text-xs whitespace-nowrap">Processing</span>
-                      <span className="sm:hidden text-xs">Proc</span>
-                    </div>
-                    
+                <div className="absolute bottom-2 left-2 right-2">
+                  <div className="flex items-center justify-center text-xs font-mono">
                     {/* Enhanced Kernel Position */}
-                    <div className="text-muted-foreground bg-background/95 px-1 sm:px-2 py-0.5 sm:py-1 border border-muted-foreground/20 rounded text-xs whitespace-nowrap flex-shrink-0">
+                    <div className="text-muted-foreground bg-background/95 px-2 py-1 border border-muted-foreground/20 rounded">
                       {mounted && (
                         <>
                           {(() => {
@@ -327,23 +317,8 @@ export function About() {
                 </div>
               </div>
               
-              {/* Enhanced Feature Map Preview - Better responsive positioning */}
-              <div className="absolute -bottom-8 sm:-bottom-10 md:-bottom-12 lg:-bottom-14 xl:-bottom-16 left-0 right-0 text-center">
-                <div className="text-xs font-mono text-muted-foreground">
-                  <div className="bg-background/95 px-2 sm:px-3 py-1 sm:py-1.5 border border-muted-foreground/20 rounded inline-flex items-center space-x-1 sm:space-x-2 shadow-sm max-w-[140px] sm:max-w-none mx-auto">
-                    <div className="flex space-x-1 flex-shrink-0">
-                      <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
-                      <div className="w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                      <div className="w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                    </div>
-                    <span className="hidden sm:inline">Feature Maps Active</span>
-                    <span className="sm:hidden text-xs truncate">Features</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Pixel corner decoration - Responsive positioning */}
-              <div className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 lg:-bottom-4 -right-1 sm:-right-2 md:-right-3 lg:-right-4 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 bg-accent"></div>
+              {/* Pixel corner decoration */}
+              <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-accent"></div>
             </div>
           </div>
         </div>
