@@ -43,29 +43,45 @@ export function Projects() {
           ...prev,
           [index]: (prev[index] || 0) + 1
         }))
-      }, 400 + index * 100) // Slower, more optimized animation
+      }, 250 + index * 60) // Faster animation speed
       intervals.push(interval)
     })
     
     return () => intervals.forEach(clearInterval)
   }, [])
   
-  // Neural Network Animation - Forward propagation pattern (optimized)
+  // Neural Network Animation - Forward propagation pattern with RGB pixels
   const getNeuralNetworkPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridCols)
     const col = i % gridCols
     const waveProgress = (step % (gridCols + gridRows)) / (gridCols + gridRows)
     const distanceFromStart = (row + col) / (gridCols + gridRows - 2)
     
+    // RGB color cycling for active neurons
+    const colorPhase = (step + i) % 3
+    
     if (Math.abs(distanceFromStart - waveProgress) < 0.3) {
-      return "bg-accent opacity-60"
+      if (colorPhase === 0) return "bg-red-500 opacity-70"
+      if (colorPhase === 1) return "bg-green-500 opacity-70"
+      return "bg-blue-500 opacity-70"
     } else if (Math.abs(distanceFromStart - waveProgress) < 0.5) {
-      return "bg-accent opacity-20"
+      if (colorPhase === 0) return "bg-red-400 opacity-30"
+      if (colorPhase === 1) return "bg-green-400 opacity-30"
+      return "bg-blue-400 opacity-30"
     }
+    
+    // Random RGB sparkles
+    if (Math.random() > 0.98) {
+      const sparkleColor = Math.floor(Math.random() * 3)
+      if (sparkleColor === 0) return "bg-red-300 opacity-20"
+      if (sparkleColor === 1) return "bg-green-300 opacity-20"
+      return "bg-blue-300 opacity-20"
+    }
+    
     return "bg-transparent"
   }
   
-  // Gradient Descent Animation - Optimization path (optimized)
+  // Gradient Descent Animation - Optimization path with RGB heat map
   const getGradientDescentPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridCols)
     const col = i % gridCols
@@ -80,48 +96,62 @@ export function Projects() {
     const descentProgress = (step % 80) / 80
     const currentRadius = (1 - descentProgress) * maxDistance
     
+    // RGB heat map based on loss/distance
     if (Math.abs(distanceFromCenter - currentRadius) < 2) {
-      return "bg-accent opacity-70"
+      return "bg-cyan-400 opacity-80" // Current optimization point
     } else if (distanceFromCenter > maxDistance * 0.7) {
-      return "bg-accent opacity-15" // High loss areas
+      return "bg-red-500 opacity-40" // High loss areas (red)
     } else if (distanceFromCenter < maxDistance * 0.3) {
-      return "bg-accent opacity-40" // Low loss areas
+      return "bg-green-500 opacity-50" // Low loss areas (green)
+    } else {
+      return "bg-yellow-400 opacity-25" // Medium loss areas (yellow)
     }
-    return "bg-transparent"
   }
   
-  // Attention Mechanism Animation - Focus patterns (optimized)
+  // Attention Mechanism Animation - RGB focus patterns
   const getAttentionPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
     const row = Math.floor(i / gridRows)
     const col = i % gridCols
     
-    // Create multiple attention heads focusing on different areas
+    // Create multiple attention heads focusing on different areas with RGB colors
     const attentionCycle = Math.floor(step / 30) % 4
-    const intensity = Math.min((step % 30) / 30, 0.6)
+    const intensity = Math.min((step % 30) / 30, 0.7)
     
     let focused = false
+    let colorClass = ""
     
     switch (attentionCycle) {
-      case 0: // Top-left attention
+      case 0: // Top-left attention (Red)
         focused = row < gridRows / 2 && col < gridCols / 2
+        colorClass = "bg-red-500"
         break
-      case 1: // Top-right attention
+      case 1: // Top-right attention (Green)
         focused = row < gridRows / 2 && col >= gridCols / 2
+        colorClass = "bg-green-500"
         break
-      case 2: // Bottom-left attention
+      case 2: // Bottom-left attention (Blue)
         focused = row >= gridRows / 2 && col < gridCols / 2
+        colorClass = "bg-blue-500"
         break
-      case 3: // Bottom-right attention
+      case 3: // Bottom-right attention (Purple)
         focused = row >= gridRows / 2 && col >= gridCols / 2
+        colorClass = "bg-purple-500"
         break
     }
     
     if (focused) {
-      return `bg-accent opacity-${Math.floor(intensity * 50 + 15)}`
+      const opacityLevel = Math.floor(intensity * 60 + 20)
+      return `${colorClass} opacity-${opacityLevel}`
     }
     
-    // Background attention (reduced frequency)
-    return Math.random() > 0.95 ? "bg-accent opacity-5" : "bg-transparent"
+    // Background RGB noise
+    if (Math.random() > 0.96) {
+      const noiseColors = ["bg-red-300", "bg-green-300", "bg-blue-300", "bg-yellow-300", "bg-pink-300", "bg-cyan-300"]
+      const randomColor = noiseColors[Math.floor(Math.random() * noiseColors.length)]
+      return `${randomColor} opacity-10`
+    }
+    
+    return "bg-transparent"
   }
   
   const getAnimationPattern = (animationType: string, step: number, i: number, gridCols: number, gridRows: number) => {
