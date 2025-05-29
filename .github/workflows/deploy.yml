@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages with Cache Busting
 
 on:
   push:
@@ -39,10 +39,22 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
         
-      - name: Build with Next.js
-        run: npm run build
+      - name: Build with Next.js and Cache Busting
+        run: |
+          BUILD_ID=${{ github.sha }}-${{ github.run_number }}
+          BUILD_TIME=$(date -Iseconds)
+          echo "NEXT_PUBLIC_BUILD_ID=$BUILD_ID" > .env.local
+          echo "NEXT_PUBLIC_BUILD_TIME=$BUILD_TIME" >> .env.local
+          npm run build
         env:
           NODE_ENV: production
+          
+      - name: Add cache busting info
+        run: |
+          echo "Build ID: ${{ github.sha }}-${{ github.run_number }}" > ./out/build-info.txt
+          echo "Build Date: $(date)" >> ./out/build-info.txt
+          echo "Commit SHA: ${{ github.sha }}" >> ./out/build-info.txt
+          echo "Run Number: ${{ github.run_number }}" >> ./out/build-info.txt
           
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll

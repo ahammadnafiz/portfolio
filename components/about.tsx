@@ -211,7 +211,7 @@ export function About() {
                 {/* Resume Download Button */}
                 <div className="pt-4">
                   <a
-                    href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/Nafiz CV Updated.pdf`}
+                    href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/Nafiz CV Updated.pdf?v=${process.env.NEXT_PUBLIC_BUILD_ID || Date.now()}`}
                     download="Nafiz_CV_Updated.pdf"
                     className="pixel-button uppercase text-sm"
                   >

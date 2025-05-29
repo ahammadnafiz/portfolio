@@ -37,6 +37,13 @@ export default function RootLayout({
           rel="stylesheet" 
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" 
         />
+        {/* Cache busting meta tags */}
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
+        <meta name="version" content={process.env.NEXT_PUBLIC_BUILD_ID || "dev"} />
+        <meta name="build-time" content={process.env.NEXT_PUBLIC_BUILD_TIME || ""} />
+        
         {/* Additional favicon meta tags for better browser support */}
         <link rel="icon" type="image/x-icon" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon.ico`} />
         <link rel="icon" type="image/png" sizes="16x16" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon-16x16.png`} />
