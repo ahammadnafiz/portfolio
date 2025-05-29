@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { CacheBuster } from "../components/cache-buster"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -44,6 +45,12 @@ export default function RootLayout({
         <meta name="version" content={process.env.NEXT_PUBLIC_BUILD_ID || "dev"} />
         <meta name="build-time" content={process.env.NEXT_PUBLIC_BUILD_TIME || ""} />
         
+        {/* Cache busting script */}
+        <script 
+          src={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/cache-buster.js?v=${process.env.NEXT_PUBLIC_BUILD_ID || Date.now()}`}
+          defer
+        />
+        
         {/* Additional favicon meta tags for better browser support */}
         <link rel="icon" type="image/x-icon" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon.ico`} />
         <link rel="icon" type="image/png" sizes="16x16" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon-16x16.png`} />
@@ -52,6 +59,7 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/icon.png`} />
       </head>
       <body className={inter.className}>
+        <CacheBuster />
         {children}
       </body>
     </html>

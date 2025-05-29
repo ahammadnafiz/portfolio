@@ -39,22 +39,40 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
         
-      - name: Build with Next.js and Cache Busting
+      - name: Build with Aggressive Cache Busting
         run: |
-          BUILD_ID=${{ github.sha }}-${{ github.run_number }}
+          BUILD_ID=$(date +%s)
           BUILD_TIME=$(date -Iseconds)
-          echo "NEXT_PUBLIC_BUILD_ID=$BUILD_ID" > .env.local
+          RANDOM_HASH=$(openssl rand -hex 8)
+          CACHE_BUSTER="${BUILD_ID}-${RANDOM_HASH}"
+          
+          echo "NEXT_PUBLIC_BUILD_ID=$CACHE_BUSTER" > .env.local
           echo "NEXT_PUBLIC_BUILD_TIME=$BUILD_TIME" >> .env.local
+          
+          # Clear npm cache for fresh build
+          npm cache clean --force
+          
           npm run build
         env:
           NODE_ENV: production
           
-      - name: Add cache busting info
+      - name: Add comprehensive cache busting info
         run: |
-          echo "Build ID: ${{ github.sha }}-${{ github.run_number }}" > ./out/build-info.txt
+          BUILD_ID=$(date +%s)
+          RANDOM_HASH=$(openssl rand -hex 8)
+          CACHE_BUSTER="${BUILD_ID}-${RANDOM_HASH}"
+          
+          echo "Build ID: $CACHE_BUSTER" > ./out/build-info.txt
           echo "Build Date: $(date)" >> ./out/build-info.txt
           echo "Commit SHA: ${{ github.sha }}" >> ./out/build-info.txt
           echo "Run Number: ${{ github.run_number }}" >> ./out/build-info.txt
+          echo "Random Hash: $RANDOM_HASH" >> ./out/build-info.txt
+          
+          # Add cache busting to HTML files
+          find ./out -name "*.html" -type f -exec sed -i "s/<html/<html data-cache-buster=\"$CACHE_BUSTER\"/g" {} \;
+          
+          # Create cache manifest
+          echo "{\"buildId\":\"$CACHE_BUSTER\",\"buildTime\":\"$(date -Iseconds)\",\"timestamp\":$(date +%s)}" > ./out/cache-manifest.json
           
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
