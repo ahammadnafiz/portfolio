@@ -48,6 +48,43 @@
     font-family: var(--font-mono);
     line-height: 1.6;
   }
+
+  /* Ensure proper viewport handling for mobile devices */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom viewport units for better mobile support */
+  .min-h-screen-safe {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* Perfect centering utility */
+  .center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Responsive container with safe margins */
+  .safe-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Enhanced responsive text scaling */
+  .text-responsive-xl {
+    font-size: clamp(1.25rem, 4vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    line-height: 1.4;
+  }
 }
 
 html {
