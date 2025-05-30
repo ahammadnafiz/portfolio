@@ -10,7 +10,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative pt-8 sm:pt-12 md:pt-8 lg:pt-0" itemScope itemType="https://schema.org/Person">
+    <section id="home" className="min-h-screen flex items-center justify-center relative pt-8 sm:pt-12 md:pt-8 lg:pt-16 xl:pt-20" itemScope itemType="https://schema.org/Person">
       {/* Enhanced structured data */}
       <meta itemProp="name" content="Ahammad Nafiz" />
       <meta itemProp="jobTitle" content="ML Researcher & Python Developer" />

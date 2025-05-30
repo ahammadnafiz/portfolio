@@ -5,6 +5,20 @@ set -e
 
 echo "🚀 Building and deploying portfolio with optimized caching..."
 
+# Clean previous build - Fresh start
+echo "🧹 Cleaning previous build..."
+if [ -d "out" ]; then
+    echo "   Removing existing 'out' directory..."
+    rm -rf out
+fi
+
+if [ -d ".next" ]; then
+    echo "   Removing existing '.next' directory..."
+    rm -rf .next
+fi
+
+echo "✨ Fresh workspace prepared!"
+
 # Set build environment variables
 export BUILD_ID=$(git rev-parse --short HEAD 2>/dev/null || echo "manual-$(date +%s)")
 export NEXT_PUBLIC_BUILD_ID=$BUILD_ID
@@ -13,8 +27,8 @@ export NEXT_PUBLIC_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 echo "📦 Build ID: $BUILD_ID"
 echo "⏰ Build Time: $NEXT_PUBLIC_BUILD_TIME"
 
-# Build the project
-echo "🔨 Building Next.js project..."
+# Build the project with fresh start
+echo "🔨 Building Next.js project from scratch..."
 npm run build
 
 # Create .nojekyll file to prevent GitHub Pages from ignoring files starting with _
@@ -74,21 +88,37 @@ Sitemap: https://yourusername.github.io/portfolio/sitemap.xml
 EOF
 
 # Update service worker with correct scope for GitHub Pages
-sed -i 's|scope: "/portfolio/"|scope: "/portfolio/"|g' out/sw.js
+if [ -f "out/sw.js" ]; then
+    echo "🔧 Configuring service worker for GitHub Pages..."
+    sed -i 's|scope: "/portfolio/"|scope: "/portfolio/"|g' out/sw.js
+else
+    echo "ℹ️  No service worker found, skipping configuration..."
+fi
 
 echo "✅ Build completed successfully!"
-echo "📁 Output directory: out/"
+echo "📁 Output directory: out/ (freshly created)"
 echo "🌐 Ready for deployment to GitHub Pages"
 
 # Show build info
 echo ""
 echo "📊 Build Summary:"
+echo "  - Fresh Build: ✅ Previous files cleaned"
 echo "  - Build ID: $BUILD_ID"
 echo "  - Build Time: $NEXT_PUBLIC_BUILD_TIME"
 echo "  - Service Worker: ✅ Network-first strategy"
 echo "  - Cache Headers: ✅ Optimized for static assets"
 echo "  - Hash-based filenames: ✅ Next.js built-in"
 echo ""
+
+# Show build statistics
+if [ -d "out" ]; then
+    OUT_SIZE=$(du -sh out | cut -f1)
+    FILE_COUNT=$(find out -type f | wc -l)
+    echo "📈 Build Statistics:"
+    echo "  - Total size: $OUT_SIZE"
+    echo "  - Files created: $FILE_COUNT"
+    echo ""
+fi
 
 # Optional: Deploy to GitHub Pages (uncomment if you want automatic deployment)
 # echo "🚀 Deploying to GitHub Pages..."
