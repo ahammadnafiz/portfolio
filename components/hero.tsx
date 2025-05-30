@@ -10,7 +10,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative pt-8 sm:pt-12 md:pt-8 lg:pt-16 xl:pt-20" itemScope itemType="https://schema.org/Person">
+    <section id="home" className="min-h-screen flex items-center justify-center relative pt-8 sm:pt-12 md:pt-8 lg:pt-8 xl:pt-12" itemScope itemType="https://schema.org/Person">
       {/* Enhanced structured data */}
       <meta itemProp="name" content="Ahammad Nafiz" />
       <meta itemProp="jobTitle" content="ML Researcher & Python Developer" />
@@ -172,8 +172,8 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Center content container */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      {/* Center content container with adjusted positioning */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative lg:-mt-8 xl:-mt-12">
         {/* Left decorative element */}
         <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2">
           <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-accent animate-pulse opacity-30"></div>
