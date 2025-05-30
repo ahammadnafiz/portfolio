@@ -10,7 +10,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative pt-8 sm:pt-12 md:pt-16" itemScope itemType="https://schema.org/Person">
+    <section id="home" className="min-h-screen flex items-center justify-center relative pt-8 sm:pt-12 md:pt-8 lg:pt-0" itemScope itemType="https://schema.org/Person">
       {/* Enhanced structured data */}
       <meta itemProp="name" content="Ahammad Nafiz" />
       <meta itemProp="jobTitle" content="ML Researcher & Python Developer" />
@@ -183,7 +183,7 @@ export function Hero() {
         <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2">
           <div className="w-6 h-6 lg:w-8 lg:h-8 bg-accent opacity-20 animate-pulse"></div>
         </div>
-        <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-7">
+        <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-6 xl:space-y-7">
           {/* Profile Image - Top */}
           <div
             className={`transition-all duration-1000 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
@@ -227,20 +227,20 @@ export function Hero() {
           <div
             className={`transition-all duration-1000 delay-500 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-mono font-bold mb-4 sm:mb-5 md:mb-6 tracking-tight" itemProp="name">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-mono font-bold mb-4 sm:mb-5 md:mb-6 lg:mb-5 xl:mb-6 tracking-tight" itemProp="name">
               <span className="text-accent">A</span>hammad <span className="text-accent">N</span>afiz
             </h1>
 
-            <div className="w-12 sm:w-16 md:w-20 lg:w-24 h-1 sm:h-2 bg-accent mx-auto mb-6 sm:mb-7 md:mb-8" aria-hidden="true"></div>
+            <div className="w-12 sm:w-16 md:w-20 lg:w-24 h-1 sm:h-2 bg-accent mx-auto mb-6 sm:mb-7 md:mb-8 lg:mb-6 xl:mb-8" aria-hidden="true"></div>
 
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-mono text-muted-foreground mb-6 sm:mb-7 md:mb-8 leading-relaxed uppercase max-w-2xl px-4" itemProp="description">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-mono text-muted-foreground mb-6 sm:mb-7 md:mb-8 lg:mb-6 xl:mb-8 leading-relaxed uppercase max-w-2xl px-4" itemProp="description">
               <span itemProp="jobTitle">ML Researcher | Python Developer</span>
               <br />
               <span className="text-accent">Building AI Skills Through Code, Research, and Community</span>
             </p>
 
             {/* Social Media Links */}
-            <div className="flex justify-center space-x-4 sm:space-x-6 md:space-x-8 mb-6 sm:mb-7 md:mb-8" itemProp="sameAs">
+            <div className="flex justify-center space-x-4 sm:space-x-6 md:space-x-8 mb-6 sm:mb-7 md:mb-8 lg:mb-6 xl:mb-8" itemProp="sameAs">
               <a
                 href="https://github.com/ahammadnafiz"
                 target="_blank"
