@@ -47,18 +47,19 @@ export function Navigation() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b-2 border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b-2 border-border" role="banner" aria-label="Main navigation">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex justify-between items-center">
           <button
             onClick={() => scrollToSection("home")}
             className="text-lg sm:text-xl font-mono font-bold hover:text-accent transition-colors uppercase tracking-wider"
+            aria-label="Go to home section"
           >
             Nafiz
           </button>
 
           <div className="flex items-center space-x-4 sm:space-x-6">
-            <div className="hidden sm:flex space-x-4 lg:space-x-8">
+            <div className="hidden sm:flex space-x-4 lg:space-x-8" role="menubar" aria-label="Desktop navigation menu">
               {[
                 { id: "home", label: "Home" },
                 { id: "about", label: "About" },
@@ -74,6 +75,9 @@ export function Navigation() {
                       ? "text-accent border-b-2 border-accent" 
                       : "text-muted-foreground hover:text-accent"
                   }`}
+                  role="menuitem"
+                  aria-current={activeSection === item.id ? "page" : undefined}
+                  aria-label={`Go to ${item.label.toLowerCase()} section`}
                 >
                   {item.label}
                 </button>
@@ -85,9 +89,18 @@ export function Navigation() {
               <button
                 onClick={() => {
                   const menu = document.getElementById('mobile-menu')
+                  const isHidden = menu?.classList.contains('hidden')
                   menu?.classList.toggle('hidden')
+                  // Update aria-expanded based on menu visibility
+                  const button = document.querySelector('[aria-controls="mobile-menu"]') as HTMLButtonElement
+                  if (button) {
+                    button.setAttribute('aria-expanded', isHidden ? 'true' : 'false')
+                  }
                 }}
                 className="font-mono text-sm text-muted-foreground hover:text-accent transition-colors"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                aria-label="Toggle mobile navigation menu"
               >
                 MENU
               </button>
@@ -96,7 +109,7 @@ export function Navigation() {
         </div>
         
         {/* Mobile menu */}
-        <div id="mobile-menu" className="hidden sm:hidden mt-4 pb-4 border-t border-border pt-4">
+        <div id="mobile-menu" className="hidden sm:hidden mt-4 pb-4 border-t border-border pt-4" role="menu" aria-label="Mobile navigation menu">
           <div className="flex flex-col space-y-3">
             {[
               { id: "home", label: "Home" },
@@ -109,13 +122,22 @@ export function Navigation() {
                 key={item.id}
                 onClick={() => {
                   scrollToSection(item.id)
-                  document.getElementById('mobile-menu')?.classList.add('hidden')
+                  const menu = document.getElementById('mobile-menu')
+                  menu?.classList.add('hidden')
+                  // Update aria-expanded when menu closes
+                  const button = document.querySelector('[aria-controls="mobile-menu"]') as HTMLButtonElement
+                  if (button) {
+                    button.setAttribute('aria-expanded', 'false')
+                  }
                 }}
                 className={`font-mono text-sm transition-colors uppercase text-left ${
                   activeSection === item.id 
                     ? "text-accent" 
                     : "text-muted-foreground hover:text-accent"
                 }`}
+                role="menuitem"
+                aria-current={activeSection === item.id ? "page" : undefined}
+                aria-label={`Go to ${item.label.toLowerCase()} section`}
               >
                 {item.label}
               </button>

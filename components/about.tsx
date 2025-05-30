@@ -178,22 +178,59 @@ export function About() {
   }
   
   return (
-    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-secondary/20 relative">
+    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-secondary/20 relative" itemScope itemType="https://schema.org/AboutPage">
+      {/* Enhanced structured data for About section */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Ahammad Nafiz",
+            "description": "Data Science student with strong interest in AI research, specializing in Natural Language Processing and Reinforcement Learning",
+            "jobTitle": "Head of R&D",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "UIU Data Science Club"
+            },
+            "knowsAbout": [
+              "Natural Language Processing",
+              "Reinforcement Learning", 
+              "Transformer Architectures",
+              "Deep Learning",
+              "Machine Learning",
+              "Python Development",
+              "PyTorch",
+              "TensorFlow"
+            ],
+            "hasCredential": [
+              {
+                "@type": "EducationalOccupationalCredential",
+                "name": "Data Science Student",
+                "educationalLevel": "Undergraduate"
+              }
+            ]
+          })
+        }}
+      />
+      
       <div className="flex justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl text-center relative">
           {/* Left decorative element */}
-          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2">
+          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
             <div className="w-6 h-6 lg:w-8 lg:h-8 bg-accent opacity-30"></div>
           </div>
           
           {/* Right decorative element */}
-          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2">
+          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
             <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-accent opacity-30"></div>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-8 sm:mb-12 uppercase">
-            <span className="text-accent">A</span>bout
-          </h2>
+          <header>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-8 sm:mb-12 uppercase" itemProp="name">
+              <span className="text-accent">A</span>bout
+            </h2>
+          </header>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="order-2 lg:order-1">

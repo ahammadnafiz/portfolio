@@ -176,36 +176,72 @@ export function Projects() {
   }
   return (
     <section id="projects" className="py-16 sm:py-20 lg:py-24 relative">
+      {/* Structured Data for Projects */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Ahammad Nafiz Projects",
+            "description": "Machine Learning and AI projects by Ahammad Nafiz",
+            "numberOfItems": projects.length,
+            "itemListElement": projects.map((project, index) => ({
+              "@type": "SoftwareApplication",
+              "position": index + 1,
+              "name": project.title,
+              "description": project.description,
+              "url": project.link,
+              "applicationCategory": "Machine Learning",
+              "operatingSystem": "Cross-platform",
+              "programmingLanguage": project.tech,
+              "author": {
+                "@type": "Person",
+                "name": "Ahammad Nafiz",
+                "url": "https://ahammadnafiz.github.io"
+              },
+              "dateCreated": project.year.includes("2024") ? "2024" : "2025",
+              "keywords": project.tech.join(", ")
+            }))
+          })
+        }}
+      />
+      
       {/* Center content container */}
       <div className="flex justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl text-center relative">
           {/* Left decorative element */}
-          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2">
+          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
             <div className="w-6 h-6 lg:w-8 lg:h-8 bg-accent opacity-30"></div>
           </div>
           
           {/* Right decorative element */}
-          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2">
+          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
             <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-accent opacity-30 animate-pulse"></div>
           </div>
-          <div className="mb-12 sm:mb-16">
+          
+          <header className="mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-4 uppercase">
               <span className="text-accent">P</span>rojects
             </h2>
-            <div className="w-12 sm:w-16 h-1 sm:h-2 bg-accent mx-auto"></div>
-          </div>
+            <div className="w-12 sm:w-16 h-1 sm:h-2 bg-accent mx-auto" aria-hidden="true"></div>
+            <p className="sr-only">Machine Learning and AI projects by Ahammad Nafiz, showcasing expertise in deep learning, natural language processing, and automated systems.</p>
+          </header>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8" role="list" aria-label="Featured projects">
             {projects.map((project, index) => (
-              <div
+              <article
                 key={index}
                 className="group border-2 border-accent hover:border-accent bg-secondary/10 transition-all duration-300 p-4 sm:p-6 lg:p-8 pixel-borders"
+                role="listitem"
+                itemScope
+                itemType="https://schema.org/SoftwareApplication"
               >
-                <div className="aspect-video bg-background mb-4 sm:mb-6 relative overflow-hidden border border-accent/30">
+                <div className="aspect-video bg-background mb-4 sm:mb-6 relative overflow-hidden border border-accent/30" aria-hidden="true">
                   {/* ML/AI Themed Pixel Art Animations */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     {/* Animation Label */}
-                    <div className="absolute top-1 left-1 text-xs font-mono text-accent bg-background/80 px-1">
+                    <div className="absolute top-1 left-1 text-xs font-mono text-accent bg-background/80 px-1" aria-hidden="true">
                       {project.animationType === "neural_network" && "Neural Net"}
                       {project.animationType === "gradient_descent" && "Gradient Descent"}
                       {project.animationType === "attention_mechanism" && "Attention"}
@@ -275,16 +311,18 @@ export function Projects() {
                 </div>
 
                 <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <h3 className="font-mono font-bold text-lg sm:text-xl text-accent">{project.title}</h3>
-                  <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
+                  <h3 className="font-mono font-bold text-lg sm:text-xl text-accent" itemProp="name">{project.title}</h3>
+                  <time className="font-mono text-xs text-muted-foreground" itemProp="dateCreated">{project.year}</time>
                 </div>
-                <p className="font-mono text-foreground text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">{project.description}</p>
+                <p className="font-mono text-foreground text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed" itemProp="description">{project.description}</p>
 
-                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6 justify-center">
+                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6 justify-center" role="list" aria-label={`Technologies used in ${project.title}`}>
                   {project.tech.map((tech, techIndex) => (
                     <span 
                       key={techIndex} 
                       className="font-mono text-xs border-2 border-accent px-2 py-1 text-foreground"
+                      role="listitem"
+                      itemProp="programmingLanguage"
                     >
                       {tech}
                     </span>
@@ -294,10 +332,14 @@ export function Projects() {
                 <a
                   href={project.link}
                   className="pixel-button text-xs sm:text-sm inline-block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  itemProp="url"
+                  aria-label={`View ${project.title} project on GitHub`}
                 >
                   View Project →
                 </a>
-              </div>
+              </article>
             ))}
           </div>
 
@@ -308,6 +350,7 @@ export function Projects() {
               target="_blank"
               rel="noopener noreferrer"
               className="pixel-button text-sm sm:text-base"
+              aria-label="View more projects by Ahammad Nafiz on GitHub"
             >
               View More Projects →
             </a>

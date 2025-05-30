@@ -36,17 +36,62 @@ const skillsData = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-16 sm:py-20 lg:py-24 bg-background relative">
+    <section id="skills" className="py-16 sm:py-20 lg:py-24 bg-background relative" itemScope itemType="https://schema.org/Person">
+      {/* Enhanced structured data for Skills */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Ahammad Nafiz",
+            "knowsAbout": [
+              "Python Programming",
+              "C++ Programming",
+              "PyTorch",
+              "TensorFlow",
+              "Scikit-learn",
+              "NumPy",
+              "Pandas",
+              "OpenCV",
+              "FastAPI",
+              "LangChain",
+              "Machine Learning",
+              "Deep Learning",
+              "Computer Vision",
+              "Natural Language Processing",
+              "Data Science",
+              "Linux",
+              "Git Version Control",
+              "Neovim",
+              "VS Code"
+            ],
+            "hasOccupation": {
+              "@type": "Occupation",
+              "name": "ML Researcher & Python Developer",
+              "skills": [
+                "Machine Learning",
+                "Deep Learning",
+                "Python Development",
+                "Data Science",
+                "Computer Vision",
+                "Natural Language Processing"
+              ]
+            }
+          })
+        }}
+      />
+      
       {/* Center content container */}
       <div className="flex justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl text-center relative">
           {/* Left decorative element */}
-          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2">
+          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
             <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-accent opacity-30 animate-pulse"></div>
           </div>
           
           {/* Right decorative element */}
-          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2">
+          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
             <div className="w-6 h-6 lg:w-8 lg:h-8 bg-accent opacity-20 animate-pulse"></div>
           </div>
           <div className="mb-12 sm:mb-16">
