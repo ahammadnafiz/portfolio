@@ -122,6 +122,115 @@ pnpm start
 pnpm export
 ```
 
+## 🔄 Cache Busting System
+
+This portfolio includes a sophisticated cache busting system to ensure users always get the latest version of your site. **Everything is now integrated into a single deployment script!**
+
+### 🚀 One-Command Deployment
+
+```bash
+# Complete deployment with automatic cache busting
+./deploy-optimized.sh
+```
+
+This single script handles:
+- ✅ Clean build environment setup
+- ✅ Cache busting component verification  
+- ✅ Unique build ID generation
+- ✅ Environment variable updates
+- ✅ Next.js build with cache busting
+- ✅ Service worker configuration
+- ✅ Deployment preparation
+- ✅ Comprehensive verification
+
+### 📖 Complete Guide
+
+For detailed information, see: **[CACHE_BUSTING_GUIDE.md](./CACHE_BUSTING_GUIDE.md)**
+
+### Quick Reference
+
+```bash
+# Update cache busting variables (Shell script)
+npm run update-cache
+
+# Update cache busting variables (Node.js script)
+npm run update-cache:node
+
+# Deploy with automatic cache busting
+npm run deploy
+```
+
+### Manual Cache Busting
+
+#### Using Shell Script (Linux/macOS)
+```bash
+./update-cache-bust.sh
+```
+
+#### Using Node.js Script (Cross-platform)
+```bash
+node update-cache-bust.js
+```
+
+#### Using npm Scripts
+```bash
+# Shell version
+npm run update-cache
+
+# Node.js version  
+npm run update-cache:node
+```
+
+### Environment Variables
+
+The cache busting system uses two environment variables in `.env.local`:
+
+```bash
+# Unique build identifier
+NEXT_PUBLIC_BUILD_ID=ca36b0f-1748594503131
+
+# Build timestamp
+NEXT_PUBLIC_BUILD_TIME=2025-05-30T08:41:43.131Z
+```
+
+### Components Involved
+
+- **`components/cache-buster.tsx`**: React component that detects version changes
+- **`public/cache-buster.js`**: Standalone script for cache clearing
+- **`public/sw.js`**: Service worker with cache management
+- **`update-cache-bust.sh`**: Shell script to update variables
+- **`update-cache-bust.js`**: Node.js script to update variables
+
+### Development Workflow
+
+1. **Make changes** to your portfolio
+2. **Update cache variables** using one of the update scripts
+3. **Restart development server** to pick up new environment variables
+4. **Test locally** to ensure cache busting works
+5. **Deploy** using the deploy script for automatic cache busting
+
+### Deployment
+
+The `deploy-optimized.sh` script automatically:
+- Generates fresh build IDs
+- Updates `.env.local` 
+- Builds the project with new variables
+- Prepares optimized static files for GitHub Pages
+
+```bash
+./deploy-optimized.sh
+```
+
+### Troubleshooting
+
+If cache busting isn't working:
+
+1. **Check environment variables**: Ensure `.env.local` exists and has valid values
+2. **Restart dev server**: Changes to `.env.local` require a restart
+3. **Clear browser cache**: Manually clear browser cache and storage
+4. **Check service worker**: Open DevTools → Application → Service Workers
+5. **Verify build ID**: Check console for build ID logs
+
 ## 🎯 Key Sections
 
 ### 🏠 Hero Section

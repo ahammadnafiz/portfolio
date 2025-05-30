@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build"
+    "export": "next build",
+    "update-cache": "./update-cache-bust.sh",
+    "update-cache:node": "node update-cache-bust.js",
+    "deploy": "./deploy-optimized.sh",
+    "test-cache": "./test-cache-busting.sh",
+    "deploy:complete": "./deploy-optimized.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
