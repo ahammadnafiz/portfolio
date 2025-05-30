@@ -56,56 +56,58 @@ export function Contact() {
             <span className="text-accent">Let's build intelligent solutions together.</span>
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 lg:space-x-12">
-            <a
-              href="mailto:ahammadnafiz86@gmail.com"
-              className="pixel-button uppercase text-sm sm:text-base"
-              aria-label="Send email to Ahammad Nafiz"
-              itemProp="email"
-            >
-              Send Email
-            </a>
+          <div className="spacing-lg">
+            <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 lg:space-x-12">
+              <a
+                href="mailto:ahammadnafiz86@gmail.com"
+                className="pixel-button uppercase text-sm sm:text-base"
+                aria-label="Send email to Ahammad Nafiz"
+                itemProp="email"
+              >
+                Send Email
+              </a>
 
-            <nav className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8" aria-label="Social media and contact links">
-              <a
-                href="https://github.com/ahammadnafiz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
-                aria-label="Visit Ahammad Nafiz's GitHub profile"
-                itemProp="sameAs"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://linkedin.com/in/ahammad-nafiz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
-                aria-label="Connect with Ahammad Nafiz on LinkedIn"
-                itemProp="sameAs"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://ahammadnafiz.github.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
-                aria-label="Visit Ahammad Nafiz's blog"
-                itemProp="url"
-              >
-                Blog
-              </a>
-              <a
-                href="tel:+8801619960303"
-                className="font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
-                aria-label="Call Ahammad Nafiz"
-                itemProp="telephone"
-              >
-                Phone
-              </a>
-            </nav>
+              <nav className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8" aria-label="Social media and contact links">
+                <a
+                  href="https://github.com/ahammadnafiz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
+                  aria-label="Visit Ahammad Nafiz's GitHub profile"
+                  itemProp="sameAs"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://linkedin.com/in/ahammad-nafiz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
+                  aria-label="Connect with Ahammad Nafiz on LinkedIn"
+                  itemProp="sameAs"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://ahammadnafiz.github.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
+                  aria-label="Visit Ahammad Nafiz's blog"
+                  itemProp="url"
+                >
+                  Blog
+                </a>
+                <a
+                  href="tel:+8801619960303"
+                  className="social-icon font-mono text-xs sm:text-sm border-b-2 border-accent hover:text-accent transition-colors"
+                  aria-label="Call Ahammad Nafiz"
+                  itemProp="telephone"
+                >
+                  Phone
+                </a>
+              </nav>
+            </div>
           </div>
 
           <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t-2 border-accent/30">

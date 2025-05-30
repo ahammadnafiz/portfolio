@@ -232,7 +232,7 @@ export function Projects() {
             {projects.map((project, index) => (
               <article
                 key={index}
-                className="group border-2 border-accent hover:border-accent bg-secondary/10 transition-all duration-300 p-4 sm:p-6 lg:p-8 pixel-borders"
+                className="group border-2 border-accent hover:border-accent bg-secondary/10 transition-all duration-300 p-4 sm:p-6 lg:p-8 pixel-borders hover-lift"
                 role="listitem"
                 itemScope
                 itemType="https://schema.org/SoftwareApplication"

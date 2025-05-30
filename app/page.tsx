@@ -5,6 +5,9 @@ import { Projects } from "@/components/projects"
 import { Contact } from "@/components/contact"
 import { Navigation } from "@/components/navigation"
 import { Breadcrumbs } from "@/components/breadcrumbs"
+import { ScrollIndicator } from "@/components/scroll-indicator"
+import { FadeInSection } from "@/components/fade-in-section"
+import { BackToTop } from "@/components/back-to-top"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -21,6 +24,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <ScrollIndicator />
       {/* Enhanced structured data for homepage */}
       <script
         type="application/ld+json"
@@ -50,14 +54,44 @@ export default function Home() {
         <Navigation />
         <Breadcrumbs />
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+        
+        {/* About Section with spacing */}
+        <div className="section-divider"></div>
+        <FadeInSection>
+          <div className="p-spacing-lg">
+            <About />
+          </div>
+        </FadeInSection>
+        
+        {/* Skills Section with spacing */}
+        <div className="section-divider"></div>
+        <FadeInSection>
+          <div className="p-spacing-lg">
+            <Skills />
+          </div>
+        </FadeInSection>
+        
+        {/* Projects Section with spacing */}
+        <div className="section-divider"></div>
+        <FadeInSection>
+          <div className="p-spacing-lg">
+            <Projects />
+          </div>
+        </FadeInSection>
+        
+        {/* Contact Section with spacing */}
+        <div className="section-divider"></div>
+        <FadeInSection>
+          <div className="p-spacing-lg">
+            <Contact />
+          </div>
+        </FadeInSection>
         
         {/* Pixel art grid lines - purely decorative, very subtle */}
         <div className="fixed inset-0 pointer-events-none opacity-[0.02] sm:opacity-[0.03] z-0 bg-[linear-gradient(to_right,hsl(var(--accent))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--accent))_1px,transparent_1px)] bg-[size:16px_16px] sm:bg-[size:20px_20px] lg:bg-[size:24px_24px]" aria-hidden="true"></div>
       </main>
+      
+      <BackToTop />
     </>
   )
 }
