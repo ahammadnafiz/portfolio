@@ -150,7 +150,7 @@ echo "🔨 Building Next.js project with cache busting..."
 echo "================================================"
 
 # Build the project
-npm run build
+NODE_ENV=production npm run build
 
 # Verify build success
 if [ $? -eq 0 ]; then

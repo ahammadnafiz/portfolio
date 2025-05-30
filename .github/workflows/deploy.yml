@@ -52,7 +52,7 @@ jobs:
           # Clear npm cache for fresh build
           npm cache clean --force
           
-          npm run build
+          NODE_ENV=production npm run build
         env:
           NODE_ENV: production
           

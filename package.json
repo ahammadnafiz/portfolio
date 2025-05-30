@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --next-config next.config.dev.mjs",
+    "dev": "NODE_ENV=development next dev",
     "build": "next build",
+    "build:github": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next build",
