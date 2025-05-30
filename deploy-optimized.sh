@@ -49,19 +49,19 @@ test_cache_busting() {
 
 print_status $BLUE "🚀 Building and deploying portfolio with comprehensive cache busting..."
 
-# Clean previous build - Fresh start
-print_status $BLUE "🧹 Cleaning previous build..."
-if [ -d "out" ]; then
-    echo "   Removing existing 'out' directory..."
-    rm -rf out
-fi
+# # Clean previous build - Fresh start
+# print_status $BLUE "🧹 Cleaning previous build..."
+# if [ -d "out" ]; then
+#     echo "   Removing existing 'out' directory..."
+#     rm -rf out
+# fi
 
-if [ -d ".next" ]; then
-    echo "   Removing existing '.next' directory..."
-    rm -rf .next
-fi
+# if [ -d ".next" ]; then
+#     echo "   Removing existing '.next' directory..."
+#     rm -rf .next
+# fi
 
-print_status $GREEN "✨ Fresh workspace prepared!"
+# print_status $GREEN "✨ Fresh workspace prepared!"
 
 # Test cache busting system before proceeding
 test_cache_busting

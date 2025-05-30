@@ -52,6 +52,11 @@
   /* Ensure proper viewport handling for mobile devices */
   html {
     scroll-behavior: smooth;
+    /* Set CSS custom properties for viewport heights */
+    --vh: 1vh;
+    --dvh: 1dvh;
+    --svh: 1svh;
+    --lvh: 1lvh;
   }
 
   /* Custom viewport units for better mobile support */
@@ -60,8 +65,30 @@
     min-height: 100dvh; /* Dynamic viewport height for mobile */
   }
 
+  .h-screen-safe {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* Fallback for browsers that don't support dvh */
+  @supports not (height: 100dvh) {
+    .min-h-screen-safe,
+    .h-screen-safe {
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+  }
+
   /* Perfect centering utility */
   .center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Full viewport height with perfect centering */
+  .full-viewport-center {
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -404,4 +431,65 @@ a:not(.pixel-button):not(.social-icon):focus-visible {
   margin: -2px -4px;
 }
 
-/* ...existing code... */
+/* Enhanced viewport height utilities for mobile browsers */
+@supports (height: 100dvh) {
+  .min-h-screen-dynamic {
+    min-height: 100dvh;
+  }
+  
+  .h-screen-dynamic {
+    height: 100dvh;
+  }
+}
+
+@supports not (height: 100dvh) {
+  .min-h-screen-dynamic {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+  
+  .h-screen-dynamic {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+/* Responsive spacing utilities */
+.space-responsive {
+  margin-bottom: clamp(1rem, 4vw, 2rem);
+}
+
+/* Perfect centering with flexbox fallbacks */
+.perfect-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
+  place-content: center;
+}
+
+/* Responsive text that scales smoothly */
+.text-hero-title {
+  font-size: clamp(1.5rem, 5vw, 4rem);
+  line-height: 1.1;
+}
+
+.text-hero-subtitle {
+  font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+  line-height: 1.4;
+}
+
+/* Enhanced focus states for better accessibility */
+.focus-enhanced:focus-visible {
+  outline: 3px solid hsl(var(--accent));
+  outline-offset: 3px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 6px hsla(var(--accent), 0.2);
+}
+
+/* Responsive container queries support */
+@container (min-width: 768px) {
+  .container-responsive {
+    padding: 2rem;
+  }
+}

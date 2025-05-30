@@ -13,6 +13,14 @@ const config: Config = {
   		screens: {
   			'xs': '475px',
   		},
+  		height: {
+  			'screen-safe': '100vh',
+  			'screen-dynamic': '100dvh',
+  		},
+  		minHeight: {
+  			'screen-safe': '100vh',
+  			'screen-dynamic': '100dvh',
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

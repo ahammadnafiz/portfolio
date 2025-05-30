@@ -224,6 +224,26 @@ export default function RootLayout({
       <body className={inter.className}>
         <ServiceWorkerRegistration />
         <CacheBuster />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Set custom viewport height properties for better mobile support
+              function setViewportHeight() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', vh + 'px');
+              }
+              
+              // Set initial values
+              setViewportHeight();
+              
+              // Update on resize and orientation change
+              window.addEventListener('resize', setViewportHeight);
+              window.addEventListener('orientationchange', () => {
+                setTimeout(setViewportHeight, 100);
+              });
+            `,
+          }}
+        />
         {children}
       </body>
     </html>
