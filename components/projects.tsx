@@ -4,28 +4,44 @@ import { useEffect, useState } from "react"
 
 const projects = [
   {
-    title: "Predicta",
-    description: "End-to-end ML pipeline for data analysis and prediction, featuring automated feature engineering and model selection. Built with advanced AI agents for intelligent automation.",
+    title: "Predicta - ML Pipeline Platform",
+    description: "Built end-to-end ML workflow automation for EDA, feature engineering, and model selection.",
     tech: ["Python", "Scikit-learn", "Pandas", "Streamlit", "LangChain"],
     link: "https://github.com/ahammadnafiz/Predicta",
     year: "2024 - Current",
     animationType: "neural_network" // Neural network propagation
   },
   {
-    title: "FizTorch",
-    description: "Educational deep learning framework inspired by PyTorch. Implements autograd, optimization algorithms, and core ML components with comprehensive documentation for beginners.",
-    tech: ["Python", "NumPy", "Linear Algebra", "Deep Learning"],
-    link: "https://github.com/ahammadnafiz/FizTorch",
-    year: "2024",
+    title: "Analyzia - AI CSV Analysis Platform",
+    description: "Designed chat-based CSV explorer using LangChain + Agent + RAG.",
+    tech: ["LangChain", "Python", "RAG", "Agents", "Streamlit"],
+    link: "https://github.com/ahammadnafiz/Analyzia",
+    year: "2025",
     animationType: "gradient_descent" // Gradient descent optimization
   },
   {
-    title: "Personal Knowledge Assistant",
-    description: "Multi-Agent RAG system combining document processing, smart confidence-based routing, and web fusion. Features LLM integration and modern web interface.",
+    title: "YOLOv12 FoodVision: BD Cuisine Detector",
+    description: "Trained YOLOv12m on a 3988-image dataset for Bangladeshi food detection.",
+    tech: ["YOLOv12", "Python", "Computer Vision", "Deep Learning"],
+    link: "https://github.com/ahammadnafiz/ML-From-Scratch/tree/main/Projects/YOLO11%20Bangladesh%20Street%20Food%20Detection",
+    year: "2025",
+    animationType: "neural_network" // Neural network propagation
+  },
+  {
+    title: "Personal Knowledge Assistant - Multi-Agent AI",
+    description: "Built web-integrated multi-agent RAG system with semantic search and routing.",
     tech: ["LangChain", "Hugging Face", "Groq LLM", "FAISS", "FastAPI", "Next.js", "Tailwind"],
     link: "https://github.com/ahammadnafiz/Personal-Knowledge-Assistant",
     year: "2025",
     animationType: "attention_mechanism" // Attention/transformer pattern
+  },
+  {
+    title: "EduGen: Animated Curriculum LLM Studio",
+    description: "Developed an automated system generating curriculum-aligned animated educational content.",
+    tech: ["LLM", "Python", "Animation", "LangChain", "Education"],
+    link: "https://github.com/ahammadnafiz/EduGen",
+    year: "2025",
+    animationType: "gradient_descent" // Gradient descent optimization
   },
 ]
 
@@ -162,7 +178,49 @@ export function Projects() {
     return "bg-transparent"
   }
   
-  const getAnimationPattern = (animationType: string, step: number, i: number, gridCols: number, gridRows: number) => {
+  // Unique YOLO Animation - Pulsing detection grid
+  const getYOLOPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
+    const row = Math.floor(i / gridCols)
+    const col = i % gridCols
+    // Simulate detection boxes pulsing
+    const pulse = Math.abs(Math.sin((step + i) * 0.15))
+    if ((row === 1 || row === gridRows - 2) && (col === 1 || col === gridCols - 2)) {
+      return `bg-yellow-400 opacity-${Math.floor(40 + pulse * 45)}` // Detected object corners
+    }
+    if ((row === 0 || row === gridRows - 1 || col === 0 || col === gridCols - 1)) {
+      return `bg-orange-400 opacity-${Math.floor(20 + pulse * 30)}` // Grid border
+    }
+    if (pulse > 0.95) {
+      return "bg-red-500 opacity-30" // Occasional detection flash
+    }
+    return "bg-transparent"
+  }
+
+  // Unique EduGen Animation - Animated book pages flipping
+  const getEduGenPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
+    const row = Math.floor(i / gridCols)
+    const col = i % gridCols
+    // Simulate flipping pages with a wave
+    const wave = Math.sin((step * 0.18) + col * 0.7)
+    if (Math.abs(wave) > 0.85 && row > 1 && row < gridRows - 2) {
+      return "bg-blue-300 opacity-60" // Flipping page
+    }
+    if (row === 0 || row === gridRows - 1) {
+      return "bg-indigo-400 opacity-30" // Book cover
+    }
+    if (col === 0 || col === gridCols - 1) {
+      return "bg-amber-300 opacity-25" // Book spine
+    }
+    return "bg-transparent"
+  }
+
+  const getAnimationPattern = (animationType: string, step: number, i: number, gridCols: number, gridRows: number, projectTitle?: string) => {
+    if (projectTitle === "YOLOv12 FoodVision: BD Cuisine Detector") {
+      return getYOLOPattern(step, i, gridCols, gridRows)
+    }
+    if (projectTitle === "EduGen: Animated Curriculum LLM Studio") {
+      return getEduGenPattern(step, i, gridCols, gridRows)
+    }
     switch (animationType) {
       case "neural_network":
         return getNeuralNetworkPattern(step, i, gridCols, gridRows)
@@ -256,7 +314,7 @@ export function Projects() {
                           key={i}
                           className={`aspect-square transition-all duration-500 ${
                             mounted 
-                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 6, 4)
+                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 6, 4, project.title)
                               : 'bg-accent opacity-15'
                           }`}
                           style={!mounted ? { 
@@ -276,7 +334,7 @@ export function Projects() {
                           key={i}
                           className={`aspect-square transition-all duration-500 ${
                             mounted 
-                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 8, 5)
+                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 8, 5, project.title)
                               : 'bg-accent opacity-15'
                           }`}
                           style={!mounted ? { 
@@ -296,7 +354,7 @@ export function Projects() {
                           key={i}
                           className={`aspect-square transition-all duration-500 ${
                             mounted 
-                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 10, 6)
+                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 10, 6, project.title)
                               : 'bg-accent opacity-15'
                           }`}
                           style={!mounted ? { 
