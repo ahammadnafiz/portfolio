@@ -10,6 +10,11 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			display: ['var(--font-display)', 'Georgia', 'serif'],
+  			mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+  		},
   		screens: {
   			'xs': '475px',
   		},
@@ -79,6 +84,14 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		keyframes: {
+  			'marquee': {
+  				from: { transform: 'translateX(0)' },
+  				to: { transform: 'translateX(-50%)' }
+  			},
+  			'ink-rise': {
+  				from: { opacity: '0', transform: 'translateY(0.4em)' },
+  				to: { opacity: '1', transform: 'translateY(0)' }
+  			},
   			'accordion-down': {
   				from: {
   					height: '0'
@@ -113,7 +126,9 @@ const config: Config = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
-  			'float': 'float 6s ease-in-out infinite'
+  			'float': 'float 6s ease-in-out infinite',
+  			'marquee': 'marquee 32s linear infinite',
+  			'ink-rise': 'ink-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both'
   		}
   	}
   },

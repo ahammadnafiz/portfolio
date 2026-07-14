@@ -1,363 +1,125 @@
-"use client"
+const EXPERIENCE = [
+  {
+    org: "United International University",
+    role: "Research Assistant",
+    date: "Dec 2025 — Present",
+    note: "Researching autonomous agents and multi-agent systems, and helping with papers on LLM applications, retrieval, and agentic workflow design.",
+  },
+  {
+    org: "AskTuring.ai",
+    role: "Jr. Software Engineer (former)",
+    date: "Sep 2025 — May 2026",
+    note: "Owned the eval service and admin dashboard, automating RAG benchmarks over HotpotQA, MuSiQue, FinQA, and CUAD. Built Deepen Answer: extended-thinking LLMs, an agent that fills its own knowledge gaps, and hybrid BM25 + vector retrieval with RRF.",
+  },
+]
 
-import { useEffect, useState } from "react"
+const ACHIEVEMENTS = [
+  { title: "Champion — IC6 University Innovation Hub", date: "Oct 2025", note: "BDT 60,000 pre-seed after a 15-week program." },
+  { title: "Best Prototype — Blockchain Olympiad", date: "Jan 2025", note: "Team Auctra, UIU CSE Fest. BDT 20,000 prize." },
+  { title: "Champion — CSE Project Show (Predicta)", date: "Jun 2024", note: "End-to-end data analysis & ML platform." },
+  { title: "1st Runner-Up — Data Innovators Challenge", date: "2024", note: "Sales analytics track." },
+]
 
 export function About() {
-  const [animationStep, setAnimationStep] = useState(0)
-  const [mounted, setMounted] = useState(false)
-  
-  useEffect(() => {
-    setMounted(true)
-    const interval = setInterval(() => {
-      setAnimationStep(prev => prev + 1)
-    }, 120)
-    
-    return () => clearInterval(interval)
-  }, [])
-  
-  // Enhanced CNN Input Pattern - Realistic handwritten digit
-  const getCNNInputPattern = (i: number, gridSize: number) => {
-    const row = Math.floor(i / gridSize)
-    const col = i % gridSize
-    
-    // Simulate a handwritten digit "8" 
-    const centerX = gridSize / 2
-    const centerY = gridSize / 2
-    
-    // Top circle of "8"
-    const topCircleY = centerY - gridSize * 0.15
-    const topCircleDist = Math.sqrt((row - topCircleY) ** 2 + (col - centerX) ** 2)
-    const isTopCircleEdge = topCircleDist > gridSize * 0.12 && topCircleDist < gridSize * 0.18
-    const isTopCircleInner = topCircleDist <= gridSize * 0.12
-    
-    // Bottom circle of "8"
-    const bottomCircleY = centerY + gridSize * 0.15
-    const bottomCircleDist = Math.sqrt((row - bottomCircleY) ** 2 + (col - centerX) ** 2)
-    const isBottomCircleEdge = bottomCircleDist > gridSize * 0.12 && bottomCircleDist < gridSize * 0.18
-    const isBottomCircleInner = bottomCircleDist <= gridSize * 0.12
-    
-    // Middle connection
-    const isMiddleConnection = Math.abs(row - centerY) < 1 && Math.abs(col - centerX) < gridSize * 0.08
-    
-    // Ink variations
-    const hasInkVariation = (row * 3 + col * 5) % 11 === 0
-    const hasSmudge = (row + col) % 13 === 0
-    
-    // Main stroke areas
-    if (isTopCircleEdge || isBottomCircleEdge || isMiddleConnection) {
-      if (hasInkVariation) {
-        return "bg-slate-800"
-      }
-      return "bg-slate-700"
-    }
-    
-    // Inner areas
-    if (isTopCircleInner || isBottomCircleInner) {
-      return "bg-slate-500/60"
-    }
-    
-    // Paper texture
-    if (hasSmudge) {
-      return "bg-slate-400/20"
-    }
-    
-    return "bg-slate-50"
-  }
-  
-  // Enhanced CNN Pattern with CSS class integration
-  const getEnhancedCNNPattern = (step: number, i: number, gridSize: number) => {
-    const row = Math.floor(i / gridSize)
-    const col = i % gridSize
-    
-    const filterSize = 3
-    const maxFilterRow = gridSize - filterSize + 1
-    const maxFilterCol = gridSize - filterSize + 1
-    const totalPositions = maxFilterRow * maxFilterCol
-    
-    // Cycle through different filter types
-    const passNumber = Math.floor(step / totalPositions) % 4
-    const currentPosition = step % totalPositions
-    const filterRow = Math.floor(currentPosition / maxFilterCol)
-    const filterCol = currentPosition % maxFilterCol
-    
-    // Get base pattern
-    const basePattern = getCNNInputPattern(i, gridSize)
-    
-    // Current filter kernel
-    const underFilter = row >= filterRow && row < filterRow + filterSize && 
-                       col >= filterCol && col < filterCol + filterSize
-    
-    if (underFilter) {
-      const relativeRow = row - filterRow
-      const relativeCol = col - filterCol
-      const isCenter = relativeRow === 1 && relativeCol === 1
-      
-      // Filter center with enhanced animation classes
-      if (isCenter) {
-        const filterClasses = [
-          "cnn-filter-center cnn-pixel-processing bg-orange-500 border-2 border-orange-300 shadow-lg shadow-orange-500/40",
-          "cnn-filter-center cnn-pixel-processing bg-purple-500 border-2 border-purple-300 shadow-lg shadow-purple-500/40", 
-          "cnn-filter-center cnn-pixel-processing bg-cyan-500 border-2 border-cyan-300 shadow-lg shadow-cyan-500/40",
-          "cnn-filter-center cnn-pixel-processing bg-emerald-500 border-2 border-emerald-300 shadow-lg shadow-emerald-500/40"
-        ]
-        return filterClasses[passNumber]
-      }
-      
-      // Filter kernel positions
-      switch (passNumber) {
-        case 0: // Edge Detection (Sobel X)
-          if (relativeCol === 0) return "cnn-filter-active bg-blue-400/80 border border-blue-300"
-          if (relativeCol === 2) return "cnn-filter-active bg-red-400/80 border border-red-300" 
-          return "cnn-filter-active bg-slate-300/60 border border-slate-400/40"
-          
-        case 1: // Edge Detection (Sobel Y) 
-          if (relativeRow === 0) return "cnn-filter-active bg-green-400/80 border border-green-300"
-          if (relativeRow === 2) return "cnn-filter-active bg-yellow-400/80 border border-yellow-300"
-          return "cnn-filter-active bg-slate-300/60 border border-slate-400/40"
-          
-        case 2: // Blur/Gaussian
-          const isCorner = (relativeRow === 0 || relativeRow === 2) && (relativeCol === 0 || relativeCol === 2)
-          if (isCorner) return "cnn-filter-active bg-blue-300/60 border border-blue-200"
-          return "cnn-filter-active bg-blue-400/70 border border-blue-300"
-          
-        case 3: // Sharpen
-          if (relativeRow === 1 || relativeCol === 1) return "cnn-filter-active bg-red-300/70 border border-red-200"
-          return "cnn-filter-active bg-slate-400/50 border border-slate-300"
-      }
-    }
-    
-    // Enhanced feature map activation trail with CSS classes
-    const trailLength = 8
-    for (let t = 1; t <= trailLength; t++) {
-      const pastPosition = (step - t + totalPositions) % totalPositions
-      const pastFilterRow = Math.floor(pastPosition / maxFilterCol)
-      const pastFilterCol = pastPosition % maxFilterCol
-      
-      const wasUnderPastFilter = row >= pastFilterRow && row < pastFilterRow + filterSize && 
-                                col >= pastFilterCol && col < pastFilterCol + filterSize
-      
-      if (wasUnderPastFilter) {
-        const intensity = (trailLength - t) / trailLength
-        const wasPastCenter = row === pastFilterRow + 1 && col === pastFilterCol + 1
-        
-        // Feature activation with intensity-based CSS classes
-        if (wasPastCenter && intensity > 0.7) {
-          return "cnn-activation-high cnn-feature-strong"
-        } else if (wasPastCenter && intensity > 0.4) {
-          return "cnn-activation-medium cnn-feature-map"
-        } else if (intensity > 0.2) {
-          return "cnn-activation-low cnn-feature-map"
-        }
-      }
-    }
-    
-    return basePattern
-  }
-  
-  // Get current filter info
-  const getCurrentFilterInfo = (step: number, gridSize: number) => {
-    const filterSize = 3
-    const maxFilterRow = gridSize - filterSize + 1
-    const maxFilterCol = gridSize - filterSize + 1
-    const totalPositions = maxFilterRow * maxFilterCol
-    const passNumber = Math.floor(step / totalPositions) % 4
-    const currentPosition = step % totalPositions
-    
-    const filterTypes = [
-      { name: 'Edge Detection (Sobel X)', class: 'cnn-edge-detection', color: 'text-orange-400' },
-      { name: 'Edge Detection (Sobel Y)', class: 'cnn-edge-detection', color: 'text-purple-400' }, 
-      { name: 'Gaussian Blur', class: 'cnn-blur-filter', color: 'text-cyan-400' },
-      { name: 'Sharpen Filter', class: 'cnn-sharpen-filter', color: 'text-emerald-400' }
-    ]
-    
-    return {
-      ...filterTypes[passNumber],
-      position: currentPosition,
-      progress: ((currentPosition / totalPositions) * 100).toFixed(1)
-    }
-  }
-  
   return (
-    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-secondary/20 relative" itemScope itemType="https://schema.org/AboutPage">
-      {/* Enhanced structured data for About section */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Ahammad Nafiz",
-            "description": "Data Science student with strong interest in AI research, specializing in Natural Language Processing and Reinforcement Learning",
-            "jobTitle": "Head of R&D",
-            "worksFor": {
-              "@type": "Organization",
-              "name": "UIU Data Science Club"
-            },
-            "knowsAbout": [
-              "Natural Language Processing",
-              "Reinforcement Learning", 
-              "Transformer Architectures",
-              "Deep Learning",
-              "Machine Learning",
-              "Python Development",
-              "PyTorch",
-              "TensorFlow"
-            ],
-            "hasCredential": [
-              {
-                "@type": "EducationalOccupationalCredential",
-                "name": "Data Science Student",
-                "educationalLevel": "Undergraduate"
-              }
-            ]
-          })
-        }}
-      />
-      
-      <div className="flex justify-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl text-center relative">
-          {/* Left decorative element */}
-          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
-            <div className="w-6 h-6 lg:w-8 lg:h-8 bg-accent opacity-30"></div>
-          </div>
-          
-          {/* Right decorative element */}
-          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
-            <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-accent opacity-30"></div>
-          </div>
-          
-          <header>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-8 sm:mb-12 uppercase" itemProp="name">
-              <span className="text-accent">A</span>bout
-            </h2>
-          </header>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="space-y-4 sm:space-y-6 font-mono text-foreground leading-relaxed text-sm sm:text-base text-left">
-                <p className="border-l-2 sm:border-l-4 border-accent pl-3 sm:pl-4">
-                  I'm a Data Science student with a strong interest in AI research—especially Natural Language Processing and Reinforcement Learning. I focus on understanding machine learning from both theoretical and practical angles, currently diving deep into Transformer architectures by implementing them from scratch.
-                </p>
-                <p>
-                  As Head of R&D at UIU Data Science Club, I lead workshops and projects to help others learn alongside me. I also build educational tools like FizTorch (a deep learning framework) and Predicta (an AutoML pipeline) to make complex AI concepts more accessible.
-                </p>
-                <p>
-                  I believe in learning AI through research papers, code, and collaboration—and I'm always looking to connect with mentors and contribute to open-source projects.
-                </p>
-                
-                {/* Resume Download Button */}
-                <div className="pt-4">
-                  <a
-                    href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/Nafiz CV Updated.pdf?v=${process.env.NEXT_PUBLIC_BUILD_ID || Date.now()}`}
-                    download="Nafiz_CV_Updated.pdf"
-                    className="pixel-button uppercase text-sm"
-                  >
-                    Download Resume
-                  </a>
-                </div>
-              </div>
-            </div>
+    <section
+      id="about"
+      className="relative w-full border-t border-border px-5 sm:px-8 lg:px-12 py-14 sm:py-16"
+      itemScope
+      itemType="https://schema.org/AboutPage"
+    >
+      <div className="flex items-baseline gap-4 mb-8 sm:mb-10">
+        <span className="label">( 01 )</span>
+        <h2 className="font-display font-medium text-[clamp(2rem,6vw,4rem)] leading-none tracking-[-0.02em]">
+          About
+        </h2>
+      </div>
 
-            <div className="relative order-1 lg:order-2">
-              <div className="group aspect-square bg-background relative overflow-hidden border-2 sm:border-4 border-accent pixel-borders w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[320px] xl:max-w-[350px] mx-auto">
-                
-                {/* Enhanced CNN Processing Info */}
-                <div className="absolute -top-20 left-0 right-0 text-center space-y-2">
-                  <div className={`text-xs font-mono px-3 py-1 border border-accent/30 rounded inline-block cnn-processing-indicator ${mounted ? getCurrentFilterInfo(animationStep, 12).class : ''}`}>
-                    <span className={mounted ? getCurrentFilterInfo(animationStep, 12).color : 'text-accent'}>
-                      {mounted && getCurrentFilterInfo(animationStep, 12).name}
-                    </span>
-                  </div>
-                  <div className="text-xs font-mono text-muted-foreground">
-                    <span className="bg-background/90 px-2 py-1 border border-muted-foreground/20 rounded">
-                      Progress: {mounted && getCurrentFilterInfo(animationStep, 12).progress}%
-                    </span>
-                  </div>
-                </div>
-                
-                {/* Enhanced CNN Grid with CSS Animation Classes */}
-                <div className="absolute inset-0 flex items-center justify-center p-1">
-                  {/* Mobile: 6x6 grid */}
-                  <div className={`grid grid-cols-6 gap-px w-full h-full sm:hidden ${!mounted ? 'cnn-animation-grid opacity-50' : ''}`}>
-                    {Array.from({ length: 36 }).map((_, i) => (
-                      <div 
-                        key={i} 
-                        className={`cnn-pixel aspect-square transition-all duration-150 ease-out ${
-                          mounted ? getEnhancedCNNPattern(animationStep, i, 6) : 'bg-slate-300'
-                        }`}
-                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
-                      />
-                    ))}
-                  </div>
-                  
-                  {/* Small screens: 8x8 grid */}
-                  <div className={`hidden sm:grid md:hidden grid-cols-8 gap-px w-full h-full ${!mounted ? 'cnn-animation-grid opacity-50' : ''}`}>
-                    {Array.from({ length: 64 }).map((_, i) => (
-                      <div 
-                        key={i} 
-                        className={`cnn-pixel aspect-square transition-all duration-150 ease-out ${
-                          mounted ? getEnhancedCNNPattern(animationStep, i, 8) : 'bg-slate-300'
-                        }`}
-                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
-                      />
-                    ))}
-                  </div>
-                  
-                  {/* Medium screens: 10x10 grid */}
-                  <div className={`hidden md:grid lg:hidden grid-cols-10 gap-px w-full h-full ${!mounted ? 'cnn-animation-grid opacity-50' : ''}`}>
-                    {Array.from({ length: 100 }).map((_, i) => (
-                      <div 
-                        key={i} 
-                        className={`cnn-pixel aspect-square transition-all duration-150 ease-out ${
-                          mounted ? getEnhancedCNNPattern(animationStep, i, 10) : 'bg-slate-300'
-                        }`}
-                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
-                      />
-                    ))}
-                  </div>
-                  
-                  {/* Large screens: 12x12 grid */}
-                  <div className={`hidden lg:grid grid-cols-12 gap-px w-full h-full ${!mounted ? 'cnn-animation-grid opacity-50' : ''}`}>
-                    {Array.from({ length: 144 }).map((_, i) => (
-                      <div 
-                        key={i} 
-                        className={`cnn-pixel aspect-square transition-all duration-150 ease-out ${
-                          mounted ? getEnhancedCNNPattern(animationStep, i, 12) : 'bg-slate-300'
-                        }`}
-                        style={!mounted ? { '--animation-delay': i } as React.CSSProperties : {}}
-                      />
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Enhanced Status Panel */}
-                <div className="absolute bottom-2 left-2 right-2">
-                  <div className="flex items-center justify-center text-xs font-mono">
-                    {/* Enhanced Kernel Position */}
-                    <div className="text-muted-foreground bg-background/95 px-2 py-1 border border-muted-foreground/20 rounded">
-                      {mounted && (
-                        <>
-                          {(() => {
-                            const gridSize = typeof window !== 'undefined' 
-                              ? window.innerWidth < 640 ? 6 : window.innerWidth < 768 ? 8 : window.innerWidth < 1024 ? 10 : 12
-                              : 12;
-                            const maxPos = (gridSize - 3 + 1) * (gridSize - 3 + 1);
-                            const currentPos = animationStep % maxPos;
-                            const row = Math.floor(currentPos / (gridSize - 3 + 1));
-                            const col = currentPos % (gridSize - 3 + 1);
-                            return `K[${row},${col}]`;
-                          })()}
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Pixel corner decoration */}
-              <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-accent"></div>
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-10">
+        {/* Bio */}
+        <div className="lg:col-span-5">
+          <div className="space-y-4 text-[15px] sm:text-base leading-relaxed text-foreground/90 max-w-xl">
+            <p>
+              I&apos;m a data science student at UIU and an ML engineer. My last role was
+              junior engineer at AskTuring.ai, where I owned the evaluation service and
+              built Deepen Answer, a RAG pipeline that pairs extended-thinking models with
+              an agent that fills its own knowledge gaps.
+            </p>
+            <p>
+              I tend to learn things by rebuilding them. An autograd engine in NumPy. A
+              memory layer for agents that cut context cost by 22× without dropping
+              accuracy. A research agent that plans, searches, and cites its sources.
+              Lately I keep drifting toward interpretability, trying to work out what these
+              models are actually doing inside.
+            </p>
+            <p className="text-muted-foreground">
+              Next I want a PhD in Europe, and after that a lab working on the frontier.
+            </p>
           </div>
+
+          <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-3">
+            <a
+              href={`${process.env.NODE_ENV === "production" ? "/portfolio" : ""}/Ahammad_Nafiz_CV.pdf`}
+              download="Ahammad_Nafiz_CV.pdf"
+              className="group inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase"
+            >
+              <span className="border-b border-foreground pb-0.5 group-hover:border-transparent transition-colors">
+                Download CV
+              </span>
+              <span aria-hidden className="transition-transform group-hover:translate-y-0.5">↓</span>
+            </a>
+            <a
+              href="mailto:ahammadnafiz86@gmail.com"
+              className="link-editorial font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground hover:text-foreground"
+            >
+              ahammadnafiz86@gmail.com
+            </a>
+          </div>
+        </div>
+
+        {/* Experience ledger */}
+        <div className="lg:col-span-7">
+          <p className="label mb-4">[ Experience ]</p>
+          <ul>
+            {EXPERIENCE.map((e) => (
+              <li key={e.org} className="py-4 border-t border-border">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="font-display text-lg sm:text-xl tracking-[-0.01em]">{e.org}</h3>
+                  <span className="font-mono text-[0.625rem] tracking-[0.1em] uppercase text-muted-foreground">
+                    {e.date}
+                  </span>
+                </div>
+                <p className="font-mono text-[0.6875rem] tracking-[0.08em] uppercase text-foreground/80 mt-1">
+                  {e.role}
+                </p>
+                <p className="text-[13px] sm:text-sm text-muted-foreground leading-relaxed mt-2 max-w-2xl">
+                  {e.note}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <div className="py-4 border-t border-border flex flex-wrap items-baseline justify-between gap-x-4">
+            <h3 className="font-display text-lg sm:text-xl">B.Sc. in Data Science — UIU</h3>
+            <span className="font-mono text-[0.625rem] tracking-[0.1em] uppercase text-muted-foreground">
+              2023 — Present
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Achievements strip */}
+      <div className="mt-10 pt-8 border-t border-border">
+        <p className="label mb-5">[ Recognition ]</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
+          {ACHIEVEMENTS.map((a) => (
+            <div key={a.title} className="border-t border-foreground pt-3">
+              <p className="font-mono text-[0.625rem] tracking-[0.1em] uppercase text-muted-foreground mb-1.5">
+                {a.date}
+              </p>
+              <h4 className="text-sm font-medium leading-snug">{a.title}</h4>
+              <p className="text-[13px] text-muted-foreground leading-relaxed mt-1">{a.note}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

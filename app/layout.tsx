@@ -1,26 +1,41 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Fraunces } from "next/font/google"
 import "./globals.css"
 import { CacheBuster } from "../components/cache-buster"
 import { ServiceWorkerRegistration } from "../components/service-worker-registration"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  axes: ["opsz", "SOFT", "WONK"],
+})
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ahammadnafiz.github.io"),
   // Basic metadata
   title: {
-    default: "Ahammad Nafiz | ML Researcher & Python Developer",
+    default: "Ahammad Nafiz | ML & AI Engineer",
     template: "%s | Ahammad Nafiz"
   },
-  description: "ML Researcher & Python Developer specializing in Natural Language Processing, Deep Learning, and AI research. Head of R&D at UIU Data Science Club. Creator of FizTorch and Predicta.",
+  description: "ML & AI Engineer building RAG systems, LLM agents, and mechanistic interpretability. Head of R&D at UIU Data Science Club. Creator of FizTorch and Predicta.",
   
   // Keywords for SEO
   keywords: [
     "Ahammad Nafiz",
-    "ML Researcher",
+    "ML Engineer",
+    "AI Engineer",
+    "Machine Learning Engineer",
+    "RAG",
+    "Retrieval-Augmented Generation",
+    "LLM Agents",
+    "Multi-Agent Systems",
+    "Mechanistic Interpretability",
+    "LLM Evaluation",
+    "Vector Search",
     "Machine Learning",
-    "Python Developer",
     "Deep Learning",
     "Natural Language Processing",
     "NLP",
@@ -52,15 +67,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://ahammadnafiz.github.io/portfolio",
-    title: "Ahammad Nafiz | ML Researcher & Python Developer",
-    description: "ML Researcher & Python Developer specializing in Natural Language Processing, Deep Learning, and AI research. Head of R&D at UIU Data Science Club.",
+    title: "Ahammad Nafiz | ML & AI Engineer",
+    description: "ML & AI Engineer building RAG systems, LLM agents, and mechanistic interpretability. Head of R&D at UIU Data Science Club.",
     siteName: "Ahammad Nafiz Portfolio",
     images: [
       {
         url: `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/assets/image.png`,
         width: 1200,
         height: 630,
-        alt: "Ahammad Nafiz - ML Researcher & Python Developer Portfolio"
+        alt: "Ahammad Nafiz - ML & AI Engineer Portfolio"
       }
     ]
   },
@@ -68,8 +83,8 @@ export const metadata: Metadata = {
   // Twitter Card metadata
   twitter: {
     card: "summary_large_image",
-    title: "Ahammad Nafiz | ML Researcher & Python Developer",
-    description: "ML Researcher & Python Developer specializing in Natural Language Processing, Deep Learning, and AI research.",
+    title: "Ahammad Nafiz | ML & AI Engineer",
+    description: "ML & AI Engineer building RAG systems, LLM agents, and mechanistic interpretability.",
     site: "@ahammadnafi_z",
     creator: "@ahammadnafi_z",
     images: [`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/assets/image.png`]
@@ -123,8 +138,8 @@ export const metadata: Metadata = {
   // Additional metadata
   other: {
     'devicons': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css',
-    'theme-color': '#ffffff',
-    'msapplication-TileColor': '#000000',
+    'theme-color': '#e8e6e1',
+    'msapplication-TileColor': '#1b1815',
     'msapplication-config': `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/browserconfig.xml`
   }
 }
@@ -135,7 +150,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth dark" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} suppressHydrationWarning>
       <head>
         {/* Enhanced SEO meta tags */}
         <meta charSet="utf-8" />
@@ -185,7 +200,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Ahammad Nafiz",
               alternateName: "Nafiz",
-              description: "ML Researcher & Python Developer specializing in Natural Language Processing, Deep Learning, and AI research",
+              description: "ML & AI Engineer building RAG systems, LLM agents, and mechanistic interpretability",
               url: "https://ahammadnafiz.github.io/portfolio",
               image: "https://ahammadnafiz.github.io/portfolio/assets/image.png",
               sameAs: [
@@ -194,7 +209,7 @@ export default function RootLayout({
                 "https://x.com/ahammadnafi_z",
                 "https://ahammadnafiz.github.io"
               ],
-              jobTitle: "ML Researcher & Python Developer",
+              jobTitle: "ML & AI Engineer",
               worksFor: {
                 "@type": "Organization",
                 name: "UIU Data Science Club",
@@ -221,7 +236,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className="font-sans antialiased">
+        {/* Film-grain overlay: the paper texture that ties the monochrome system together */}
+        <div className="grain-overlay" aria-hidden="true" />
         <ServiceWorkerRegistration />
         <CacheBuster />
         <script

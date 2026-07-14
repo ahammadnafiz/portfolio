@@ -1,420 +1,122 @@
 "use client"
 
-import { useEffect, useState } from "react"
-
-const projects = [
+const PROJECTS = [
   {
-    title: "Predicta - ML Pipeline Platform",
-    description: "Built end-to-end ML workflow automation for EDA, feature engineering, and model selection.",
-    tech: ["Python", "Scikit-learn", "Pandas", "Streamlit", "LangChain"],
-    link: "https://github.com/ahammadnafiz/Predicta",
-    year: "2024 - Current",
-    animationType: "neural_network" // Neural network propagation
+    n: "01",
+    name: "fizzlabai",
+    kind: "Deep Research Agent",
+    desc: "A solo deep-research agent running a deterministic 8-phase pipeline (plan, search, read, synth, verify, re-plan, polish, close) over the open web, producing cited Markdown with a full execution trace.",
+    tags: ["LangGraph", "FastAPI", "pgvector", "OTel"],
+    href: "https://github.com/ahammadnafiz/fizzlabai",
   },
   {
-    title: "Analyzia - AI CSV Analysis Platform",
-    description: "Designed chat-based CSV explorer using LangChain + Agent + RAG.",
-    tech: ["LangChain", "Python", "RAG", "Agents", "Streamlit"],
-    link: "https://github.com/ahammadnafiz/Analyzia",
-    year: "2025",
-    animationType: "gradient_descent" // Gradient descent optimization
+    n: "02",
+    name: "Engram",
+    kind: "Persistent Memory for AI Agents",
+    desc: "A memory library on PostgreSQL + pgvector combining hybrid search (BM25 + vector + RRF), graph traversal, and durable task ledgers. Cut LLM context cost up to 22× at 90%+ on LongMemEval, LoCoMo, and BEAM.",
+    tags: ["pgvector", "Hybrid Search", "Infra"],
+    href: "https://github.com/ahammadnafiz/engram",
   },
   {
-    title: "YOLOv12 FoodVision: BD Cuisine Detector",
-    description: "Trained YOLOv12m on a 3988-image dataset for Bangladeshi food detection.",
-    tech: ["YOLOv12", "Python", "Computer Vision", "Deep Learning"],
-    link: "https://github.com/ahammadnafiz/ML-From-Scratch/tree/main/Projects/YOLO11%20Bangladesh%20Street%20Food%20Detection",
-    year: "2025",
-    animationType: "neural_network" // Neural network propagation
+    n: "03",
+    name: "Personal Knowledge Assistant",
+    kind: "Multi-Agent RAG System",
+    desc: "A multi-agent RAG system with confidence-based routing, knowledge-strip decomposition, and automatic web-search fallback for low-confidence queries.",
+    tags: ["Multi-Agent", "RAG", "Routing"],
+    href: "https://github.com/ahammadnafiz/Personal-Knowledge-Assistant",
   },
   {
-    title: "Personal Knowledge Assistant - Multi-Agent AI",
-    description: "Built web-integrated multi-agent RAG system with semantic search and routing.",
-    tech: ["LangChain", "Hugging Face", "Groq LLM", "FAISS", "FastAPI", "Next.js", "Tailwind"],
-    link: "https://github.com/ahammadnafiz/Personal-Knowledge-Assistant",
-    year: "2025",
-    animationType: "attention_mechanism" // Attention/transformer pattern
+    n: "04",
+    name: "Analyzia",
+    kind: "AI-Powered CSV Analysis",
+    desc: "A LangChain agent that turns plain-English questions over CSV data into pandas analysis and Plotly visualizations, with confidence-scored answers and conversation memory.",
+    tags: ["LangChain", "Agents", "Plotly"],
+    href: "https://github.com/ahammadnafiz/Analyzia",
   },
   {
-    title: "EduGen: Animated Curriculum LLM Studio",
-    description: "Developed an automated system generating curriculum-aligned animated educational content.",
-    tech: ["LLM", "Python", "Animation", "LangChain", "Education"],
-    link: "https://github.com/ahammadnafiz/EduGen",
-    year: "2025",
-    animationType: "gradient_descent" // Gradient descent optimization
+    n: "05",
+    name: "SmartPrice Intelligence",
+    kind: "Smartphone Market Analytics",
+    desc: "Scraped 10,000+ listings across 37 brands from GSMArena under adaptive rate limiting, then trained CatBoost / XGBoost on 50+ engineered spec features (R² = 0.772, 74.4% price-segment accuracy).",
+    tags: ["CatBoost", "XGBoost", "Scraping"],
+    href: "https://github.com/ahammadnafiz/SmartPrice-Intelligence",
+  },
+  {
+    n: "06",
+    name: "FizTorch",
+    kind: "Deep Learning Framework",
+    desc: "A NumPy-based deep-learning framework from scratch: autograd engine, core layers, and an Adam optimizer, validated on MNIST and California Housing.",
+    tags: ["NumPy", "Autograd", "From Scratch"],
+    href: "https://github.com/ahammadnafiz/FizTorch",
   },
 ]
 
 export function Projects() {
-  const [animationSteps, setAnimationSteps] = useState<{[key: number]: number}>({})
-  const [mounted, setMounted] = useState(false)
-  
-  useEffect(() => {
-    setMounted(true)
-    const intervals: NodeJS.Timeout[] = []
-    
-    projects.forEach((_, index) => {
-      const interval = setInterval(() => {
-        setAnimationSteps(prev => ({
-          ...prev,
-          [index]: (prev[index] || 0) + 1
-        }))
-      }, 250 + index * 60) // Faster animation speed
-      intervals.push(interval)
-    })
-    
-    return () => intervals.forEach(clearInterval)
-  }, [])
-  
-  // Neural Network Animation - Forward propagation pattern with vibrant colors
-  const getNeuralNetworkPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
-    const row = Math.floor(i / gridCols)
-    const col = i % gridCols
-    const waveProgress = (step % (gridCols + gridRows)) / (gridCols + gridRows)
-    const distanceFromStart = (row + col) / (gridCols + gridRows - 2)
-    
-    // Vibrant color cycling for active neurons
-    const colorPhase = (step + i) % 4
-    
-    if (Math.abs(distanceFromStart - waveProgress) < 0.3) {
-      if (colorPhase === 0) return "bg-violet-500 opacity-70" // Electric violet
-      if (colorPhase === 1) return "bg-emerald-500 opacity-70" // Vibrant emerald
-      if (colorPhase === 2) return "bg-cyan-500 opacity-70" // Electric cyan
-      return "bg-fuchsia-500 opacity-70" // Bright fuchsia
-    } else if (Math.abs(distanceFromStart - waveProgress) < 0.5) {
-      if (colorPhase === 0) return "bg-violet-400 opacity-35"
-      if (colorPhase === 1) return "bg-emerald-400 opacity-35"
-      if (colorPhase === 2) return "bg-cyan-400 opacity-35"
-      return "bg-fuchsia-400 opacity-35"
-    }
-    
-    // Random vibrant sparkles
-    if (Math.random() > 0.98) {
-      const sparkleColor = Math.floor(Math.random() * 5)
-      if (sparkleColor === 0) return "bg-rose-400 opacity-25" // Vibrant rose
-      if (sparkleColor === 1) return "bg-amber-400 opacity-25" // Golden amber
-      if (sparkleColor === 2) return "bg-indigo-400 opacity-25" // Deep indigo
-      if (sparkleColor === 3) return "bg-teal-400 opacity-25" // Ocean teal
-      return "bg-pink-400 opacity-25" // Electric pink
-    }
-    
-    return "bg-transparent"
-  }
-  
-  // Gradient Descent Animation - Optimization path with vibrant heat map
-  const getGradientDescentPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
-    const row = Math.floor(i / gridCols)
-    const col = i % gridCols
-    const centerRow = Math.floor(gridRows / 2)
-    const centerCol = Math.floor(gridCols / 2)
-    
-    // Create a "loss landscape" with global minimum at center
-    const distanceFromCenter = Math.abs(row - centerRow) + Math.abs(col - centerCol)
-    const maxDistance = centerRow + centerCol
-    
-    // Animated "descent" towards center
-    const descentProgress = (step % 80) / 80
-    const currentRadius = (1 - descentProgress) * maxDistance
-    
-    // Vibrant heat map based on loss/distance
-    if (Math.abs(distanceFromCenter - currentRadius) < 2) {
-      return "bg-sky-400 opacity-85" // Bright sky blue for current optimization point
-    } else if (distanceFromCenter > maxDistance * 0.7) {
-      return "bg-rose-500 opacity-45" // Vibrant rose for high loss areas
-    } else if (distanceFromCenter < maxDistance * 0.3) {
-      return "bg-lime-500 opacity-55" // Electric lime for low loss areas
-    } else {
-      return "bg-orange-400 opacity-30" // Warm orange for medium loss areas
-    }
-  }
-  
-  // Attention Mechanism Animation - Vibrant focus patterns
-  const getAttentionPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
-    const row = Math.floor(i / gridRows)
-    const col = i % gridCols
-    
-    // Create multiple attention heads focusing on different areas with vibrant colors
-    const attentionCycle = Math.floor(step / 30) % 4
-    const intensity = Math.min((step % 30) / 30, 0.75)
-    
-    let focused = false
-    let colorClass = ""
-    
-    switch (attentionCycle) {
-      case 0: // Top-left attention (Vibrant rose)
-        focused = row < gridRows / 2 && col < gridCols / 2
-        colorClass = "bg-rose-500"
-        break
-      case 1: // Top-right attention (Electric emerald)
-        focused = row < gridRows / 2 && col >= gridCols / 2
-        colorClass = "bg-emerald-500"
-        break
-      case 2: // Bottom-left attention (Sapphire blue)
-        focused = row >= gridRows / 2 && col < gridCols / 2
-        colorClass = "bg-blue-600"
-        break
-      case 3: // Bottom-right attention (Vibrant purple)
-        focused = row >= gridRows / 2 && col >= gridCols / 2
-        colorClass = "bg-purple-600"
-        break
-    }
-    
-    if (focused) {
-      const opacityLevel = Math.floor(intensity * 65 + 25)
-      return `${colorClass} opacity-${opacityLevel}`
-    }
-    
-    // Background vibrant noise
-    if (Math.random() > 0.96) {
-      const noiseColors = [
-        "bg-rose-300", "bg-amber-300", "bg-emerald-300", 
-        "bg-sky-300", "bg-violet-300", "bg-fuchsia-300",
-        "bg-teal-300", "bg-indigo-300"
-      ]
-      const randomColor = noiseColors[Math.floor(Math.random() * noiseColors.length)]
-      return `${randomColor} opacity-12`
-    }
-    
-    return "bg-transparent"
-  }
-  
-  // Unique YOLO Animation - Pulsing detection grid
-  const getYOLOPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
-    const row = Math.floor(i / gridCols)
-    const col = i % gridCols
-    // Simulate detection boxes pulsing
-    const pulse = Math.abs(Math.sin((step + i) * 0.15))
-    if ((row === 1 || row === gridRows - 2) && (col === 1 || col === gridCols - 2)) {
-      return `bg-yellow-400 opacity-${Math.floor(40 + pulse * 45)}` // Detected object corners
-    }
-    if ((row === 0 || row === gridRows - 1 || col === 0 || col === gridCols - 1)) {
-      return `bg-orange-400 opacity-${Math.floor(20 + pulse * 30)}` // Grid border
-    }
-    if (pulse > 0.95) {
-      return "bg-red-500 opacity-30" // Occasional detection flash
-    }
-    return "bg-transparent"
-  }
-
-  // Unique EduGen Animation - Animated book pages flipping
-  const getEduGenPattern = (step: number, i: number, gridCols: number, gridRows: number) => {
-    const row = Math.floor(i / gridCols)
-    const col = i % gridCols
-    // Simulate flipping pages with a wave
-    const wave = Math.sin((step * 0.18) + col * 0.7)
-    if (Math.abs(wave) > 0.85 && row > 1 && row < gridRows - 2) {
-      return "bg-blue-300 opacity-60" // Flipping page
-    }
-    if (row === 0 || row === gridRows - 1) {
-      return "bg-indigo-400 opacity-30" // Book cover
-    }
-    if (col === 0 || col === gridCols - 1) {
-      return "bg-amber-300 opacity-25" // Book spine
-    }
-    return "bg-transparent"
-  }
-
-  const getAnimationPattern = (animationType: string, step: number, i: number, gridCols: number, gridRows: number, projectTitle?: string) => {
-    if (projectTitle === "YOLOv12 FoodVision: BD Cuisine Detector") {
-      return getYOLOPattern(step, i, gridCols, gridRows)
-    }
-    if (projectTitle === "EduGen: Animated Curriculum LLM Studio") {
-      return getEduGenPattern(step, i, gridCols, gridRows)
-    }
-    switch (animationType) {
-      case "neural_network":
-        return getNeuralNetworkPattern(step, i, gridCols, gridRows)
-      case "gradient_descent":
-        return getGradientDescentPattern(step, i, gridCols, gridRows)
-      case "attention_mechanism":
-        return getAttentionPattern(step, i, gridCols, gridRows)
-      default:
-        return "bg-transparent"
-    }
-  }
   return (
-    <section id="projects" className="py-16 sm:py-20 lg:py-24 relative">
-      {/* Structured Data for Projects */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": "Ahammad Nafiz Projects",
-            "description": "Machine Learning and AI projects by Ahammad Nafiz",
-            "numberOfItems": projects.length,
-            "itemListElement": projects.map((project, index) => ({
-              "@type": "SoftwareApplication",
-              "position": index + 1,
-              "name": project.title,
-              "description": project.description,
-              "url": project.link,
-              "applicationCategory": "Machine Learning",
-              "operatingSystem": "Cross-platform",
-              "programmingLanguage": project.tech,
-              "author": {
-                "@type": "Person",
-                "name": "Ahammad Nafiz",
-                "url": "https://ahammadnafiz.github.io"
-              },
-              "dateCreated": project.year.includes("2024") ? "2024" : "2025",
-              "keywords": project.tech.join(", ")
-            }))
-          })
-        }}
-      />
-      
-      {/* Center content container */}
-      <div className="flex justify-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl text-center relative">
-          {/* Left decorative element */}
-          <div className="hidden lg:flex absolute -left-16 xl:-left-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
-            <div className="w-6 h-6 lg:w-8 lg:h-8 bg-accent opacity-30"></div>
-          </div>
-          
-          {/* Right decorative element */}
-          <div className="hidden lg:flex absolute -right-16 xl:-right-20 top-1/2 transform -translate-y-1/2" aria-hidden="true">
-            <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-accent opacity-30 animate-pulse"></div>
-          </div>
-          
-          <header className="mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold mb-4 uppercase">
-              <span className="text-accent">P</span>rojects
-            </h2>
-            <div className="w-12 sm:w-16 h-1 sm:h-2 bg-accent mx-auto" aria-hidden="true"></div>
-            <p className="sr-only">Machine Learning and AI projects by Ahammad Nafiz, showcasing expertise in deep learning, natural language processing, and automated systems.</p>
-          </header>
+    <section
+      id="projects"
+      className="relative w-full border-t border-border px-5 sm:px-8 lg:px-12 py-14 sm:py-16"
+    >
+      <div className="flex items-baseline justify-between gap-4 mb-8 sm:mb-10">
+        <div className="flex items-baseline gap-4">
+          <span className="label">( 03 )</span>
+          <h2 className="font-display font-medium text-[clamp(2rem,6vw,4rem)] leading-none tracking-[-0.02em]">
+            Work
+          </h2>
+        </div>
+        <span className="hidden sm:block label">Selected · 2024 — 2026</span>
+      </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8" role="list" aria-label="Featured projects">
-            {projects.map((project, index) => (
-              <article
-                key={index}
-                className="group border-2 border-accent hover:border-accent bg-secondary/10 transition-all duration-300 p-4 sm:p-6 lg:p-8 pixel-borders hover-lift"
-                role="listitem"
-                itemScope
-                itemType="https://schema.org/SoftwareApplication"
-              >
-                <div className="aspect-video bg-background mb-4 sm:mb-6 relative overflow-hidden border border-accent/30" aria-hidden="true">
-                  {/* ML/AI Themed Pixel Art Animations */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Animation Label */}
-                    <div className="absolute top-1 left-1 text-xs font-mono text-accent bg-background/80 px-1" aria-hidden="true">
-                      {project.animationType === "neural_network" && "Neural Net"}
-                      {project.animationType === "gradient_descent" && "Gradient Descent"}
-                      {project.animationType === "attention_mechanism" && "Attention"}
-                    </div>
-                    
-                    {/* Mobile: 6x4 grid for video aspect */}
-                    <div className={`grid grid-cols-6 gap-0 w-full h-full sm:hidden ${
-                      !mounted ? `project-${project.animationType.replace('_', '-')}` : ''
-                    }`}>
-                      {Array.from({ length: 24 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`aspect-square transition-all duration-500 ${
-                            mounted 
-                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 6, 4, project.title)
-                              : 'bg-accent opacity-15'
-                          }`}
-                          style={!mounted ? { 
-                            '--wave-delay': i,
-                            '--descent-delay': i,
-                            '--attention-delay': i
-                          } as React.CSSProperties : {}}
-                        />
-                      ))}
-                    </div>
-                    {/* Small screens: 8x5 grid */}
-                    <div className={`hidden sm:grid md:hidden grid-cols-8 gap-0 w-full h-full ${
-                      !mounted ? `project-${project.animationType.replace('_', '-')}` : ''
-                    }`}>
-                      {Array.from({ length: 40 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`aspect-square transition-all duration-500 ${
-                            mounted 
-                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 8, 5, project.title)
-                              : 'bg-accent opacity-15'
-                          }`}
-                          style={!mounted ? { 
-                            '--wave-delay': i,
-                            '--descent-delay': i,
-                            '--attention-delay': i
-                          } as React.CSSProperties : {}}
-                        />
-                      ))}
-                    </div>
-                    {/* Medium and larger screens: 10x6 grid */}
-                    <div className={`hidden md:grid grid-cols-10 gap-0 w-full h-full ${
-                      !mounted ? `project-${project.animationType.replace('_', '-')}` : ''
-                    }`}>
-                      {Array.from({ length: 60 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`aspect-square transition-all duration-500 ${
-                            mounted 
-                              ? getAnimationPattern(project.animationType, animationSteps[index] || 0, i, 10, 6, project.title)
-                              : 'bg-accent opacity-15'
-                          }`}
-                          style={!mounted ? { 
-                            '--wave-delay': i,
-                            '--descent-delay': i,
-                            '--attention-delay': i
-                          } as React.CSSProperties : {}}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <h3 className="font-mono font-bold text-lg sm:text-xl text-accent" itemProp="name">{project.title}</h3>
-                  <time className="font-mono text-xs text-muted-foreground" itemProp="dateCreated">{project.year}</time>
-                </div>
-                <p className="font-mono text-foreground text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed" itemProp="description">{project.description}</p>
-
-                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6 justify-center" role="list" aria-label={`Technologies used in ${project.title}`}>
-                  {project.tech.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex} 
-                      className="font-mono text-xs border-2 border-accent px-2 py-1 text-foreground"
-                      role="listitem"
-                      itemProp="programmingLanguage"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  href={project.link}
-                  className="pixel-button text-xs sm:text-sm inline-block"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  itemProp="url"
-                  aria-label={`View ${project.title} project on GitHub`}
-                >
-                  View Project →
-                </a>
-              </article>
-            ))}
-          </div>
-
-          {/* View More Projects Button */}
-          <div className="mt-12 sm:mt-16">
+      <ul>
+        {PROJECTS.map((p) => (
+          <li key={p.n} className="border-t border-border last:border-b">
             <a
-              href="https://github.com/ahammadnafiz"
+              href={p.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="pixel-button text-sm sm:text-base"
-              aria-label="View more projects by Ahammad Nafiz on GitHub"
+              className="group block py-5 sm:py-6 transition-colors duration-200 hover:bg-foreground hover:text-background"
             >
-              View More Projects →
+              <div className="grid grid-cols-12 gap-x-4 gap-y-2 items-baseline px-1 sm:px-3">
+                <span className="col-span-2 sm:col-span-1 font-mono text-xs text-muted-foreground group-hover:text-background/60">
+                  {p.n}
+                </span>
+
+                <div className="col-span-10 sm:col-span-5">
+                  <h3 className="font-display text-xl sm:text-2xl lg:text-3xl leading-[1.05] tracking-[-0.01em]">
+                    {p.name}
+                  </h3>
+                  <p className="font-mono text-[0.625rem] tracking-[0.12em] uppercase text-muted-foreground group-hover:text-background/60 mt-1.5">
+                    {p.kind}
+                  </p>
+                </div>
+
+                <div className="col-span-12 sm:col-span-5">
+                  <p className="text-[13px] sm:text-sm leading-relaxed text-muted-foreground group-hover:text-background/80 max-w-md">
+                    {p.desc}
+                  </p>
+                  <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="font-mono text-[0.625rem] tracking-[0.1em] uppercase text-foreground/50 group-hover:text-background/70"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </p>
+                </div>
+
+                <span
+                  aria-hidden
+                  className="hidden sm:block col-span-1 justify-self-end text-lg transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
+                >
+                  ↗
+                </span>
+              </div>
             </a>
-          </div>
-        </div>
-      </div>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
