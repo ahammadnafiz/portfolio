@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react"
 
-const NAME = "AHAMMADNAFIZ"
+const NAME = "AHAMMAD NAFIZ"
 
 const MARQUEE_ITEMS = [
   "OPEN TO ML / AI ENGINEERING ROLES",
-  "RESEARCH ASSISTANT @ UIU",
+  "ASSOCIATE PRODUCT ENGINEER @ MARKOPOLO AI",
   "RAG · LLM AGENTS · MECHANISTIC INTERPRETABILITY",
   "AIMING FOR A PHD IN EUROPE",
 ]
@@ -19,7 +19,7 @@ const MENU = [
 ]
 
 const SPECS: { label: string; value: React.ReactNode }[] = [
-  { label: "Now", value: "Research Assistant, UIU" },
+  { label: "Now", value: "Associate Product Engineer, Markopolo AI" },
   { label: "Before", value: "Jr. Software Engineer, AskTuring.ai" },
   { label: "Focus", value: "RAG · LLM Agents · Interpretability" },
   { label: "Goal", value: "PhD in Europe, then a frontier lab" },
@@ -52,14 +52,8 @@ export function Hero() {
     <section
       id="home"
       className="relative min-h-screen-dynamic min-h-screen flex flex-col"
-      itemScope
-      itemType="https://schema.org/Person"
     >
-      <meta itemProp="name" content="Ahammad Nafiz" />
-      <meta itemProp="jobTitle" content="Machine Learning & AI Engineer" />
-      <meta itemProp="url" content="https://ahammadnafiz.github.io/portfolio" />
-      <meta itemProp="email" content="ahammadnafiz86@gmail.com" />
-      <meta itemProp="address" content="Dhaka, Bangladesh" />
+      {/* Person entity lives in the JSON-LD graph in layout.tsx — one per page. */}
 
       {/* Availability marquee */}
       <div className="marquee-mask w-full bg-foreground text-background select-none">
@@ -95,18 +89,23 @@ export function Hero() {
         <div className="py-6">
           <h1
             className="font-display font-medium leading-[0.86] tracking-[-0.025em] text-foreground whitespace-nowrap text-[clamp(2rem,10.3vw,11rem)]"
-            itemProp="name"
-            aria-label="Ahammad Nafiz"
           >
-            {NAME.split("").map((ch, i) => (
-              <span
-                key={i}
-                className="inline-block"
-                style={mounted ? { animation: `ink-rise 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 40}ms both` } : { opacity: 0 }}
-              >
-                {ch}
-              </span>
-            ))}
+            {NAME.split("").map((ch, i) =>
+              ch === " " ? (
+                // A real space text node, so h1.textContent reads "AHAMMAD NAFIZ".
+                // An empty sized span would look right but leave the name unspaced
+                // to crawlers, which is the whole reason this exists.
+                " "
+              ) : (
+                <span
+                  key={i}
+                  className="inline-block"
+                  style={mounted ? { animation: `ink-rise 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 40}ms both` } : { opacity: 0 }}
+                >
+                  {ch}
+                </span>
+              )
+            )}
           </h1>
           <p className="mt-6 sm:mt-7 font-display text-[clamp(1.35rem,3.2vw,2.5rem)] leading-[1.15] tracking-[-0.01em] text-foreground/90 max-w-3xl">
             I build retrieval systems and LLM agents that hold up outside a notebook.
@@ -116,16 +115,36 @@ export function Hero() {
         {/* Bottom band: intro + spec index, aligned to a grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-10 items-end">
           <div className="lg:col-span-6">
-            <p className="max-w-xl text-[15px] sm:text-base leading-relaxed text-foreground/90" itemProp="description">
-              Right now I&apos;m a research assistant at UIU, working on autonomous agents
-              and reading a lot about mechanistic interpretability. Before that I was a
-              junior engineer at AskTuring.ai, building the evaluation and retrieval behind
-              a production RAG system.
+            <p className="max-w-xl text-[15px] sm:text-base leading-relaxed text-foreground/90">
+              I&apos;m an engineer on DeepDive at Markopolo AI, working across the
+              TypeScript monorepo and the Python scraping and annotation pipeline under
+              it. Before that I owned the eval service at AskTuring.ai, building the
+              retrieval and benchmarks for a production RAG system. Most of my reading
+              still goes to mechanistic interpretability.
             </p>
             <p className="mt-5 font-mono text-[0.6875rem] tracking-[0.12em] uppercase text-muted-foreground flex items-center">
               <span className="inline-block w-2 h-2 bg-foreground mr-2.5" aria-hidden />
               Open to ML / AI roles &amp; research collaborations
             </p>
+
+            {/* A conversion path above the fold. Without this the only things a
+                first-time visitor can act on are four anchor links and "scroll". */}
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <a
+                href={`${process.env.NODE_ENV === "production" ? "/portfolio" : ""}/Ahammad-Nafiz-CV.pdf`}
+                download="Ahammad-Nafiz-CV.pdf"
+                className="group inline-flex items-center gap-2.5 bg-foreground text-background px-5 py-3 font-mono text-xs tracking-[0.14em] uppercase hover:bg-foreground/85 transition-colors"
+              >
+                Download CV
+                <span aria-hidden className="transition-transform group-hover:translate-y-0.5">↓</span>
+              </a>
+              <a
+                href="mailto:ahammadnafiz86@gmail.com"
+                className="inline-flex items-center px-1 py-3 font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <span className="border-b border-current pb-0.5">Email me</span>
+              </a>
+            </div>
           </div>
 
           <dl className="lg:col-span-5 lg:col-start-8 self-end">

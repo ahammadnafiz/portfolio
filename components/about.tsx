@@ -1,15 +1,21 @@
 const EXPERIENCE = [
   {
-    org: "United International University",
-    role: "Research Assistant",
-    date: "Dec 2025 — Present",
-    note: "Researching autonomous agents and multi-agent systems, and helping with papers on LLM applications, retrieval, and agentic workflow design.",
+    org: "Markopolo AI",
+    role: "Associate Product Engineer, DeepDive",
+    date: "Aug 2026 — Present",
+    note: "Building full-stack features for DeepDive, an AI social listening and narrative intelligence platform, across a TypeScript monorepo and the Python scraping and LLM annotation pipeline that feeds it.",
   },
   {
     org: "AskTuring.ai",
     role: "Jr. Software Engineer (former)",
     date: "Sep 2025 — May 2026",
     note: "Owned the eval service and admin dashboard, automating RAG benchmarks over HotpotQA, MuSiQue, FinQA, and CUAD. Built Deepen Answer: extended-thinking LLMs, an agent that fills its own knowledge gaps, and hybrid BM25 + vector retrieval with RRF.",
+  },
+  {
+    org: "United International University",
+    role: "Research Assistant",
+    date: "Dec 2025 — Feb 2026",
+    note: "Researched autonomous agents and multi-agent systems, and contributed to papers on LLM applications, retrieval, and agentic workflow design.",
   },
 ]
 
@@ -40,15 +46,15 @@ export function About() {
         <div className="lg:col-span-5">
           <div className="space-y-4 text-[15px] sm:text-base leading-relaxed text-foreground/90 max-w-xl">
             <p>
-              I&apos;m a data science student at UIU and an ML engineer. My last role was
-              junior engineer at AskTuring.ai, where I owned the evaluation service and
-              built Deepen Answer, a RAG pipeline that pairs extended-thinking models with
-              an agent that fills its own knowledge gaps.
+              I&apos;m a data science student at UIU and an ML engineer. Right now I work
+              on DeepDive at Markopolo AI. Before that, at AskTuring.ai, I owned the
+              evaluation service and built Deepen Answer, a RAG pipeline that pairs
+              extended-thinking models with an agent that fills its own knowledge gaps.
             </p>
             <p>
               I tend to learn things by rebuilding them. An autograd engine in NumPy. A
-              memory layer for agents that cut context cost by 22× without dropping
-              accuracy. A research agent that plans, searches, and cites its sources.
+              memory layer for agents that cuts the context you send by 17× without
+              giving up accuracy. A research agent that plans, searches, and cites its sources.
               Lately I keep drifting toward interpretability, trying to work out what these
               models are actually doing inside.
             </p>
@@ -57,15 +63,16 @@ export function About() {
             </p>
           </div>
 
-          <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+            {/* The one primary action on the page. Filled, so it does not read as
+                the sixth identical text link. Padding also lifts the hit target
+                over the 24px minimum (WCAG 2.5.8) — it was 19px tall. */}
             <a
-              href={`${process.env.NODE_ENV === "production" ? "/portfolio" : ""}/Ahammad_Nafiz_CV.pdf`}
-              download="Ahammad_Nafiz_CV.pdf"
-              className="group inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase"
+              href={`${process.env.NODE_ENV === "production" ? "/portfolio" : ""}/Ahammad-Nafiz-CV.pdf`}
+              download="Ahammad-Nafiz-CV.pdf"
+              className="group inline-flex items-center gap-2.5 bg-foreground text-background px-5 py-3 font-mono text-xs tracking-[0.14em] uppercase hover:bg-foreground/85 transition-colors"
             >
-              <span className="border-b border-foreground pb-0.5 group-hover:border-transparent transition-colors">
-                Download CV
-              </span>
+              Download CV
               <span aria-hidden className="transition-transform group-hover:translate-y-0.5">↓</span>
             </a>
             <a

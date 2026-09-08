@@ -27,7 +27,6 @@ export function Contact() {
           <a
             href="mailto:ahammadnafiz86@gmail.com"
             className="group inline-block font-display font-medium tracking-[-0.02em] leading-none text-[clamp(1.75rem,6vw,4rem)]"
-            itemProp="email"
           >
             <span className="border-b-2 border-foreground pb-1 group-hover:border-transparent transition-colors">
               ahammadnafiz86@gmail.com

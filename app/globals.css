@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
-@import url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css");
 
 @tailwind base;
 @tailwind components;
@@ -24,7 +23,7 @@
     --secondary: 38 8% 84%;          /* #D9D6CF muted panel */
     --secondary-foreground: 30 8% 10%;
     --muted: 38 7% 85%;
-    --muted-foreground: 32 5% 42%;   /* #706B64 secondary ink */
+    --muted-foreground: 32 5% 38%;   /* secondary ink — 4.91:1 on paper, was 42% / 4.21:1 (WCAG AA fail) */
     --accent: 30 8% 10%;             /* ink is the only accent */
     --accent-foreground: 40 12% 92%;
     --destructive: 30 6% 30%;

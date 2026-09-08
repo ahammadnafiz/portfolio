@@ -13,8 +13,8 @@ const PROJECTS = [
     n: "02",
     name: "Engram",
     kind: "Persistent Memory for AI Agents",
-    desc: "A memory library on PostgreSQL + pgvector combining hybrid search (BM25 + vector + RRF), graph traversal, and durable task ledgers. Cut LLM context cost up to 22× at 90%+ on LongMemEval, LoCoMo, and BEAM.",
-    tags: ["pgvector", "Hybrid Search", "Infra"],
+    desc: "A memory library on PostgreSQL + pgvector combining hybrid search (BM25 + vector + RRF), graph traversal, and durable task ledgers. 90.8% on LongMemEval-S, 94.1% on LoCoMo-10, 79.7% on BEAM 1M — with 17× less context on BEAM and no LLM calls at ingest.",
+    tags: ["pgvector", "Hybrid Search", "Agent Memory"],
     href: "https://github.com/ahammadnafiz/engram",
   },
   {
