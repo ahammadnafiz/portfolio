@@ -130,6 +130,8 @@
     color: hsl(var(--hl));
     background: hsl(var(--hl) / 0.12);
   }
+  /* Same chip in neutral colours, for company names with a logo. */
+  .hl-plain { color: hsl(var(--foreground)); background: hsl(var(--foreground) / 0.08); }
   .hl-blue { --hl: var(--hl-blue); }
   .hl-green { --hl: var(--hl-green); }
   .hl-orange { --hl: var(--hl-orange); }
