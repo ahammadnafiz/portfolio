@@ -19,9 +19,9 @@ export const projects: Project[] = [
     kind: "Source control for coding agents",
     status: "Contributor",
     summary:
-      "Core contributor to an open-source agentic IDE (Rust, Tauri, React, 9.4k+ stars) that links commits to LLM agent sessions.",
+      "Core contributor to Atlas, an open-source agentic IDE (Rust, Tauri, React, 9.4k+ stars) that links every git commit to the AI coding agent session that wrote it.",
     intro:
-      "Atlas is an agentic IDE that treats an AI coding session like part of version control: every commit is linked to the agent session that produced it. I'm a core contributor.",
+      "Atlas is an open-source agentic IDE that puts AI coding agents under version control: every commit is linked to the LLM agent session that produced it. I'm a core contributor, and I built Team Timeline, Org Agent and Atlas Memory, its multi-agent memory layer.",
     highlights: [
       "Open-source agentic IDE with 9.4k+ stars on GitHub",
       "Links every commit to the LLM agent session that wrote it",
@@ -37,9 +37,9 @@ export const projects: Project[] = [
     kind: "AI commerce platform",
     status: "Live",
     summary:
-      "A multi-tenant e-commerce SaaS. I built the AI sales agent and the store builder, and led product engineering.",
+      "A multi-tenant e-commerce SaaS with an AI sales agent that sells in Bangla and English. I built the agent and the store builder, and led product engineering.",
     intro:
-      "Buyziz lets a shop owner set up an online store and put an AI sales agent in front of it. The agent talks to customers in Bangla or English, looks at the images they send, and calls tools to find products and take orders.",
+      "Buyziz lets a shop owner launch an online store and put an AI sales agent in front of it. The agent chats with customers in Bangla or English, understands the product photos they send, and uses tool calling to find products and take orders.",
     highlights: [
       "AI sales agent: multimodal, Bangla and English, with tool calling",
       "Built the store builder",
@@ -54,9 +54,9 @@ export const projects: Project[] = [
     kind: "Deep research agent",
     status: "In development",
     summary:
-      "A research agent that runs a fixed 8-phase pipeline over the open web and returns a cited Markdown answer with a full trace.",
+      "A deep research agent built with LangGraph and Gemini. It runs a fixed 8-phase pipeline over the open web and returns a cited Markdown answer with a full trace.",
     intro:
-      "You ask a question and fizzlabai plans, searches, reads, drafts, checks and rewrites until the answer holds up. Every LLM call, tool call and source URL it touches shows up in a live trace, so you can see why it said what it said.",
+      "fizzlabai is an AI research agent. You ask a question and it plans, searches the web, reads, drafts, checks and rewrites until the answer holds up. Every LLM call, tool call and source URL it touches shows up in a live trace, so you can see why it said what it said.",
     highlights: [
       "Eight phases: plan, search, read, synth, verify, re-plan, polish, close",
       "The verify step scores grounding, answer fidelity and depth gaps separately, and re-plans only when one of them falls short",
@@ -73,9 +73,9 @@ export const projects: Project[] = [
     kind: "Persistent memory for AI agents",
     status: "Open source",
     summary:
-      "A memory library on PostgreSQL and pgvector. 90.8% on LongMemEval-S, 94.1% on LoCoMo-10 and 79.7% on BEAM 1M, with no LLM calls at ingest.",
+      "Long-term memory for AI agents on PostgreSQL and pgvector. 90.8% on LongMemEval-S, 94.1% on LoCoMo-10 and 79.7% on BEAM 1M, with no LLM calls at ingest.",
     intro:
-      "Agents that run for weeks need to remember what happened last Tuesday without re-reading every conversation. Engram stores raw turns as they come in, then finds the right evidence at question time with hybrid search, graph traversal and durable task ledgers.",
+      "Engram is an open-source memory layer for LLM agents. Agents that run for weeks need to remember what happened last Tuesday without re-reading every conversation. Engram stores raw turns as they come in, then finds the right evidence at question time with hybrid search (BM25 plus vector search), graph traversal and durable task ledgers.",
     highlights: [
       "90.8% on LongMemEval-S (500 questions), 94.1% on LoCoMo-10 (1,540) and 79.7% on BEAM 1M (700)",
       "Retrieval finds the gold session for all 470 answerable LongMemEval questions",
@@ -95,9 +95,9 @@ export const projects: Project[] = [
     kind: "Multi-agent RAG system",
     status: "Open source",
     summary:
-      "Ask questions across your own books and notes. Low-confidence answers fall back to web search automatically.",
+      "A multi-agent RAG system for your own books and notes. Low-confidence answers fall back to web search automatically.",
     intro:
-      "A chat interface over your personal library. It decides how sure it is about each answer and routes accordingly: confident answers come straight from your documents, shaky ones go out to the web first.",
+      "A RAG chatbot over your personal library. It scores how confident it is in each answer and routes accordingly: confident answers come straight from your documents, uncertain ones go out to web search first.",
     highlights: [
       "Confidence-based routing between your documents and the web",
       "Knowledge-strip decomposition to keep only the relevant parts of each retrieved chunk",
@@ -112,9 +112,9 @@ export const projects: Project[] = [
     name: "FizTorch",
     kind: "Deep learning framework from scratch",
     status: "Open source",
-    summary: "A small PyTorch-style framework in NumPy: autograd, core layers and an Adam optimizer.",
+    summary: "A PyTorch-style deep learning framework built from scratch in NumPy: an autograd engine, core layers and an Adam optimizer.",
     intro:
-      "I wanted to know what happens inside loss.backward(), so I wrote it. FizTorch is a tensor library with automatic differentiation, a handful of layers and an optimizer, small enough to read in an afternoon.",
+      "I wanted to know what happens inside loss.backward(), so I wrote it. FizTorch is a tensor library in Python and NumPy with automatic differentiation (backpropagation), a handful of neural network layers and an optimizer, small enough to read in an afternoon.",
     highlights: [
       "Autograd engine on top of NumPy",
       "Linear, ReLU and Sigmoid layers with a Sequential container",

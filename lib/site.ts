@@ -21,21 +21,21 @@ export const experience = [
     role: "Associate Product Engineer, DeepDive",
     date: "Aug 2026 – Present",
     current: true,
-    note: "Building DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent, across a TypeScript and Python LLM stack.",
+    note: "Working on DeepDive, an AI social listening platform, plus an AEO (answer engine optimization) visibility tool and an AI data analysis agent, across a TypeScript and Python LLM stack.",
   },
   {
     org: "AskTuring.ai",
     role: "Jr. Software Engineer",
     date: "Sep 2025 – May 2026",
     current: false,
-    note: "Owned the eval service and admin dashboard, automating RAG benchmarks over HotpotQA, MuSiQue, FinQA and CUAD. Built Deepen Answer: extended-thinking LLMs, an agent that fills its own knowledge gaps, and hybrid BM25 + vector retrieval with RRF. Built FastAPI services that improved retrieval accuracy and cut query latency.",
+    note: "Owned the LLM evaluation service and admin dashboard, automating RAG benchmarks on HotpotQA, MuSiQue, FinQA and CUAD. Built Deepen Answer, a production RAG pipeline: extended-thinking LLMs, an agent that fills its own knowledge gaps, and hybrid BM25 plus vector retrieval with reciprocal rank fusion. Built FastAPI services that improved retrieval accuracy and cut query latency.",
   },
   {
     org: "United International University",
     role: "Research Assistant",
     date: "Dec 2025 – Feb 2026",
     current: false,
-    note: "Researched autonomous agents and multi-agent systems, and contributed to papers on LLM applications, retrieval and agentic workflow design.",
+    note: "Researched autonomous AI agents and multi-agent systems, and contributed to papers on LLM applications, retrieval and agentic workflow design.",
   },
 ]
 

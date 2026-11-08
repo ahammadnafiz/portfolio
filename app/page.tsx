@@ -150,7 +150,7 @@ export default function Home() {
 
           <Section id="contact" n="04" title="Contact">
             <p className="max-w-[46ch] leading-relaxed text-muted-foreground">
-              Hiring for ML or AI work, want to talk research, or have a good problem? My inbox is open.
+              Hiring an AI or machine learning engineer, want to talk research, or have a good problem? My inbox is open.
             </p>
             <a
               href={`mailto:${site.email}`}
