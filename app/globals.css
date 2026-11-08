@@ -124,15 +124,15 @@
 }
 
 @layer components {
-  /* Coloured chip around a key phrase in running text. */
+  /* Coloured chip around a key phrase in running text. The right margin keeps a following comma or full stop off the edge. */
   .hl {
-    @apply px-1 py-px box-decoration-clone;
+    @apply mr-[0.2em] px-1 py-px box-decoration-clone;
     color: hsl(var(--hl));
     background: hsl(var(--hl) / 0.12);
   }
   /* Company name with its logo: a bordered chip, logo and name evenly spaced inside. */
   .brand-chip {
-    @apply whitespace-nowrap border px-[0.4em] py-[0.1em] box-decoration-clone;
+    @apply mr-[0.2em] whitespace-nowrap border px-[0.4em] py-[0.1em] box-decoration-clone;
     color: hsl(var(--foreground));
     background: hsl(var(--foreground) / 0.05);
     transition: background-color 300ms, border-color 300ms;
