@@ -68,7 +68,7 @@ export function Breadcrumbs() {
             <li key={item.label}>
               <a
                 href={item.href}
-                className={`block w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+                className={`block w-3 h-3 border-2 transition-all duration-300 ${
                   item.current 
                     ? "bg-accent border-accent scale-125" 
                     : "border-accent/50 hover:border-accent hover:bg-accent/20"

@@ -79,7 +79,7 @@ export default async function PostPage({ params }: Props) {
                 href={`/writing/${older.slug}/`}
                 prefetch={false}
                 lang={langOf(older)}
-                className="rounded-xl bg-card px-4 py-3.5 transition-colors duration-300 hover:bg-secondary"
+                className=" bg-card px-4 py-3.5 transition-colors duration-300 hover:bg-secondary"
               >
                 <span className="text-xs text-muted-foreground">← Older</span>
                 <span className="mt-1 line-clamp-2 block font-medium">{older.title}</span>
@@ -92,7 +92,7 @@ export default async function PostPage({ params }: Props) {
                 href={`/writing/${newer.slug}/`}
                 prefetch={false}
                 lang={langOf(newer)}
-                className="rounded-xl bg-card px-4 py-3.5 text-right transition-colors duration-300 hover:bg-secondary"
+                className=" bg-card px-4 py-3.5 text-right transition-colors duration-300 hover:bg-secondary"
               >
                 <span className="text-xs text-muted-foreground">Newer →</span>
                 <span className="mt-1 line-clamp-2 block font-medium">{newer.title}</span>

@@ -61,7 +61,7 @@ export default async function ProjectPage({ params }: Props) {
             <span aria-hidden>←</span> All work
           </Link>
 
-          <div className="mt-4 overflow-hidden rounded-xl bg-card">
+          <div className="mt-4 overflow-hidden bg-card">
             <img
               src={`/covers/${project.slug}.svg`}
               alt=""
@@ -85,8 +85,8 @@ export default async function ProjectPage({ params }: Props) {
                   rel="noopener noreferrer"
                   className={
                     i === 0
-                      ? "inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity duration-300 hover:opacity-85"
-                      : "inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm transition-colors duration-300 hover:bg-card"
+                      ? "inline-flex items-center gap-1.5 bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity duration-300 hover:opacity-85"
+                      : "inline-flex items-center gap-1.5 border px-4 py-2 text-sm transition-colors duration-300 hover:bg-card"
                   }
                 >
                   {l.label} <span aria-hidden>↗</span>
@@ -100,7 +100,7 @@ export default async function ProjectPage({ params }: Props) {
             <ul className="space-y-2.5 leading-relaxed">
               {project.highlights.map((h) => (
                 <li key={h} className="flex gap-3">
-                  <span aria-hidden className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/60" />
+                  <span aria-hidden className="mt-[0.6em] h-1.5 w-1.5 shrink-0 bg-muted-foreground/60" />
                   {h}
                 </li>
               ))}
@@ -110,7 +110,7 @@ export default async function ProjectPage({ params }: Props) {
           <Section id="stack" n="02" title="Stack">
             <ul className="flex flex-wrap gap-2">
               {project.stack.map((t) => (
-                <li key={t} className="rounded-md border bg-card px-2.5 py-1 text-sm">
+                <li key={t} className=" border bg-card px-2.5 py-1 text-sm">
                   {t}
                 </li>
               ))}
@@ -119,13 +119,13 @@ export default async function ProjectPage({ params }: Props) {
 
           <nav aria-label="More projects" className="mt-14 grid grid-cols-2 gap-4">
             {prev && (
-              <Link href={`/work/${prev.slug}`} className="group rounded-xl bg-card px-4 py-3.5 transition-colors duration-300 hover:bg-secondary">
+              <Link href={`/work/${prev.slug}`} className="group bg-card px-4 py-3.5 transition-colors duration-300 hover:bg-secondary">
                 <span className="text-xs text-muted-foreground">← Previous</span>
                 <span className="mt-1 block font-medium">{prev.name}</span>
               </Link>
             )}
             {next && (
-              <Link href={`/work/${next.slug}`} className="group rounded-xl bg-card px-4 py-3.5 text-right transition-colors duration-300 hover:bg-secondary">
+              <Link href={`/work/${next.slug}`} className="group bg-card px-4 py-3.5 text-right transition-colors duration-300 hover:bg-secondary">
                 <span className="text-xs text-muted-foreground">Next →</span>
                 <span className="mt-1 block font-medium">{next.name}</span>
               </Link>

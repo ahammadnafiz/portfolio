@@ -40,7 +40,7 @@ export default function Home() {
               alt="Portrait of Ahammad Nafiz"
               width={224}
               height={224}
-              className="h-20 w-20 shrink-0 rounded-xl object-cover ring-1 ring-border sm:h-28 sm:w-28"
+              className="h-20 w-20 shrink-0 object-cover ring-1 ring-border sm:h-28 sm:w-28"
             />
             <div className="min-w-0">
               <h1 className="font-serif text-[2.5rem] leading-[1.02] sm:text-[3.25rem]">{site.name}</h1>
@@ -87,7 +87,7 @@ export default function Home() {
                 >
                   <span
                     style={{ color: `hsl(${tint})`, backgroundColor: `hsl(${tint} / 0.14)` }}
-                    className="grid h-[22px] w-[22px] place-items-center rounded-md sm:h-7 sm:w-7 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                    className="grid h-[22px] w-[22px] place-items-center sm:h-7 sm:w-7 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
                   >
                     <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   </span>
@@ -184,7 +184,7 @@ export default function Home() {
               <a
                 href={site.cv}
                 download="Ahammad-Nafiz-CV.pdf"
-                className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity duration-300 hover:opacity-85"
+                className="inline-flex items-center gap-2 bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity duration-300 hover:opacity-85"
               >
                 Download CV <span aria-hidden>↓</span>
               </a>

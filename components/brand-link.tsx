@@ -16,7 +16,7 @@ export function BrandLink({ brand, chip = true }: { brand: keyof typeof brands; 
         alt=""
         width={16}
         height={16}
-        className={`mr-[0.35em] inline-block h-[1em] w-[1em] align-[-0.15em] ${bare ? "object-contain" : "rounded-[3px] ring-1 ring-border"} transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/brand:scale-110`}
+        className={`mr-[0.35em] inline-block h-[1em] w-[1em] align-[-0.15em] ${bare ? "object-contain" : "ring-1 ring-border"} transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/brand:scale-110`}
       />
       {name}
       {!chip && (

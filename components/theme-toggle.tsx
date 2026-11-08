@@ -47,7 +47,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Switch between light and dark"
-      className="grid h-8 w-8 place-items-center rounded-full text-muted-foreground transition-colors duration-300 hover:bg-secondary hover:text-foreground"
+      className="grid h-8 w-8 place-items-center text-muted-foreground transition-colors duration-300 hover:bg-secondary hover:text-foreground"
     >
       {/* Both icons render; CSS shows the right one, so there is no hydration flicker. */}
       <Sun className="theme-icon-sun h-4 w-4" />
