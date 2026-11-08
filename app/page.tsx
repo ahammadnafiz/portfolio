@@ -32,7 +32,7 @@ export default function Home() {
           <div className="mt-8 flex items-center gap-5 sm:mt-12 sm:gap-7">
             <img
               src="/avatar.webp"
-              alt="Ahammad Nafiz"
+              alt="Portrait of Ahammad Nafiz"
               width={224}
               height={224}
               className="h-20 w-20 shrink-0 rounded-xl object-cover ring-1 ring-border sm:h-28 sm:w-28"
@@ -51,8 +51,8 @@ export default function Home() {
 
           <ul className="mt-8 space-y-3 leading-relaxed sm:text-[17px]">
             <li>
-              I&apos;m an Associate Product Engineer at <span className="hl hl-blue">Markopolo AI</span>, building
-              DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent.
+              I&apos;m an AI engineer in Dhaka, working as an Associate Product Engineer at{" "}
+              <span className="hl hl-blue">Markopolo AI</span>. I build DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent.
             </li>
             <li>
               Before that I owned the eval service at <span className="hl hl-orange">AskTuring.ai</span> and built the

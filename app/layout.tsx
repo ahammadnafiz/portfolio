@@ -9,7 +9,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "optional" })
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "optional" })
 
-const TITLE = "Ahammad Nafiz, machine learning engineer"
+const TITLE = "Ahammad Nafiz, AI and machine learning engineer in Dhaka"
 const OG_IMAGE = `${SITE_URL}/og-image.png`
 
 export const metadata: Metadata = {
@@ -87,12 +87,12 @@ const JSON_LD = {
       disambiguatingDescription:
         "Machine learning and AI engineer based in Dhaka, Bangladesh, working on retrieval-augmented generation, LLM agents, and agent memory infrastructure.",
       description:
-        "Data Science student and ML engineer working on RAG systems, LLM agents, and mechanistic interpretability. Aiming for graduate research in Europe and a role at a frontier AI lab.",
+        "AI and machine learning engineer working on RAG systems, LLM agents, agent memory and LLM evaluation, moving toward mechanistic interpretability research. Data Science student at United International University.",
       url: `${SITE_URL}/`,
       mainEntityOfPage: { "@id": `${SITE_URL}/#profilepage` },
       image: OG_IMAGE,
       email: "mailto:ahammadnafiz86@gmail.com",
-      jobTitle: "Associate Product Engineer",
+      jobTitle: "Associate Product Engineer, DeepDive",
       nationality: { "@type": "Country", name: "Bangladesh" },
       address: {
         "@type": "PostalAddress",
@@ -137,10 +137,10 @@ const JSON_LD = {
         "https://medium.com/@ahammadnafizz"
       ],
       award: [
-        "Champion, IC6 University Innovation Hub Program — UIU Cohort (Oct 2025), BDT 60,000 pre-seed",
+        "Champion, IC6 University Innovation Hub Program, UIU cohort (Oct 2025), BDT 60,000 pre-seed",
         "Best Prototype Award, Blockchain Olympiad, UIU CSE Fest (Jan 2025), BDT 20,000",
-        "Champion, CSE Project Show 2024 (Spring) — OOP for Data Science, for Predicta (Jun 2024)",
-        "1st Runner-Up, Data Innovators Challenge 2024 — Sales analytics track"
+        "Champion, CSE Project Show 2024 (Spring), for Predicta (Jun 2024)",
+        "1st Runner-Up, Data Innovators Challenge 2024, sales analytics track"
       ]
     }
   ]

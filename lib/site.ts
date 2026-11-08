@@ -7,7 +7,7 @@ export const site = {
   email: "ahammadnafiz86@gmail.com",
   cv: "/Ahammad-Nafiz-CV.pdf",
   description:
-    "Data science student and ML engineer in Dhaka working on RAG systems, LLM agents and mechanistic interpretability. Associate Product Engineer at Markopolo AI.",
+    "Ahammad Nafiz is an AI and machine learning engineer in Dhaka, Bangladesh. Associate Product Engineer at Markopolo AI, building RAG systems, LLM agents and agent memory.",
   socials: [
     { label: "GitHub", href: "https://github.com/ahammadnafiz" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/ahammad-nafiz/" },

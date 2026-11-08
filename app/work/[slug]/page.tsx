@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { Status } from "@/components/status"
 import { getNeighbours, getProject, projects } from "@/lib/projects"
+import { SITE_URL } from "@/lib/site"
 
 export const dynamicParams = false
 
@@ -18,11 +19,15 @@ type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProject((await params).slug)
   if (!project) return {}
+  const { kind } = project
+  // Lower-case the first letter for mid-title use, but leave acronyms like "AI" alone.
+  const lead = /^[A-Z]{2}/.test(kind) ? kind : kind[0].toLowerCase() + kind.slice(1)
+  const title = `${project.name}, ${lead}`
   return {
-    title: project.name,
+    title,
     description: project.summary,
     alternates: { canonical: `/work/${project.slug}/` },
-    openGraph: { title: project.name, description: project.summary, url: `/work/${project.slug}/` },
+    openGraph: { title, description: project.summary, url: `/work/${project.slug}/` },
   }
 }
 
@@ -30,10 +35,23 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProject((await params).slug)
   if (!project) notFound()
   const { prev, next } = getNeighbours(project.slug)
+  const url = `${SITE_URL}/work/${project.slug}/`
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": project.status === "Live" ? "SoftwareApplication" : "SoftwareSourceCode",
+    name: project.name,
+    description: project.summary,
+    url,
+    image: `${SITE_URL}/covers/${project.slug}.svg`,
+    author: { "@id": `${SITE_URL}/#person` },
+    keywords: project.stack.join(", "),
+    sameAs: project.links.map((l) => l.href),
+  }
 
   return (
     <>
       <SiteHeader />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <main>
         <Container className="pt-4 sm:pt-6">
           <Link

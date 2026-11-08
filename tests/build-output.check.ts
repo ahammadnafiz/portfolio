@@ -37,4 +37,26 @@ describe("static build", () => {
     expect(readFileSync(path.join(OUT, "index.html"), "utf8")).toContain('rel="canonical" href="https://ahammadnafiz.com/"')
     expect(readFileSync(path.join(OUT, "sitemap.xml"), "utf8")).toContain("https://ahammadnafiz.com/work/engram/")
   })
+
+  it("serves an llms.txt that names him and links every project page", () => {
+    const file = path.join(OUT, "llms.txt")
+    expect(existsSync(file)).toBe(true)
+    const text = readFileSync(file, "utf8")
+    expect(text.startsWith("# Ahammad Nafiz")).toBe(true)
+    for (const p of projects) expect(text, p.slug).toContain(`https://ahammadnafiz.com/work/${p.slug}/`)
+  })
+
+  it("titles project pages with name and kind, keeping acronyms intact", () => {
+    const title = (slug: string) => readFileSync(path.join(OUT, "work", slug, "index.html"), "utf8").match(/<title>(.*?)<\/title>/)?.[1]
+    expect(title("buyziz")).toBe("Buyziz, AI commerce platform | Ahammad Nafiz")
+    expect(title("engram")).toBe("Engram, persistent memory for AI agents | Ahammad Nafiz")
+  })
+
+  it("gives each project page structured data credited to him", () => {
+    for (const p of projects) {
+      const html = readFileSync(path.join(OUT, "work", p.slug, "index.html"), "utf8")
+      expect(html, p.slug).toMatch(/"@type":"Software(SourceCode|Application)"/)
+      expect(html, p.slug).toContain('"author":{"@id":"https://ahammadnafiz.com/#person"}')
+    }
+  })
 })
