@@ -5,9 +5,9 @@ export function Container({ children, className = "" }: { children: ReactNode; c
   return <div className={`mx-auto w-full max-w-[720px] px-5 sm:px-6 ${className}`}>{children}</div>
 }
 
-/** A sharp hairline across the column. */
+/** A sharp hairline that runs a little past the column and fades out at both ends. */
 export function Rule({ className = "" }: { className?: string }) {
-  return <hr className={`border-t border-border ${className}`} />
+  return <div aria-hidden className={`fade-rule ${className}`} />
 }
 
 /** A numbered section: a rule, then "01  Title", then the content. */

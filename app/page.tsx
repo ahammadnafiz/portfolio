@@ -1,6 +1,6 @@
 import { FileText, Github, Linkedin, Mail } from "lucide-react"
 import { BrandLink } from "@/components/brand-link"
-import { Container, Section } from "@/components/frame"
+import { Container, Rule, Section } from "@/components/frame"
 import { XIcon } from "@/components/icons"
 import Link from "next/link"
 import { PostList } from "@/components/post-list"
@@ -72,7 +72,8 @@ export default function Home() {
             <li className="text-muted-foreground">Next: a PhD in Europe, then a lab working on the frontier.</li>
           </ul>
 
-          <nav aria-label="Links" className="mt-8 grid grid-cols-5 divide-x border-y">
+          <Rule className="mt-8" />
+          <nav aria-label="Links" className="grid grid-cols-5 divide-x">
             {LINKS.map(({ label, href }) => {
               const { Icon, tint } = LINK_ICONS[label]
               const external = href.startsWith("http")
@@ -102,6 +103,7 @@ export default function Home() {
               )
             })}
           </nav>
+          <Rule />
 
           <Section
             id="work"
