@@ -26,6 +26,12 @@ describe("static build", () => {
     }
   })
 
+  it("has a /work/ page listing every project, also in the sitemap", () => {
+    const html = readFileSync(path.join(OUT, "work", "index.html"), "utf8")
+    for (const p of projects) expect(html, p.slug).toContain(`href="/work/${p.slug}/"`)
+    expect(readFileSync(path.join(OUT, "sitemap.xml"), "utf8")).toContain("https://ahammadnafiz.com/work/</loc>")
+  })
+
   it("gives every page a share preview image for Facebook, LinkedIn and X", () => {
     const pages = textFiles(OUT).filter((f) => f.endsWith(".html") && !f.endsWith("404.html"))
     const missing = pages.filter((f) => {

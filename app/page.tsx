@@ -104,10 +104,17 @@ export default function Home() {
             id="work"
             n="01"
             title="Work"
-            aside={<span className="text-xs text-muted-foreground">{projects.length} projects</span>}
+            aside={
+              <Link
+                href="/work/"
+                className="text-xs text-muted-foreground transition-colors duration-300 hover:text-foreground"
+              >
+                All {projects.length} projects →
+              </Link>
+            }
           >
             <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2">
-              {projects.map((p) => (
+              {projects.slice(0, 2).map((p) => (
                 <li key={p.slug}>
                   <ProjectCard project={p} />
                 </li>
