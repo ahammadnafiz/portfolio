@@ -44,7 +44,7 @@ export default function Home() {
             />
             <div className="min-w-0">
               <h1 className="font-serif text-[2.5rem] leading-[1.02] sm:text-[3.25rem]">{site.name}</h1>
-              <p className="mt-1.5 text-sm text-muted-foreground sm:text-base">{site.title}</p>
+              <p className="shimmer-text mt-1.5 text-sm text-muted-foreground sm:text-base">{site.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 {site.location} <span aria-hidden>·</span>{" "}
                 <span className="font-mono text-xs" title="Local time in Dhaka">
