@@ -4,7 +4,7 @@ import { Geist, Instrument_Serif, Noto_Sans_Bengali } from "next/font/google"
 import { Analytics } from "@/components/analytics"
 import { SCROLL_RESET_SCRIPT } from "@/components/scroll-reset"
 import { THEME_SCRIPT } from "@/components/theme-toggle"
-import { SITE_URL, site } from "@/lib/site"
+import { SHARE_IMAGE, SITE_URL, site } from "@/lib/site"
 import "./globals.css"
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
@@ -13,7 +13,6 @@ const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "-
 const bengali = Noto_Sans_Bengali({ subsets: ["bengali"], variable: "--font-bengali", display: "swap", preload: false })
 
 const TITLE = "Ahammad Nafiz, AI and machine learning engineer in Dhaka"
-const OG_IMAGE = `${SITE_URL}/og-image.png`
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: TITLE,
     description: site.description,
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
     creator: "@ahammadnafi_z",
     title: TITLE,
     description: site.description,
-    images: [OG_IMAGE],
+    images: [SHARE_IMAGE.url],
   },
   robots: { index: true, follow: true },
   icons: {
@@ -93,7 +92,7 @@ const JSON_LD = {
         "AI and machine learning engineer working on RAG systems, LLM agents, agent memory and LLM evaluation, moving toward mechanistic interpretability research. Data Science student at United International University.",
       url: `${SITE_URL}/`,
       mainEntityOfPage: { "@id": `${SITE_URL}/#profilepage` },
-      image: OG_IMAGE,
+      image: SHARE_IMAGE.url,
       email: "mailto:ahammadnafiz86@gmail.com",
       jobTitle: "Associate Product Engineer, DeepDive",
       nationality: { "@type": "Country", name: "Bangladesh" },

@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { Status } from "@/components/status"
 import { getNeighbours, getProject, projects } from "@/lib/projects"
-import { SITE_URL } from "@/lib/site"
+import { SHARE_IMAGE, SITE_URL } from "@/lib/site"
 
 export const dynamicParams = false
 
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description: project.summary,
     alternates: { canonical: `/work/${project.slug}/` },
-    openGraph: { title, description: project.summary, url: `/work/${project.slug}/` },
+    openGraph: { title, description: project.summary, url: `/work/${project.slug}/`, images: [SHARE_IMAGE] },
   }
 }
 

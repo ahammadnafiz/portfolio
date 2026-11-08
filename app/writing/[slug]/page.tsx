@@ -5,7 +5,7 @@ import { CodeCopy } from "@/components/code-copy"
 import { Container } from "@/components/frame"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
-import { SITE_URL } from "@/lib/site"
+import { SHARE_IMAGE, SITE_URL } from "@/lib/site"
 import { formatDate, getPost, getPosts, langOf, renderMarkdown } from "@/lib/writing"
 
 export const dynamicParams = false
@@ -25,7 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     keywords: post.tags,
     alternates: { canonical: url },
-    openGraph: { type: "article", title: post.title, description: post.description, url, publishedTime: post.date },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url,
+      publishedTime: post.date,
+      images: [SHARE_IMAGE],
+    },
   }
 }
 

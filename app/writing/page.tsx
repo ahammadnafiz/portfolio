@@ -3,6 +3,7 @@ import { Container } from "@/components/frame"
 import { PostList } from "@/components/post-list"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { SHARE_IMAGE } from "@/lib/site"
 import { getPosts } from "@/lib/writing"
 
 const DESCRIPTION =
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: "Writing",
   description: DESCRIPTION,
   alternates: { canonical: "/writing/" },
-  openGraph: { title: "Writing | Ahammad Nafiz", description: DESCRIPTION, url: "/writing/" },
+  openGraph: { title: "Writing | Ahammad Nafiz", description: DESCRIPTION, url: "/writing/", images: [SHARE_IMAGE] },
 }
 
 export default function WritingPage() {

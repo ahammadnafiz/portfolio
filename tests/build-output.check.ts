@@ -26,6 +26,16 @@ describe("static build", () => {
     }
   })
 
+  it("gives every page a share preview image for Facebook, LinkedIn and X", () => {
+    const pages = textFiles(OUT).filter((f) => f.endsWith(".html") && !f.endsWith("404.html"))
+    const missing = pages.filter((f) => {
+      const html = readFileSync(f, "utf8")
+      return !html.includes('property="og:image" content="https://ahammadnafiz.com/og-image.png"') ||
+        !html.includes('name="twitter:image" content="https://ahammadnafiz.com/og-image.png"')
+    })
+    expect(missing.map((f) => path.relative(OUT, f))).toEqual([])
+  })
+
   it("no longer points at the old GitHub Pages portfolio", () => {
     const offenders = textFiles(OUT).filter((f) => {
       const text = readFileSync(f, "utf8")

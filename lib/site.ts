@@ -1,5 +1,13 @@
 export const SITE_URL = "https://ahammadnafiz.com"
 
+/** The picture shown when a link to any page is shared (Facebook, LinkedIn, X, WhatsApp, Slack). */
+export const SHARE_IMAGE = {
+  url: `${SITE_URL}/og-image.png`,
+  width: 1200,
+  height: 630,
+  alt: "Ahammad Nafiz, AI and machine learning engineer in Dhaka",
+}
+
 export const site = {
   name: "Ahammad Nafiz",
   title: "Associate Product Engineer, DeepDive at Markopolo AI",
