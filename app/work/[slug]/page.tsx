@@ -55,10 +55,10 @@ export default async function ProjectPage({ params }: Props) {
       <main>
         <Container className="pt-4 sm:pt-6">
           <Link
-            href="/#work"
+            href="/"
             className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
           >
-            <span aria-hidden>←</span> All work
+            <span aria-hidden>←</span> Home
           </Link>
 
           <div className="mt-4">
