@@ -28,9 +28,10 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
       <p className="text-sm leading-relaxed text-foreground/85">{project.summary}</p>
-      <ul className="mt-auto flex flex-wrap gap-1.5 pt-1">
-        {project.stack.slice(0, 4).map((t) => (
-          <li key={t} className=" border px-2 py-0.5 text-[11px] text-muted-foreground">
+      {/* One line of tags: the first three, never wrapping (the full stack is on the project page). */}
+      <ul className="mt-auto flex gap-1.5 overflow-hidden pt-1">
+        {project.stack.slice(0, 3).map((t) => (
+          <li key={t} className="shrink-0 whitespace-nowrap border px-2 py-0.5 text-[11px] text-muted-foreground">
             {t}
           </li>
         ))}
