@@ -2,7 +2,7 @@ export const SITE_URL = "https://ahammadnafiz.com"
 
 export const site = {
   name: "Ahammad Nafiz",
-  role: "Machine learning engineer",
+  title: "Associate Product Engineer, DeepDive at Markopolo AI",
   location: "Dhaka, Bangladesh",
   email: "ahammadnafiz86@gmail.com",
   cv: "/Ahammad-Nafiz-CV.pdf",

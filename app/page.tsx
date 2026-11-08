@@ -5,6 +5,7 @@ import { ProjectCard } from "@/components/project-card"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { DhakaClock } from "@/components/dhaka-clock"
+import { LearningBanner } from "@/components/learning-banner"
 import { projects } from "@/lib/projects"
 import { experience, recognition, site } from "@/lib/site"
 
@@ -23,14 +24,7 @@ export default function Home() {
       <main className="enter">
         {/* Banner + profile */}
         <Band className="p-2 sm:p-2.5">
-          <img
-            src="/covers/banner.svg"
-            alt=""
-            width={1520}
-            height={360}
-            fetchPriority="high"
-            className="h-28 w-full rounded-lg object-cover sm:h-44"
-          />
+          <LearningBanner />
         </Band>
         <Band className="flex items-center gap-4 px-5 py-5 sm:gap-6 sm:px-6">
           <img
@@ -47,7 +41,7 @@ export default function Home() {
             </p>
             <h1 className="mt-1 font-serif text-[2.4rem] leading-[1.05] sm:text-5xl">{site.name}</h1>
             <p className="mt-1 text-sm text-muted-foreground sm:text-base">
-              {site.role} · {site.location}
+              {site.title} · {site.location}
               <span className="sm:hidden">
                 {" "}
                 · <DhakaClock />
