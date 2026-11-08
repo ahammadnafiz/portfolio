@@ -1,22 +1,17 @@
 import Link from "next/link"
 import type { Project } from "@/lib/projects"
+import { ProjectShot } from "./project-shot"
 import { Status } from "./status"
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/work/${project.slug}`} className="group flex h-full flex-col gap-3">
-      <div className="overflow-hidden bg-card">
-        {/* On hover the cover drifts in slowly and its colours warm a little. */}
-        <img
-          src={`/covers/${project.slug}.svg`}
-          alt=""
-          width={800}
-          height={500}
-          loading="lazy"
-          decoding="async"
-          className="aspect-[16/10] w-full object-cover transition-[transform,filter] duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.045] group-hover:-rotate-[0.6deg] group-hover:saturate-[1.18] motion-reduce:transition-none motion-reduce:group-hover:transform-none"
-        />
-      </div>
+      {/* On hover the screenshot drifts in slowly. */}
+      <ProjectShot
+        slug={project.slug}
+        name={project.name}
+        className="transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:transform-none"
+      />
       <div>
         <h3 className="font-medium">
           {project.name}

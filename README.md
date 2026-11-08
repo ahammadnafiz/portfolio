@@ -17,10 +17,10 @@ pnpm typecheck
 |---|---|
 | Name, links, experience, recognition | `lib/site.ts` |
 | Projects (home cards and `/work/<slug>` pages) | `lib/projects.ts` |
-| Project cover art (halftone dots, one colour pair per project) | `lib/covers.ts`, served from `app/covers/[file]/route.ts` |
+| Project screenshots (1600×1000 WebP, 16:10) | `public/projects/<slug>.webp` |
 | Colours for light and dark (follows the system setting) | `app/globals.css` |
 
-To add a project: add an entry to `lib/projects.ts` and a cover with the same slug in `lib/covers.ts`.
+To add a project: add an entry to `lib/projects.ts` and a screenshot with the same slug at `public/projects/<slug>.webp`.
 
 ## Write a blog post
 

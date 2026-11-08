@@ -19,10 +19,10 @@ describe("static build", () => {
     expect(existsSync(path.join(OUT, "index.html"))).toBe(true)
   })
 
-  it("has a page and a cover for every project", () => {
+  it("has a page and a screenshot for every project", () => {
     for (const p of projects) {
       expect(existsSync(path.join(OUT, "work", p.slug, "index.html")), p.slug).toBe(true)
-      expect(existsSync(path.join(OUT, "covers", `${p.slug}.svg`)), p.slug).toBe(true)
+      expect(existsSync(path.join(OUT, "projects", `${p.slug}.webp`)), p.slug).toBe(true)
     }
   })
 

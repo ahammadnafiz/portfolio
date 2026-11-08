@@ -1,7 +1,7 @@
-import { FileText, Github, Linkedin, Mail } from "lucide-react"
+import { FileText } from "lucide-react"
 import { BrandLink } from "@/components/brand-link"
 import { Container, Rule, Section } from "@/components/frame"
-import { XIcon } from "@/components/icons"
+import { GitHubLogo, GmailLogo, LinkedInLogo, XLogo } from "@/components/icons"
 import Link from "next/link"
 import { PostList } from "@/components/post-list"
 import { ProjectCard } from "@/components/project-card"
@@ -12,13 +12,13 @@ import { projects } from "@/lib/projects"
 import { experience, recognition, site } from "@/lib/site"
 import { getPosts } from "@/lib/writing"
 
-/** Each icon tile gets its own colour; the text stays plain. */
-const LINK_ICONS: Record<string, { Icon: typeof Github; tint: string }> = {
-  GitHub: { Icon: Github, tint: "var(--hl-violet)" },
-  LinkedIn: { Icon: Linkedin, tint: "var(--hl-blue)" },
-  X: { Icon: XIcon as typeof Github, tint: "var(--foreground)" },
-  Email: { Icon: Mail, tint: "var(--hl-orange)" },
-  CV: { Icon: FileText, tint: "var(--hl-green)" },
+/** Each platform's own logo. The CV is a file, not a platform, so it gets a plain document icon. */
+const LINK_ICONS: Record<string, (p: { className?: string }) => React.JSX.Element> = {
+  GitHub: GitHubLogo,
+  LinkedIn: LinkedInLogo,
+  X: XLogo,
+  Email: GmailLogo,
+  CV: (p) => <FileText {...p} strokeWidth={1.75} />,
 }
 
 const LINKS = [
@@ -75,7 +75,7 @@ export default function Home() {
           <Rule className="mt-8" />
           <nav aria-label="Links" className="grid grid-cols-5 divide-x">
             {LINKS.map(({ label, href }) => {
-              const { Icon, tint } = LINK_ICONS[label]
+              const Icon = LINK_ICONS[label]
               const external = href.startsWith("http")
               return (
                 <a
@@ -86,12 +86,7 @@ export default function Home() {
                   download={label === "CV" ? "Ahammad-Nafiz-CV.pdf" : undefined}
                   className="group flex flex-col items-center justify-center gap-1.5 whitespace-nowrap py-3 text-[13px] sm:flex-row sm:gap-2 sm:py-4 sm:text-sm"
                 >
-                  <span
-                    style={{ color: `hsl(${tint})`, backgroundColor: `hsl(${tint} / 0.14)` }}
-                    className="grid h-[22px] w-[22px] place-items-center sm:h-7 sm:w-7 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
-                  >
-                    <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                  </span>
+                  <Icon className="h-4 w-4 shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 sm:h-[18px] sm:w-[18px]" />
                   {label}
                   <span
                     aria-hidden

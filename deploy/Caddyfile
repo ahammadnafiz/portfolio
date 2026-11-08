@@ -14,9 +14,9 @@ ahammadnafiz.com {
 	# Hashed build assets never change: cache for a year. Pages revalidate on every visit.
 	@hashed path /_next/static/*
 	header @hashed Cache-Control "public, max-age=31536000, immutable"
-	@assets path /covers/* /writing/images/* *.png *.jpg *.webp *.ico *.pdf
+	@assets path /writing/images/* *.png *.jpg *.webp *.ico *.pdf
 	header @assets Cache-Control "public, max-age=86400"
-	@pages not path /_next/static/* /covers/* /writing/images/* *.png *.jpg *.webp *.ico *.pdf
+	@pages not path /_next/static/* /writing/images/* *.png *.jpg *.webp *.ico *.pdf
 	header @pages Cache-Control "public, max-age=0, must-revalidate"
 
 	file_server

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Container, Section } from "@/components/frame"
+import { ProjectShot } from "@/components/project-shot"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { Status } from "@/components/status"
@@ -42,7 +43,7 @@ export default async function ProjectPage({ params }: Props) {
     name: project.name,
     description: project.summary,
     url,
-    image: `${SITE_URL}/covers/${project.slug}.svg`,
+    image: `${SITE_URL}/projects/${project.slug}.webp`,
     author: { "@id": `${SITE_URL}/#person` },
     keywords: project.stack.join(", "),
     sameAs: project.links.map((l) => l.href),
@@ -61,15 +62,8 @@ export default async function ProjectPage({ params }: Props) {
             <span aria-hidden>←</span> All work
           </Link>
 
-          <div className="mt-4 overflow-hidden bg-card">
-            <img
-              src={`/covers/${project.slug}.svg`}
-              alt=""
-              width={800}
-              height={500}
-              fetchPriority="high"
-              className="aspect-[16/10] w-full object-cover"
-            />
+          <div className="mt-4">
+            <ProjectShot slug={project.slug} name={project.name} eager />
           </div>
 
           <div className="mt-8">
