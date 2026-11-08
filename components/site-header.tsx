@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Container } from "./frame"
+import { Container, Rule } from "./frame"
 import { ThemeToggle } from "./theme-toggle"
 
 const NAV: { label: string; href: string; tiny?: string }[] = [
@@ -25,6 +25,9 @@ export function SiteHeader() {
           ))}
           <ThemeToggle />
         </nav>
+      </Container>
+      <Container>
+        <Rule />
       </Container>
     </header>
   )
