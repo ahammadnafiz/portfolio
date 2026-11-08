@@ -25,7 +25,7 @@ To add a project: add an entry to `lib/projects.ts` and a cover with the same sl
 ## Publish
 
 ```bash
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX ./deploy/deploy.sh
+./deploy/deploy.sh
 ```
 
 This runs the tests, builds `out/`, checks the build (`pnpm test:build`), copies it to `~/sites/portfolio/site` on the `vps` SSH host, and starts or reloads the Caddy container in `deploy/compose.yml`. Caddy gets the HTTPS certificate for ahammadnafiz.com itself, so the domain's A record must point at the VPS (147.93.170.52).

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Build the site on this machine and publish it to the VPS.
-#   NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX ./deploy/deploy.sh
+#   ./deploy/deploy.sh   (GA ID comes from .env.production)
 # First run also copies the Caddy config and starts the web server.
 set -euo pipefail
 
@@ -8,14 +8,14 @@ HOST="${DEPLOY_HOST:-vps}"
 DIR="${DEPLOY_DIR:-~/sites/portfolio}"
 cd "$(dirname "$0")/.."
 
-if [[ -z "${NEXT_PUBLIC_GA_ID:-}" ]]; then
-  echo "NEXT_PUBLIC_GA_ID is not set; the site would ship without analytics." >&2
-  exit 1
-fi
-
 pnpm test
 pnpm build
 pnpm test:build
+
+if ! grep -q "googletagmanager.com/gtag/js?id=G-" out/index.html; then
+  echo "The build has no Google Analytics tag; check NEXT_PUBLIC_GA_ID in .env.production." >&2
+  exit 1
+fi
 
 ssh "$HOST" "mkdir -p $DIR/site"
 rsync -az deploy/Caddyfile deploy/compose.yml "$HOST:$DIR/"

@@ -27,3 +27,4 @@ yarn-error.log*
 next-env.d.ts
 # local session state
 /.remember/
+!.env.production
