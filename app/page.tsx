@@ -17,13 +17,13 @@ const LINK_ICONS: Record<string, (p: { className?: string }) => React.JSX.Elemen
   GitHub: GitHubLogo,
   LinkedIn: LinkedInLogo,
   X: XLogo,
-  Email: GmailLogo,
+  Gmail: GmailLogo,
   CV: (p) => <FileText {...p} strokeWidth={1.75} />,
 }
 
 const LINKS = [
   ...site.socials,
-  { label: "Email", href: `mailto:${site.email}` },
+  { label: "Gmail", href: `mailto:${site.email}` },
   { label: "CV", href: site.cv },
 ]
 
@@ -87,7 +87,8 @@ export default function Home() {
                   className="group flex flex-col items-center justify-center gap-1.5 whitespace-nowrap py-3 text-[13px] sm:flex-row sm:gap-2 sm:py-4 sm:text-sm"
                 >
                   <Icon className="h-4 w-4 shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 sm:h-[18px] sm:w-[18px]" />
-                  {label}
+                  {/* The X logo is the name, so the word is only for screen readers. */}
+                  {label === "X" ? <span className="sr-only">X</span> : label}
                   <span
                     aria-hidden
                     className="hidden text-muted-foreground transition-[transform,color] sm:inline duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:translate-x-px group-hover:text-foreground"
