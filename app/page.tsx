@@ -61,7 +61,7 @@ export default function Home() {
               platform, plus an AEO visibility tool and an AI data analysis agent.
             </li>
             <li>
-              Before that I owned the eval service at <span className="hl hl-orange">AskTuring.ai</span> and built the
+              Before that I owned the eval service at <BrandLink brand="askturing" /> and built the
               retrieval and benchmarks for a production <span className="hl hl-violet">RAG system</span>.
             </li>
             <li>
@@ -140,7 +140,7 @@ export default function Home() {
                 <li key={e.role} className="py-4 first:pt-0">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="font-medium">
-                      {e.brand ? <BrandLink brand={e.brand} chip={false} /> : e.org}
+                      <BrandLink brand={e.brand} chip={false} />
                       {e.current && (
                         <span className="hl hl-green ml-2 align-middle text-[10px] font-medium uppercase tracking-wide">
                           Now

@@ -19,6 +19,8 @@ export const site = {
 export const brands = {
   markopolo: { name: "Markopolo AI", href: "https://markopolo.ai/", logo: "/logos/markopolo.png" },
   deepdive: { name: "DeepDive", href: "https://www.deepdiveplatform.com/", logo: "/logos/deepdive.png" },
+  askturing: { name: "AskTuring.ai", href: "https://www.askturing.ai/", logo: "/logos/askturing.png" },
+  uiu: { name: "United International University", href: "https://www.uiu.ac.bd/", logo: "/logos/uiu.png" },
 }
 
 export const experience = [
@@ -32,6 +34,7 @@ export const experience = [
   },
   {
     org: "AskTuring.ai",
+    brand: "askturing" as const,
     role: "Jr. Software Engineer",
     date: "Sep 2025 – May 2026",
     current: false,
@@ -39,6 +42,7 @@ export const experience = [
   },
   {
     org: "United International University",
+    brand: "uiu" as const,
     role: "Research Assistant",
     date: "Dec 2025 – Feb 2026",
     current: false,
