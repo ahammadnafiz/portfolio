@@ -4,7 +4,7 @@ ahammadnafiz.com {
 	encode zstd gzip
 
 	header {
-		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		Strict-Transport-Security "max-age=31536000"
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "strict-origin-when-cross-origin"
 		X-Frame-Options "DENY"
@@ -21,7 +21,7 @@ ahammadnafiz.com {
 
 	file_server
 
-	handle_errors {
+	handle_errors 404 {
 		rewrite * /404.html
 		file_server
 	}

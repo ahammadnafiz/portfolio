@@ -85,7 +85,7 @@ export const projects: Project[] = [
       "Plain-English questions become pandas analysis and Plotly charts",
       "Answers come with a confidence score",
       "Conversation memory for follow-up questions",
-      "Live on Streamlit, 22 stars on GitHub",
+      "Live on Streamlit",
     ],
     stack: ["Python", "LangChain", "Gemini", "pandas", "Plotly", "Streamlit"],
     links: [

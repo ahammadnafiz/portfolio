@@ -8,10 +8,10 @@ import { DhakaClock } from "@/components/dhaka-clock"
 import { projects } from "@/lib/projects"
 import { experience, recognition, site } from "@/lib/site"
 
+const SOCIAL_ICONS = { GitHub: Github, LinkedIn: Linkedin, X: XIcon }
+
 const LINKS = [
-  { label: "GitHub", href: site.socials[0].href, Icon: Github },
-  { label: "LinkedIn", href: site.socials[1].href, Icon: Linkedin },
-  { label: "X", href: site.socials[2].href, Icon: XIcon },
+  ...site.socials.map((s) => ({ ...s, Icon: SOCIAL_ICONS[s.label as keyof typeof SOCIAL_ICONS] })),
   { label: "Email", href: `mailto:${site.email}`, Icon: Mail },
   { label: "CV", href: site.cv, Icon: FileText },
 ]
@@ -61,7 +61,7 @@ export default function Home() {
         <Section id="about" title="About">
           <ul className="list-disc space-y-3 py-5 pl-10 pr-5 leading-relaxed marker:text-muted-foreground sm:pl-11 sm:pr-6 sm:text-[17px]">
             <li>
-              I&apos;m an ML engineer at <span className="hl hl-blue">Markopolo AI</span>, working on DeepDive
+              I&apos;m an Associate Product Engineer at <span className="hl hl-blue">Markopolo AI</span>, working on DeepDive
               across a TypeScript monorepo and the Python pipeline under it.
             </li>
             <li>
