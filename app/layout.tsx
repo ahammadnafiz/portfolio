@@ -6,8 +6,8 @@ import { THEME_SCRIPT } from "@/components/theme-toggle"
 import { SITE_URL, site } from "@/lib/site"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "optional" })
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "optional" })
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "swap" })
 
 const TITLE = "Ahammad Nafiz, AI and machine learning engineer in Dhaka"
 const OG_IMAGE = `${SITE_URL}/og-image.png`
