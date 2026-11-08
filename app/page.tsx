@@ -52,7 +52,7 @@ export default function Home() {
           <ul className="mt-8 space-y-3 leading-relaxed sm:text-[17px]">
             <li>
               I&apos;m an AI engineer in Dhaka, working as an Associate Product Engineer at{" "}
-              <span className="hl hl-blue">Markopolo AI</span>. I build DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent.
+              <span className="hl hl-blue">Markopolo AI</span>. I work on DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent.
             </li>
             <li>
               Before that I owned the eval service at <span className="hl hl-orange">AskTuring.ai</span> and built the
