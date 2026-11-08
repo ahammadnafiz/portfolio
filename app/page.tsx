@@ -77,7 +77,7 @@ export default function Home() {
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
                   download={label === "CV" ? "Ahammad-Nafiz-CV.pdf" : undefined}
-                  className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg py-1 pl-0.5 pr-1 text-[13px] transition-colors sm:gap-2 sm:pr-2.5 sm:text-sm duration-300 hover:bg-secondary"
+                  className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg py-1 pl-0.5 pr-1 text-[13px] sm:gap-2 sm:pr-2 sm:text-sm"
                 >
                   <span
                     style={{ color: `hsl(${tint})`, backgroundColor: `hsl(${tint} / 0.14)` }}
