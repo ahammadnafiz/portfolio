@@ -40,7 +40,7 @@ export default function Home() {
               alt="Portrait of Ahammad Nafiz"
               width={224}
               height={224}
-              className="h-20 w-20 shrink-0 object-cover ring-1 ring-border sm:h-28 sm:w-28"
+              className="h-20 w-20 shrink-0 border bg-card object-cover p-1 sm:h-28 sm:w-28"
             />
             <div className="min-w-0">
               <h1 className="font-serif text-[2.5rem] leading-[1.02] sm:text-[3.25rem]">{site.name}</h1>
