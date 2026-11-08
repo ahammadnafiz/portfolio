@@ -69,7 +69,6 @@ export default function Home() {
               that cites its sources. Lately I keep drifting toward{" "}
               <span className="hl hl-green">mechanistic interpretability</span>.
             </li>
-            <li className="text-muted-foreground">Next: a PhD in Europe, then a lab working on the frontier.</li>
           </ul>
 
           <Rule className="mt-8" />
