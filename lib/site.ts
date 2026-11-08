@@ -20,8 +20,9 @@ export const brands = {
   markopolo: { name: "Markopolo AI", href: "https://markopolo.ai/", logo: "/logos/markopolo.png" },
   deepdive: { name: "DeepDive", href: "https://www.deepdiveplatform.com/", logo: "/logos/deepdive.png" },
   askturing: { name: "AskTuring.ai", href: "https://www.askturing.ai/", logo: "/logos/askturing.png" },
-  uiu: { name: "United International University", href: "https://www.uiu.ac.bd/", logo: "/logos/uiu.png" },
-}
+  // Transparent emblem: shown without the tile border.
+  uiu: { name: "United International University", href: "https://www.uiu.ac.bd/", logo: "/logos/uiu-emblem.png", bare: true },
+} satisfies Record<string, { name: string; href: string; logo: string; bare?: boolean }>
 
 export const experience = [
   {
