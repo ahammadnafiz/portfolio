@@ -72,7 +72,7 @@ export default function Home() {
             <li className="text-muted-foreground">Next: a PhD in Europe, then a lab working on the frontier.</li>
           </ul>
 
-          <nav aria-label="Links" className="mt-7 flex flex-wrap justify-between gap-x-2 gap-y-1">
+          <nav aria-label="Links" className="mt-8 grid grid-cols-5 divide-x border-y">
             {LINKS.map(({ label, href }) => {
               const { Icon, tint } = LINK_ICONS[label]
               const external = href.startsWith("http")
@@ -83,7 +83,7 @@ export default function Home() {
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
                   download={label === "CV" ? "Ahammad-Nafiz-CV.pdf" : undefined}
-                  className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg py-1 text-[13px] sm:gap-2 sm:text-sm"
+                  className="group flex flex-col items-center justify-center gap-1.5 whitespace-nowrap py-3 text-[13px] sm:flex-row sm:gap-2 sm:py-4 sm:text-sm"
                 >
                   <span
                     style={{ color: `hsl(${tint})`, backgroundColor: `hsl(${tint} / 0.14)` }}
