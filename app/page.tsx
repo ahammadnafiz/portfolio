@@ -1,66 +1,65 @@
 import { FileText, Github, Linkedin, Mail } from "lucide-react"
-import { Band, Gap, Section } from "@/components/frame"
+import { Container, Section } from "@/components/frame"
 import { XIcon } from "@/components/icons"
 import { ProjectCard } from "@/components/project-card"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { DhakaClock } from "@/components/dhaka-clock"
-import { LearningBanner } from "@/components/learning-banner"
+import { AttentionBanner } from "@/components/attention-banner"
 import { projects } from "@/lib/projects"
 import { experience, recognition, site } from "@/lib/site"
 
-const SOCIAL_ICONS = { GitHub: Github, LinkedIn: Linkedin, X: XIcon }
+/** Each icon tile gets its own colour; the text stays plain. */
+const LINK_ICONS: Record<string, { Icon: typeof Github; tint: string }> = {
+  GitHub: { Icon: Github, tint: "var(--hl-violet)" },
+  LinkedIn: { Icon: Linkedin, tint: "var(--hl-blue)" },
+  X: { Icon: XIcon as typeof Github, tint: "var(--foreground)" },
+  Email: { Icon: Mail, tint: "var(--hl-orange)" },
+  CV: { Icon: FileText, tint: "var(--hl-green)" },
+}
 
 const LINKS = [
-  ...site.socials.map((s) => ({ ...s, Icon: SOCIAL_ICONS[s.label as keyof typeof SOCIAL_ICONS] })),
-  { label: "Email", href: `mailto:${site.email}`, Icon: Mail },
-  { label: "CV", href: site.cv, Icon: FileText },
+  ...site.socials,
+  { label: "Email", href: `mailto:${site.email}` },
+  { label: "CV", href: site.cv },
 ]
 
 export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main className="enter">
-        {/* Banner + profile */}
-        <Band className="p-2 sm:p-2.5">
-          <LearningBanner />
-        </Band>
-        <Band className="flex items-center gap-4 px-5 py-5 sm:gap-6 sm:px-6">
-          <img
-            src="/avatar.jpg"
-            alt="Ahammad Nafiz"
-            width={320}
-            height={320}
-            className="h-20 w-20 shrink-0 rounded-xl border-2 object-cover grayscale sm:h-28 sm:w-28"
-          />
-          <div className="min-w-0">
-            <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--live))]" />
-              Open to ML / AI roles and research
-            </p>
-            <h1 className="mt-1 font-serif text-[2.4rem] leading-[1.05] sm:text-5xl">{site.name}</h1>
-            <p className="mt-1 text-sm text-muted-foreground sm:text-base">
-              {site.title} · {site.location}
-              <span className="sm:hidden">
-                {" "}
-                · <DhakaClock />
-              </span>
-            </p>
+      <main>
+        <Container className="pt-2 sm:pt-4">
+          <AttentionBanner />
+
+          <div className="mt-10 flex items-center gap-5 sm:mt-14 sm:gap-7">
+            <img
+              src="/avatar.jpg"
+              alt="Ahammad Nafiz"
+              width={336}
+              height={336}
+              className="h-20 w-20 shrink-0 rounded-xl object-cover ring-1 ring-border sm:h-28 sm:w-28"
+            />
+            <div className="min-w-0">
+              <h1 className="font-serif text-[2.5rem] leading-[1.02] sm:text-[3.25rem]">{site.name}</h1>
+              <p className="mt-1.5 text-sm text-muted-foreground sm:text-base">
+                {site.title} · {site.location}
+                <span className="sm:hidden">
+                  {" "}
+                  · <DhakaClock />
+                </span>
+              </p>
+            </div>
           </div>
-        </Band>
 
-        <Gap />
-
-        <Section id="about" title="About">
-          <ul className="list-disc space-y-3 py-5 pl-10 pr-5 leading-relaxed marker:text-muted-foreground sm:pl-11 sm:pr-6 sm:text-[17px]">
+          <ul className="mt-8 space-y-3 leading-relaxed sm:text-[17px]">
             <li>
-              I&apos;m an Associate Product Engineer at <span className="hl hl-blue">Markopolo AI</span>, working on DeepDive
-              across a TypeScript monorepo and the Python pipeline under it.
+              I&apos;m an Associate Product Engineer at <span className="hl hl-blue">Markopolo AI</span>, building
+              DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent.
             </li>
             <li>
-              Before that I owned the eval service at <span className="hl hl-orange">AskTuring.ai</span> and built
-              the retrieval and benchmarks for a production <span className="hl hl-violet">RAG system</span>.
+              Before that I owned the eval service at <span className="hl hl-orange">AskTuring.ai</span> and built the
+              retrieval and benchmarks for a production <span className="hl hl-violet">RAG system</span>.
             </li>
             <li>
               I learn by rebuilding things: an autograd engine in NumPy, a memory layer for agents, a research agent
@@ -69,98 +68,96 @@ export default function Home() {
             </li>
             <li className="text-muted-foreground">Next: a PhD in Europe, then a lab working on the frontier.</li>
           </ul>
-        </Section>
 
-        <Band className="grid grid-cols-5">
-          {LINKS.map(({ label, href, Icon }) => {
-            const external = href.startsWith("http")
-            return (
-              <a
-                key={label}
-                href={href}
-                target={external ? "_blank" : undefined}
-                rel={external ? "noopener noreferrer" : undefined}
-                download={label === "CV" ? "Ahammad-Nafiz-CV.pdf" : undefined}
-                className="group flex items-center justify-center gap-2 border-dashed px-2 py-3 text-sm transition-colors hover:bg-card sm:justify-start sm:px-4 [&:not(:last-child)]:border-r"
-              >
-                <span className="grid h-8 w-8 place-items-center rounded-md border bg-card">
-                  <Icon className="h-4 w-4" />
-                </span>
-                <span className="hidden sm:inline">{label}</span>
-                <span className="sr-only sm:hidden">{label}</span>
-              </a>
-            )
-          })}
-        </Band>
+          <nav aria-label="Links" className="-ml-1 mt-7 flex flex-wrap gap-x-1 gap-y-1">
+            {LINKS.map(({ label, href }) => {
+              const { Icon, tint } = LINK_ICONS[label]
+              const external = href.startsWith("http")
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  download={label === "CV" ? "Ahammad-Nafiz-CV.pdf" : undefined}
+                  className="group inline-flex items-center gap-2 rounded-lg py-1 pl-1 pr-2.5 text-sm transition-colors duration-300 hover:bg-secondary"
+                >
+                  <span
+                    style={{ color: `hsl(${tint})`, backgroundColor: `hsl(${tint} / 0.14)` }}
+                    className="grid h-7 w-7 place-items-center rounded-md transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                  </span>
+                  {label}
+                  <span
+                    aria-hidden
+                    className="text-muted-foreground transition-[transform,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:translate-x-px group-hover:text-foreground"
+                  >
+                    {label === "CV" ? "↓" : "↗"}
+                  </span>
+                </a>
+              )
+            })}
+          </nav>
 
-        <Gap />
+          <Section
+            id="work"
+            n="01"
+            title="Work"
+            aside={<span className="text-xs text-muted-foreground">{projects.length} projects</span>}
+          >
+            <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2">
+              {projects.map((p) => (
+                <li key={p.slug}>
+                  <ProjectCard project={p} />
+                </li>
+              ))}
+            </ul>
+          </Section>
 
-        <Section id="work" title="Work" aside={<span className="text-xs text-muted-foreground">{projects.length} projects</span>}>
-          <ul className="grid sm:grid-cols-2">
-            {projects.map((p, i) => (
-              <li
-                key={p.slug}
-                className={`border-dashed ${i > 0 ? "border-t" : ""} ${i === 1 ? "sm:border-t-0" : ""} ${i % 2 === 0 ? "sm:border-r" : ""}`}
-              >
-                <ProjectCard project={p} />
-              </li>
-            ))}
-          </ul>
-        </Section>
+          <Section id="experience" n="02" title="Experience">
+            <ul className="divide-y">
+              {experience.map((e) => (
+                <li key={e.role} className="py-4 first:pt-0">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 className="font-medium">
+                      {e.org}
+                      {e.current && (
+                        <span className="hl hl-green ml-2 align-middle text-[10px] font-medium uppercase tracking-wide">
+                          Now
+                        </span>
+                      )}
+                    </h3>
+                    <span className="font-mono text-xs tabular-nums text-muted-foreground">{e.date}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{e.role}</p>
+                  {e.note && <p className="mt-2 max-w-[60ch] text-sm leading-relaxed text-foreground/85">{e.note}</p>}
+                </li>
+              ))}
+            </ul>
+          </Section>
 
-        <Gap />
+          <Section id="recognition" n="03" title="Recognition">
+            <ul className="divide-y">
+              {recognition.map((r) => (
+                <li key={r.title} className="flex items-baseline justify-between gap-4 py-3 first:pt-0">
+                  <div>
+                    <p className="text-sm font-medium">{r.title}</p>
+                    <p className="text-sm text-muted-foreground">{r.note}</p>
+                  </div>
+                  <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">{r.date}</span>
+                </li>
+              ))}
+            </ul>
+          </Section>
 
-        <Section id="experience" title="Experience">
-          <ul>
-            {experience.map((e, i) => (
-              <li key={e.role} className={`px-5 py-4 sm:px-6 ${i > 0 ? "border-t border-dashed" : ""}`}>
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="font-medium">
-                    {e.org}
-                    {e.current && (
-                      <span className="ml-2 rounded px-1.5 py-0.5 align-middle text-[10px] font-medium uppercase tracking-wide hl hl-green">
-                        Now
-                      </span>
-                    )}
-                  </h3>
-                  <span className="text-xs tabular-nums text-muted-foreground">{e.date}</span>
-                </div>
-                <p className="text-sm text-muted-foreground">{e.role}</p>
-                {e.note && <p className="mt-2 max-w-[60ch] text-sm leading-relaxed text-foreground/85">{e.note}</p>}
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        <Gap />
-
-        <Section id="recognition" title="Recognition">
-          <ul>
-            {recognition.map((r, i) => (
-              <li
-                key={r.title}
-                className={`flex items-baseline justify-between gap-4 px-5 py-3 sm:px-6 ${i > 0 ? "border-t border-dashed" : ""}`}
-              >
-                <div>
-                  <p className="text-sm font-medium">{r.title}</p>
-                  <p className="text-sm text-muted-foreground">{r.note}</p>
-                </div>
-                <span className="shrink-0 text-xs tabular-nums text-muted-foreground">{r.date}</span>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        <Gap />
-
-        <Section id="contact" title="Contact">
-          <div className="px-5 py-8 sm:px-6 sm:py-10">
+          <Section id="contact" n="04" title="Contact">
             <p className="max-w-[46ch] leading-relaxed text-muted-foreground">
               Hiring for ML or AI work, want to talk research, or have a good problem? My inbox is open.
             </p>
             <a
               href={`mailto:${site.email}`}
-              className="mt-4 inline-block break-all font-serif text-[1.7rem] leading-tight underline decoration-border decoration-1 underline-offset-[6px] transition-colors hover:decoration-foreground sm:text-[2.4rem]"
+              className="mt-4 inline-block break-all font-serif text-[1.8rem] leading-tight underline decoration-border decoration-1 underline-offset-[6px] transition-colors duration-500 hover:decoration-foreground sm:text-[2.5rem]"
             >
               {site.email}
             </a>
@@ -168,15 +165,13 @@ export default function Home() {
               <a
                 href={site.cv}
                 download="Ahammad-Nafiz-CV.pdf"
-                className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
+                className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity duration-300 hover:opacity-85"
               >
                 Download CV <span aria-hidden>↓</span>
               </a>
             </div>
-          </div>
-        </Section>
-
-        <Gap />
+          </Section>
+        </Container>
       </main>
       <SiteFooter />
     </>

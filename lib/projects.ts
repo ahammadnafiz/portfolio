@@ -2,7 +2,7 @@ export type Project = {
   slug: string
   name: string
   kind: string
-  status: "Open source" | "Live" | "In development"
+  status: "Open source" | "Live" | "In development" | "Contributor"
   /** One or two sentences for the home page card. */
   summary: string
   /** Opening paragraph on the project page. */
@@ -13,6 +13,41 @@ export type Project = {
 }
 
 export const projects: Project[] = [
+  {
+    slug: "atlas",
+    name: "Atlas",
+    kind: "Source control for coding agents",
+    status: "Contributor",
+    summary:
+      "Core contributor to an open-source agentic IDE (Rust, Tauri, React, 9.4k+ stars) that links commits to LLM agent sessions.",
+    intro:
+      "Atlas is an agentic IDE that treats an AI coding session like part of version control: every commit is linked to the agent session that produced it. I'm a core contributor.",
+    highlights: [
+      "Open-source agentic IDE with 9.4k+ stars on GitHub",
+      "Links every commit to the LLM agent session that wrote it",
+      "Built Team Timeline and Org Agent",
+      "Built Atlas Memory, a multi-agent memory layer with HNSW vector search",
+    ],
+    stack: ["Rust", "Tauri", "React", "HNSW", "LLM agents"],
+    links: [{ label: "GitHub", href: "https://github.com/tryatlas/atlas" }],
+  },
+  {
+    slug: "buyziz",
+    name: "Buyziz",
+    kind: "AI commerce platform",
+    status: "Live",
+    summary:
+      "A multi-tenant e-commerce SaaS. I built the AI sales agent and the store builder, and led product engineering.",
+    intro:
+      "Buyziz lets a shop owner set up an online store and put an AI sales agent in front of it. The agent talks to customers in Bangla or English, looks at the images they send, and calls tools to find products and take orders.",
+    highlights: [
+      "AI sales agent: multimodal, Bangla and English, with tool calling",
+      "Built the store builder",
+      "Led product engineering for the multi-tenant SaaS",
+    ],
+    stack: ["LLM agents", "Tool calling", "Multimodal", "Multi-tenant SaaS"],
+    links: [{ label: "Website", href: "https://buyziz.com" }],
+  },
   {
     slug: "fizzlabai",
     name: "fizzlabai",
@@ -45,7 +80,7 @@ export const projects: Project[] = [
       "90.8% on LongMemEval-S (500 questions), 94.1% on LoCoMo-10 (1,540) and 79.7% on BEAM 1M (700)",
       "Retrieval finds the gold session for all 470 answerable LongMemEval questions",
       "No LLM calls at ingest: embeddings run on-device with all-MiniLM-L6-v2",
-      "On BEAM's 1M-token conversations it sends 17× less context than the full history",
+      "Cuts LLM context cost by up to 15× while holding over 90% accuracy on LongMemEval and LoCoMo",
       "Hybrid search with BM25, vectors and reciprocal rank fusion",
     ],
     stack: ["Python", "PostgreSQL", "pgvector", "BM25", "RRF", "Graph traversal"],
@@ -71,44 +106,6 @@ export const projects: Project[] = [
     ],
     stack: ["Python", "FastAPI", "FAISS", "Gemini", "Next.js"],
     links: [{ label: "GitHub", href: "https://github.com/ahammadnafiz/Personal-Knowledge-Assistant" }],
-  },
-  {
-    slug: "analyzia",
-    name: "Analyzia",
-    kind: "Talk to your CSV data",
-    status: "Live",
-    summary:
-      "Ask a question about a CSV in plain English and get the pandas analysis and a Plotly chart back.",
-    intro:
-      "Upload a CSV and talk to it. A LangChain agent turns each question into pandas code, runs it, and answers with a chart and a short explanation. It remembers the conversation, so follow-up questions work.",
-    highlights: [
-      "Plain-English questions become pandas analysis and Plotly charts",
-      "Answers come with a confidence score",
-      "Conversation memory for follow-up questions",
-      "Live on Streamlit",
-    ],
-    stack: ["Python", "LangChain", "Gemini", "pandas", "Plotly", "Streamlit"],
-    links: [
-      { label: "Live app", href: "https://analyzia.streamlit.app/" },
-      { label: "GitHub", href: "https://github.com/ahammadnafiz/Analyzia" },
-    ],
-  },
-  {
-    slug: "smartprice-intelligence",
-    name: "SmartPrice Intelligence",
-    kind: "Smartphone market analytics",
-    status: "Open source",
-    summary:
-      "10,000+ phones from 37 brands scraped from GSMArena, then CatBoost and XGBoost models that predict price from specs.",
-    intro:
-      "How much should a phone cost, given what's inside it? I scraped GSMArena end to end, cleaned more than 50 spec fields per phone, and trained models to predict price and price segment.",
-    highlights: [
-      "10,000+ phones across 37 brands, scraped with adaptive rate limiting",
-      "50+ engineered features from raw spec sheets",
-      "R² of 0.772 on price, 74.4% accuracy on price segment",
-    ],
-    stack: ["Python", "CatBoost", "XGBoost", "pandas", "Scraping"],
-    links: [{ label: "GitHub", href: "https://github.com/ahammadnafiz/SmartPrice-Intelligence" }],
   },
   {
     slug: "fiztorch",

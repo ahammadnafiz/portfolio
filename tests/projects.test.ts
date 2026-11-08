@@ -16,12 +16,12 @@ describe("project lookup", () => {
   })
 
   it("links the first project back to the last, and forward to the second", () => {
-    const { prev, next } = getNeighbours("fizzlabai")
+    const { prev, next } = getNeighbours("atlas")
     expect(prev?.slug).toBe("fiztorch")
-    expect(next?.slug).toBe("engram")
+    expect(next?.slug).toBe("buyziz")
   })
 
   it("links the last project forward to the first", () => {
-    expect(getNeighbours("fiztorch").next?.slug).toBe("fizzlabai")
+    expect(getNeighbours("fiztorch").next?.slug).toBe("atlas")
   })
 })

@@ -2,11 +2,12 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter, Instrument_Serif } from "next/font/google"
 import { Analytics } from "@/components/analytics"
+import { THEME_SCRIPT } from "@/components/theme-toggle"
 import { SITE_URL, site } from "@/lib/site"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "swap" })
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "optional" })
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "optional" })
 
 const TITLE = "Ahammad Nafiz, machine learning engineer"
 const OG_IMAGE = `${SITE_URL}/og-image.png`
@@ -147,7 +148,10 @@ const JSON_LD = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${serif.variable}`}>
+    <html lang="en" className={`${inter.variable} ${serif.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body className="min-h-screen font-sans antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
         {children}

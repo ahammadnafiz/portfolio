@@ -7,7 +7,7 @@ export const site = {
   email: "ahammadnafiz86@gmail.com",
   cv: "/Ahammad-Nafiz-CV.pdf",
   description:
-    "ML engineer in Dhaka working on RAG systems, LLM agents and agent memory. Currently at Markopolo AI. Previously AskTuring.ai and research at UIU.",
+    "Data science student and ML engineer in Dhaka working on RAG systems, LLM agents and mechanistic interpretability. Associate Product Engineer at Markopolo AI.",
   socials: [
     { label: "GitHub", href: "https://github.com/ahammadnafiz" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/ahammad-nafiz/" },
@@ -21,14 +21,14 @@ export const experience = [
     role: "Associate Product Engineer, DeepDive",
     date: "Aug 2026 – Present",
     current: true,
-    note: "Building full-stack features for DeepDive, an AI social listening and narrative intelligence platform, across a TypeScript monorepo and the Python scraping and LLM annotation pipeline that feeds it.",
+    note: "Building DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent, across a TypeScript and Python LLM stack.",
   },
   {
     org: "AskTuring.ai",
     role: "Jr. Software Engineer",
     date: "Sep 2025 – May 2026",
     current: false,
-    note: "Owned the eval service and admin dashboard, automating RAG benchmarks over HotpotQA, MuSiQue, FinQA and CUAD. Built Deepen Answer: extended-thinking LLMs, an agent that fills its own knowledge gaps, and hybrid BM25 + vector retrieval with RRF.",
+    note: "Owned the eval service and admin dashboard, automating RAG benchmarks over HotpotQA, MuSiQue, FinQA and CUAD. Built Deepen Answer: extended-thinking LLMs, an agent that fills its own knowledge gaps, and hybrid BM25 + vector retrieval with RRF. Built FastAPI services that improved retrieval accuracy and cut query latency.",
   },
   {
     org: "United International University",
@@ -40,9 +40,9 @@ export const experience = [
   {
     org: "United International University",
     role: "B.Sc. in Data Science",
-    date: "2023 – Present",
+    date: "Sep 2023 – Present",
     current: false,
-    note: "",
+    note: "Machine Learning and Deep Learning Specializations from DeepLearning.AI and Stanford (Coursera).",
   },
 ]
 

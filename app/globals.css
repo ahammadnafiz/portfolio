@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light follows the system: warm paper and ink. Dark: near-black with white text. */
+/* Light: warm paper and ink. Dark: near-black with white text. Follows the system
+   until the visitor picks one with the toggle (stored as data-theme on <html>). */
 @layer base {
   :root {
     color-scheme: light dark;
-
     --background: 40 8% 90%;          /* #E8E6E1 paper */
     --foreground: 30 8% 10%;          /* #1C1815 ink */
     --card: 42 10% 93%;
@@ -36,8 +36,9 @@
     --live: 145 63% 36%;
   }
 
+  /* Dark: follows the system unless the visitor picked light; or picked dark. */
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --background: 0 3% 6%;          /* #0F0E0E */
       --foreground: 0 0% 100%;
       --card: 0 2% 8%;
@@ -62,6 +63,37 @@
       --hl-violet: 256 90% 78%;
       --live: 145 63% 52%;
     }
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --background: 0 3% 6%;          /* #0F0E0E */
+    --foreground: 0 0% 100%;
+    --card: 0 2% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 2% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 3% 6%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 54%;   /* #8A8A8A, 5.6:1 on #0F0E0E */
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 19%;
+    --input: 0 0% 19%;
+    --ring: 0 0% 100%;
+
+    --hl-blue: 214 95% 72%;
+    --hl-green: 152 60% 62%;
+    --hl-orange: 22 95% 68%;
+    --hl-violet: 256 90% 78%;
+    --live: 145 63% 52%;
   }
 
   * {
@@ -104,26 +136,17 @@
   .hl-violet { --hl: var(--hl-violet); }
 }
 
-/* Content rises in once on load. Off when the visitor asks for less motion. */
-@media (prefers-reduced-motion: no-preference) {
-  .enter {
-    animation: enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 }
 
-@keyframes enter {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+/* Theme toggle shows the sun in dark mode (click for light) and the moon in light mode. */
+.theme-icon-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-icon-moon { display: none; }
 }
+:root[data-theme="dark"] .theme-icon-sun { display: block; }
+:root[data-theme="dark"] .theme-icon-moon { display: none; }

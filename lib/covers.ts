@@ -86,31 +86,28 @@ const covers: Record<string, Cover> = {
       return d
     }),
   },
-  // A bar chart growing out of a table.
-  analyzia: {
-    stops: ["#FFD449", "#FF9F2E"],
+  // A commit history: one main line, branches leaving and merging back, each commit a dot.
+  atlas: {
+    stops: ["#7C8CFF", "#B86BFF"],
     field: at((x, y) => {
-      const heights = [0.35, 0.55, 0.45, 0.72, 0.6, 0.85]
-      for (let i = 0; i < heights.length; i++) {
-        const left = 0.22 + i * 0.2
-        if (x > left && x < left + 0.13 && y > 0.9 - heights[i] && y < 0.9) {
-          return 0.55 + 0.45 * ((0.9 - y) / heights[i])
-        }
+      let d = 0.7 * stroke(x, y, 0.15, 0.5, 1.45, 0.5, 0.012)
+      const branches: [number, number, number][] = [[0.3, 0.75, 0.22], [0.8, 1.15, 0.78], [1.0, 1.3, 0.25]]
+      for (const [from, to, by] of branches) {
+        const mid = (from + to) / 2
+        d = Math.max(d, 0.7 * stroke(x, y, from, 0.5, mid, by, 0.012), 0.7 * stroke(x, y, mid, by, to, 0.5, 0.012))
+        d = Math.max(d, blob(x, y, mid, by, 0.035))
       }
-      return y > 0.9 && y < 0.92 && x > 0.15 && x < 1.45 ? 0.8 : 0
+      for (let i = 0; i < 9; i++) d = Math.max(d, blob(x, y, 0.2 + i * 0.15, 0.5, 0.032))
+      return d
     }),
   },
-  // Phones scattered around a rising price curve.
-  "smartprice-intelligence": {
-    stops: ["#5AA9FF", "#7DE3F4"],
+  // A conversation: a customer's bubble, the agent's reply, and a row of products.
+  buyziz: {
+    stops: ["#FFB547", "#FF6F61"],
     field: at((x, y) => {
-      const curve = (t: number) => 0.82 - 0.5 * (t / 1.6) ** 1.6
-      let d = 0.6 * Math.exp(-((y - curve(x)) ** 2) / 0.0006)
-      for (let i = 0; i < 28; i++) {
-        const px = 0.12 + noise[i] * 1.36
-        const py = curve(px) + (noise[i + 28] - 0.5) * 0.3
-        d = Math.max(d, blob(x, y, px, py, 0.022 + noise[(i + 7) % 64] * 0.018))
-      }
+      const box = (x0: number, y0: number, x1: number, y1: number) => (x > x0 && x < x1 && y > y0 && y < y1 ? 1 : 0)
+      let d = 0.85 * box(0.2, 0.14, 0.8, 0.32) + 0.55 * box(0.75, 0.38, 1.4, 0.56)
+      for (let i = 0; i < 4; i++) d = Math.max(d, 0.95 * box(0.2 + i * 0.31, 0.64, 0.45 + i * 0.31, 0.88))
       return d
     }),
   },
