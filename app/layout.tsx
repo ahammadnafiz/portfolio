@@ -1,13 +1,13 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, Instrument_Serif, Noto_Sans_Bengali } from "next/font/google"
+import { Geist, Instrument_Serif, Noto_Sans_Bengali } from "next/font/google"
 import { Analytics } from "@/components/analytics"
 import { SCROLL_RESET_SCRIPT } from "@/components/scroll-reset"
 import { THEME_SCRIPT } from "@/components/theme-toggle"
 import { SITE_URL, site } from "@/lib/site"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
+const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "swap" })
 // Bangla text (one post so far). Not preloaded: its unicode-range means it only downloads where Bangla appears.
 const bengali = Noto_Sans_Bengali({ subsets: ["bengali"], variable: "--font-bengali", display: "swap", preload: false })
@@ -151,7 +151,7 @@ const JSON_LD = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${serif.variable} ${bengali.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${serif.variable} ${bengali.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: SCROLL_RESET_SCRIPT }} />
