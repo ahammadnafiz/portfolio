@@ -6,7 +6,7 @@ import { ProjectShot } from "@/components/project-shot"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { Status } from "@/components/status"
-import { getNeighbours, getProject, projects } from "@/lib/projects"
+import { getProject, projects } from "@/lib/projects"
 import { SHARE_IMAGE, SITE_URL } from "@/lib/site"
 
 export const dynamicParams = false
@@ -35,7 +35,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectPage({ params }: Props) {
   const project = getProject((await params).slug)
   if (!project) notFound()
-  const { prev, next } = getNeighbours(project.slug)
   const url = `${SITE_URL}/work/${project.slug}/`
   const jsonLd = {
     "@context": "https://schema.org",
@@ -111,20 +110,6 @@ export default async function ProjectPage({ params }: Props) {
             </ul>
           </Section>
 
-          <nav aria-label="More projects" className="mt-14 grid grid-cols-2 gap-4">
-            {prev && (
-              <Link href={`/work/${prev.slug}`} className="group bg-card px-4 py-3.5 transition-colors duration-300 hover:bg-secondary">
-                <span className="text-xs text-muted-foreground">← Previous</span>
-                <span className="mt-1 block font-medium">{prev.name}</span>
-              </Link>
-            )}
-            {next && (
-              <Link href={`/work/${next.slug}`} className="group bg-card px-4 py-3.5 text-right transition-colors duration-300 hover:bg-secondary">
-                <span className="text-xs text-muted-foreground">Next →</span>
-                <span className="mt-1 block font-medium">{next.name}</span>
-              </Link>
-            )}
-          </nav>
         </Container>
       </main>
       <SiteFooter />

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getNeighbours, getProject, projects } from "@/lib/projects"
+import { getProject, projects } from "@/lib/projects"
 
 describe("project lookup", () => {
   it("finds a project by its URL slug", () => {
@@ -15,13 +15,4 @@ describe("project lookup", () => {
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 
-  it("links the first project back to the last, and forward to the second", () => {
-    const { prev, next } = getNeighbours("atlas")
-    expect(prev?.slug).toBe("fiztorch")
-    expect(next?.slug).toBe("buyziz")
-  })
-
-  it("links the last project forward to the first", () => {
-    expect(getNeighbours("fiztorch").next?.slug).toBe("atlas")
-  })
 })
