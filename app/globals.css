@@ -150,3 +150,65 @@
 }
 :root[data-theme="dark"] .theme-icon-sun { display: block; }
 :root[data-theme="dark"] .theme-icon-moon { display: none; }
+
+/* Blog post body (HTML rendered from Markdown at build time). */
+.post {
+  font-size: 1rem;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+@media (min-width: 640px) {
+  .post { font-size: 17px; }
+}
+.post > * + * { margin-top: 1.25em; }
+.post h1, .post h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin-top: 2.2em;
+}
+.post h3 { font-size: 1.2rem; font-weight: 500; line-height: 1.35; margin-top: 2em; }
+.post h4 { font-weight: 500; margin-top: 1.6em; }
+.post h2 + *, .post h3 + *, .post h4 + * { margin-top: 0.75em; }
+.post a { text-decoration: underline; text-decoration-color: hsl(var(--border)); text-underline-offset: 4px; }
+.post a:hover { text-decoration-color: hsl(var(--foreground)); }
+.post strong { font-weight: 600; }
+.post ul { list-style: disc; padding-left: 1.3em; }
+.post ol { list-style: decimal; padding-left: 1.3em; }
+.post li + li { margin-top: 0.35em; }
+.post li > ul, .post li > ol { margin-top: 0.35em; }
+.post blockquote { border-left: 2px solid hsl(var(--border)); padding-left: 1em; color: hsl(var(--muted-foreground)); }
+.post hr { border-color: hsl(var(--border)); margin: 2.5em 0; }
+.post img { margin: 0.5em auto; border-radius: 0.75rem; max-width: 100%; height: auto; }
+/* Rendered diagrams have dark lines on a transparent background: give them a light card. */
+.post img[src$=".svg"] { background: #fff; padding: 1rem; }
+/* Jekyll-style caption: an italic line right under an image. */
+.post p:has(> img) { text-align: center; }
+.post p:has(> img) > em { display: block; font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+.post :not(pre) > code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875em;
+  background: hsl(var(--secondary));
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+.post pre {
+  font-size: 13.5px;
+  line-height: 1.6;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+}
+.post pre.shiki { background-color: hsl(var(--card)) !important; }
+.post table { display: block; overflow-x: auto; border-collapse: collapse; font-size: 0.9em; }
+.post th, .post td { border: 1px solid hsl(var(--border)); padding: 0.4em 0.7em; text-align: left; }
+/* Native MathML, drawn with math fonts already on the device (nothing to download). */
+.post math { font-family: "STIX Two Math", "Cambria Math", "Latin Modern Math", math; font-size: 1.12em; }
+.post math[display="block"] { margin: 1.1em 0; font-size: 1.2em; overflow-x: auto; overflow-y: hidden; }
+
+/* Code colours follow the theme (Shiki writes both palettes; dark uses the --shiki-dark values). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .shiki span { color: var(--shiki-dark) !important; }
+}
+:root[data-theme="dark"] .shiki span { color: var(--shiki-dark) !important; }

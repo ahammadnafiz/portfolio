@@ -1,5 +1,6 @@
 import { projects } from "@/lib/projects"
 import { SITE_URL, experience, recognition, site } from "@/lib/site"
+import { getPosts } from "@/lib/writing"
 
 export const dynamic = "force-static"
 
@@ -15,6 +16,10 @@ export function GET() {
     "## Projects",
     "",
     ...projects.map((p) => `- [${p.name}](${SITE_URL}/work/${p.slug}/): ${p.kind}. ${p.summary}`),
+    "",
+    "## Writing",
+    "",
+    ...getPosts().map((p) => `- [${p.title}](${SITE_URL}/writing/${p.slug}/) (${p.date}): ${p.description}`),
     "",
     "## Experience",
     "",

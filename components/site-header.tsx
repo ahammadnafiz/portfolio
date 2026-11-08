@@ -5,8 +5,9 @@ import { ThemeToggle } from "./theme-toggle"
 
 const NAV: { label: string; href: string; tiny?: string }[] = [
   { label: "Work", href: "/#work" },
-  // Dropped on very narrow phones (under 320px) so the header fits on one line.
-  { label: "Experience", href: "/#experience", tiny: "max-[319px]:hidden" },
+  { label: "Writing", href: "/writing/" },
+  // Dropped on very narrow phones (under 400px) so the header fits on one line.
+  { label: "Experience", href: "/#experience", tiny: "max-[399px]:hidden" },
   { label: "Contact", href: "/#contact" },
 ]
 

@@ -1,12 +1,15 @@
 import { FileText, Github, Linkedin, Mail } from "lucide-react"
 import { Container, Section } from "@/components/frame"
 import { XIcon } from "@/components/icons"
+import Link from "next/link"
+import { PostList } from "@/components/post-list"
 import { ProjectCard } from "@/components/project-card"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { DhakaClock } from "@/components/dhaka-clock"
 import { projects } from "@/lib/projects"
 import { experience, recognition, site } from "@/lib/site"
+import { getPosts } from "@/lib/writing"
 
 /** Each icon tile gets its own colour; the text stays plain. */
 const LINK_ICONS: Record<string, { Icon: typeof Github; tint: string }> = {
@@ -24,6 +27,7 @@ const LINKS = [
 ]
 
 export default function Home() {
+  const posts = getPosts()
   return (
     <>
       <SiteHeader />
@@ -112,7 +116,23 @@ export default function Home() {
             </ul>
           </Section>
 
-          <Section id="experience" n="02" title="Experience">
+          <Section
+            id="writing"
+            n="02"
+            title="Writing"
+            aside={
+              <Link
+                href="/writing/"
+                className="text-xs text-muted-foreground transition-colors duration-300 hover:text-foreground"
+              >
+                All {posts.length} posts →
+              </Link>
+            }
+          >
+            <PostList posts={posts.slice(0, 4)} />
+          </Section>
+
+          <Section id="experience" n="03" title="Experience">
             <ul className="divide-y">
               {experience.map((e) => (
                 <li key={e.role} className="py-4 first:pt-0">
@@ -134,7 +154,7 @@ export default function Home() {
             </ul>
           </Section>
 
-          <Section id="recognition" n="03" title="Recognition">
+          <Section id="recognition" n="04" title="Recognition">
             <ul className="divide-y">
               {recognition.map((r) => (
                 <li key={r.title} className="flex items-baseline justify-between gap-4 py-3 first:pt-0">
@@ -148,7 +168,7 @@ export default function Home() {
             </ul>
           </Section>
 
-          <Section id="contact" n="04" title="Contact">
+          <Section id="contact" n="05" title="Contact">
             <p className="max-w-[46ch] leading-relaxed text-muted-foreground">
               Hiring an AI or machine learning engineer, want to talk research, or have a good problem? My inbox is open.
             </p>
