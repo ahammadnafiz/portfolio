@@ -130,8 +130,14 @@
     color: hsl(var(--hl));
     background: hsl(var(--hl) / 0.12);
   }
-  /* Same chip in neutral colours, for company names with a logo. */
-  .hl-plain { color: hsl(var(--foreground)); background: hsl(var(--foreground) / 0.08); }
+  /* Company name with its logo: a bordered chip, logo and name evenly spaced inside. */
+  .brand-chip {
+    @apply whitespace-nowrap rounded-md border px-[0.4em] py-[0.1em] box-decoration-clone;
+    color: hsl(var(--foreground));
+    background: hsl(var(--foreground) / 0.05);
+    transition: background-color 300ms, border-color 300ms;
+  }
+  .brand-chip:hover { background: hsl(var(--foreground) / 0.1); border-color: hsl(var(--foreground) / 0.25); }
   .hl-blue { --hl: var(--hl-blue); }
   .hl-green { --hl: var(--hl-green); }
   .hl-orange { --hl: var(--hl-orange); }
