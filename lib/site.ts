@@ -37,13 +37,6 @@ export const experience = [
     current: false,
     note: "Researched autonomous agents and multi-agent systems, and contributed to papers on LLM applications, retrieval and agentic workflow design.",
   },
-  {
-    org: "United International University",
-    role: "B.Sc. in Data Science",
-    date: "Sep 2023 – Present",
-    current: false,
-    note: "Machine Learning and Deep Learning Specializations from DeepLearning.AI and Stanford (Coursera).",
-  },
 ]
 
 export const recognition = [

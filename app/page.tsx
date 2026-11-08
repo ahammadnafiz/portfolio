@@ -31,10 +31,10 @@ export default function Home() {
         <Container className="pt-2 sm:pt-4">
           <div className="mt-8 flex items-center gap-5 sm:mt-12 sm:gap-7">
             <img
-              src="/avatar.jpg"
+              src="/avatar.webp"
               alt="Ahammad Nafiz"
-              width={336}
-              height={336}
+              width={224}
+              height={224}
               className="h-20 w-20 shrink-0 rounded-xl object-cover ring-1 ring-border sm:h-28 sm:w-28"
             />
             <div className="min-w-0">
@@ -66,7 +66,7 @@ export default function Home() {
             <li className="text-muted-foreground">Next: a PhD in Europe, then a lab working on the frontier.</li>
           </ul>
 
-          <nav aria-label="Links" className="-ml-1 mt-7 flex flex-wrap gap-x-1 gap-y-1">
+          <nav aria-label="Links" className="-ml-1 mt-7 flex flex-wrap justify-between gap-y-1 sm:justify-start sm:gap-x-1">
             {LINKS.map(({ label, href }) => {
               const { Icon, tint } = LINK_ICONS[label]
               const external = href.startsWith("http")
@@ -77,18 +77,18 @@ export default function Home() {
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
                   download={label === "CV" ? "Ahammad-Nafiz-CV.pdf" : undefined}
-                  className="group inline-flex items-center gap-2 rounded-lg py-1 pl-1 pr-2.5 text-sm transition-colors duration-300 hover:bg-secondary"
+                  className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg py-1 pl-0.5 pr-1 text-[13px] transition-colors sm:gap-2 sm:pr-2.5 sm:text-sm duration-300 hover:bg-secondary"
                 >
                   <span
                     style={{ color: `hsl(${tint})`, backgroundColor: `hsl(${tint} / 0.14)` }}
-                    className="grid h-7 w-7 place-items-center rounded-md transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                    className="grid h-[22px] w-[22px] place-items-center rounded-md sm:h-7 sm:w-7 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
                   >
-                    <Icon className="h-3.5 w-3.5" />
+                    <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   </span>
                   {label}
                   <span
                     aria-hidden
-                    className="text-muted-foreground transition-[transform,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:translate-x-px group-hover:text-foreground"
+                    className="hidden text-muted-foreground transition-[transform,color] sm:inline duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:translate-x-px group-hover:text-foreground"
                   >
                     {label === "CV" ? "↓" : "↗"}
                   </span>

@@ -2,12 +2,8 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
     darkMode: "media",
-    content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "*.{js,ts,jsx,tsx,mdx}"
-  ],
+    // Only files the site renders; components/ui holds unused shadcn parts.
+    content: ["./app/**/*.{ts,tsx}", "./components/*.tsx", "./lib/**/*.ts"],
   theme: {
   	extend: {
   		fontFamily: {
