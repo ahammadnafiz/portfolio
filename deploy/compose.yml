@@ -1,0 +1,20 @@
+# Public web server for ahammadnafiz.com. Bound to the public IP only, so the
+# tailnet's `tailscale serve` ports on the same machine are left alone.
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: portfolio-caddy
+    restart: unless-stopped
+    ports:
+      - "${PUBLIC_IP:-147.93.170.52}:80:80"
+      - "${PUBLIC_IP:-147.93.170.52}:443:443"
+      - "${PUBLIC_IP:-147.93.170.52}:443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - .:/srv/www:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

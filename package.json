@@ -1,19 +1,14 @@
 {
-  "name": "my-v0-project",
+  "name": "portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development next dev",
+    "dev": "next dev",
     "build": "next build",
-    "build:github": "NODE_ENV=production next build",
-    "start": "next start",
     "lint": "next lint",
-    "export": "next build",
-    "update-cache": "./update-cache-bust.sh",
-    "update-cache:node": "node update-cache-bust.js",
-    "deploy": "./deploy-optimized.sh",
-    "test-cache": "./test-cache-busting.sh",
-    "deploy:complete": "./deploy-optimized.sh"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "test:build": "BUILD_CHECK=1 vitest run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -72,6 +67,7 @@
     "@types/react-dom": "^19",
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.7"
   }
 }

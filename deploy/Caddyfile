@@ -1,0 +1,32 @@
+# Serves the static export (out/) for ahammadnafiz.com. Caddy gets and renews the HTTPS cert itself.
+ahammadnafiz.com {
+	root * /srv/www/site
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "DENY"
+		-Server
+	}
+
+	# Hashed build assets never change: cache for a year. Pages revalidate on every visit.
+	@hashed path /_next/static/*
+	header @hashed Cache-Control "public, max-age=31536000, immutable"
+	@assets path /covers/* /*.png /*.jpg /*.ico /*.pdf
+	header @assets Cache-Control "public, max-age=86400"
+	@pages not path /_next/static/* /covers/* /*.png /*.jpg /*.ico /*.pdf
+	header @pages Cache-Control "public, max-age=0, must-revalidate"
+
+	file_server
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+}
+
+www.ahammadnafiz.com {
+	redir https://ahammadnafiz.com{uri} permanent
+}

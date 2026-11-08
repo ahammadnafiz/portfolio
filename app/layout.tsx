@@ -1,113 +1,57 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { Inter, Fraunces } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Inter, Instrument_Serif } from "next/font/google"
+import { Analytics } from "@/components/analytics"
+import { SITE_URL, site } from "@/lib/site"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  axes: ["opsz", "SOFT", "WONK"],
-})
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif", display: "swap" })
 
-const SITE_URL = "https://ahammadnafiz.github.io/portfolio"
+const TITLE = "Ahammad Nafiz, machine learning engineer"
 const OG_IMAGE = `${SITE_URL}/og-image.png`
-const DESCRIPTION =
-  "ML engineer in Dhaka working on RAG systems, LLM agents, and agent memory. Currently at Markopolo AI. Previously AskTuring.ai and research at UIU."
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ahammadnafiz.github.io"),
-  title: {
-    default: "Ahammad Nafiz — Machine Learning & AI Engineer",
-    template: "%s | Ahammad Nafiz"
-  },
-  description: DESCRIPTION,
-
-  // Author information
-  authors: [{ name: "Ahammad Nafiz", url: SITE_URL }],
-  creator: "Ahammad Nafiz",
-  publisher: "Ahammad Nafiz",
-
-  // Open Graph metadata for social media
+  metadataBase: new URL(SITE_URL),
+  title: { default: TITLE, template: "%s | Ahammad Nafiz" },
+  description: site.description,
+  authors: [{ name: site.name, url: SITE_URL }],
+  creator: site.name,
+  alternates: { canonical: "/" },
   openGraph: {
     type: "profile",
     locale: "en_US",
-    url: `${SITE_URL}/`,
-    title: "Ahammad Nafiz — Machine Learning & AI Engineer",
-    description: DESCRIPTION,
-    siteName: "Ahammad Nafiz",
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Ahammad Nafiz — Machine Learning & AI Engineer, Dhaka"
-      }
-    ]
+    url: "/",
+    siteName: site.name,
+    title: TITLE,
+    description: site.description,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
   },
-
-  // Twitter Card metadata
   twitter: {
     card: "summary_large_image",
-    title: "Ahammad Nafiz — Machine Learning & AI Engineer",
-    description: DESCRIPTION,
     site: "@ahammadnafi_z",
     creator: "@ahammadnafi_z",
-    images: [OG_IMAGE]
+    title: TITLE,
+    description: site.description,
+    images: [OG_IMAGE],
   },
-
-  // Robots directive
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1
-    }
-  },
-
-  // Canonical URL
-  alternates: {
-    canonical: `${SITE_URL}/`
-  },
-
-  // Additional metadata
-  category: "Technology",
-  classification: "Personal Portfolio",
-
-  // Icons
+  robots: { index: true, follow: true },
   icons: {
     icon: [
-      { url: `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon.ico`, sizes: '32x32' },
-      { url: `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon-16x16.png`, type: 'image/png', sizes: '16x16' },
-      { url: `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon-32x32.png`, type: 'image/png', sizes: '32x32' },
-      { url: `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/icon.png`, type: 'image/png' },
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
     ],
-    apple: [
-      { url: `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/apple-icon.png`, type: 'image/png', sizes: '180x180' },
-    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
   },
+  other: { me: ["mailto:ahammadnafiz86@gmail.com", "https://github.com/ahammadnafiz"] },
+}
 
-  // Verification tokens (add your own when you get them)
-  verification: {
-    google: process.env.GOOGLE_VERIFICATION_TOKEN,
-    yandex: process.env.YANDEX_VERIFICATION_TOKEN,
-    yahoo: process.env.YAHOO_VERIFICATION_TOKEN,
-    other: {
-      me: ["mailto:ahammadnafiz86@gmail.com", "https://github.com/ahammadnafiz"]
-    }
-  },
-
-  // Additional metadata
-  other: {
-    'theme-color': '#e8e6e1',
-    'msapplication-TileColor': '#1b1815',
-    'msapplication-config': `${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/browserconfig.xml`
-  }
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#E8E6E1" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F0E0E" },
+  ],
 }
 
 // One Person entity for the whole site, cross-referenced from ProfilePage by @id.
@@ -118,8 +62,8 @@ const JSON_LD = {
       "@type": "ProfilePage",
       "@id": `${SITE_URL}/#profilepage`,
       url: `${SITE_URL}/`,
-      name: "Ahammad Nafiz — Machine Learning & AI Engineer",
-      description: DESCRIPTION,
+      name: TITLE,
+      description: site.description,
       inLanguage: "en",
       // Static export: this evaluates once at build, so it tracks deploys.
       dateModified: new Date().toISOString().slice(0, 10),
@@ -127,8 +71,8 @@ const JSON_LD = {
       about: { "@id": `${SITE_URL}/#person` },
       isPartOf: {
         "@type": "WebSite",
-        "@id": "https://ahammadnafiz.github.io/#website",
-        url: "https://ahammadnafiz.github.io/",
+        "@id": `${SITE_URL}/#website`,
+        url: `${SITE_URL}/`,
         name: "Ahammad Nafiz"
       }
     },
@@ -187,7 +131,6 @@ const JSON_LD = {
         "https://github.com/ahammadnafiz",
         "https://www.linkedin.com/in/ahammad-nafiz/",
         "https://x.com/ahammadnafi_z",
-        "https://ahammadnafiz.github.io/",
         "https://huggingface.co/ahammadnafiz",
         "https://ieeexplore.ieee.org/author/154406885670879",
         "https://medium.com/@ahammadnafizz"
@@ -202,72 +145,13 @@ const JSON_LD = {
   ]
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`} suppressHydrationWarning>
-      <head>
-        {/* Enhanced SEO meta tags */}
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-        {/* Build versioning */}
-        <meta name="version" content={process.env.NEXT_PUBLIC_BUILD_ID || "dev"} />
-        <meta name="build-time" content={process.env.NEXT_PUBLIC_BUILD_TIME || ""} />
-
-        {/* Enhanced favicon and icons */}
-        <link rel="icon" type="image/x-icon" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon.ico`} />
-        <link rel="icon" type="image/png" sizes="16x16" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon-16x16.png`} />
-        <link rel="icon" type="image/png" sizes="32x32" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/favicon-32x32.png`} />
-        <link rel="apple-touch-icon" sizes="180x180" href={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/apple-icon.png`} />
-        <meta name="msapplication-TileImage" content={`${process.env.NODE_ENV === 'production' ? '/portfolio' : ''}/icon.png`} />
-
-        {/* External resources with preconnect for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* DNS prefetch for external domains */}
-        <link rel="dns-prefetch" href="//github.com" />
-        <link rel="dns-prefetch" href="//linkedin.com" />
-        <link rel="dns-prefetch" href="//x.com" />
-
-        {/* Structured Data for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
-        />
-      </head>
-      <body className="font-sans antialiased">
-        {/* Film-grain overlay: the paper texture that ties the monochrome system together */}
-        <div className="grain-overlay" aria-hidden="true" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Set custom viewport height properties for better mobile support
-              function setViewportHeight() {
-                const vh = window.innerHeight * 0.01;
-                document.documentElement.style.setProperty('--vh', vh + 'px');
-              }
-
-              // Set initial values
-              setViewportHeight();
-
-              // Update on resize and orientation change
-              window.addEventListener('resize', setViewportHeight);
-              window.addEventListener('orientationchange', () => {
-                setTimeout(setViewportHeight, 100);
-              });
-            `,
-          }}
-        />
+    <html lang="en" className={`${inter.variable} ${serif.variable}`}>
+      <body className="min-h-screen font-sans antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
         {children}
+        <Analytics />
       </body>
     </html>
   )
