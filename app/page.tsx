@@ -5,7 +5,6 @@ import { ProjectCard } from "@/components/project-card"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { DhakaClock } from "@/components/dhaka-clock"
-import { AttentionBanner } from "@/components/attention-banner"
 import { projects } from "@/lib/projects"
 import { experience, recognition, site } from "@/lib/site"
 
@@ -30,9 +29,7 @@ export default function Home() {
       <SiteHeader />
       <main>
         <Container className="pt-2 sm:pt-4">
-          <AttentionBanner />
-
-          <div className="mt-10 flex items-center gap-5 sm:mt-14 sm:gap-7">
+          <div className="mt-8 flex items-center gap-5 sm:mt-12 sm:gap-7">
             <img
               src="/avatar.jpg"
               alt="Ahammad Nafiz"
