@@ -26,10 +26,10 @@ describe("static build", () => {
     }
   })
 
-  it("has a /work/ page listing every project, also in the sitemap", () => {
-    const html = readFileSync(path.join(OUT, "work", "index.html"), "utf8")
-    for (const p of projects) expect(html, p.slug).toContain(`href="/work/${p.slug}/"`)
-    expect(readFileSync(path.join(OUT, "sitemap.xml"), "utf8")).toContain("https://ahammadnafiz.com/work/</loc>")
+  it("sends visitors to GitHub for more projects, with no /work/ list page", () => {
+    expect(existsSync(path.join(OUT, "work", "index.html"))).toBe(false)
+    expect(readFileSync(path.join(OUT, "sitemap.xml"), "utf8")).not.toContain("https://ahammadnafiz.com/work/</loc>")
+    expect(readFileSync(path.join(OUT, "index.html"), "utf8")).toMatch(/href="https:\/\/github.com\/ahammadnafiz"[^>]*>More on GitHub/)
   })
 
   it("gives every page a share preview image for Facebook, LinkedIn and X", () => {

@@ -105,12 +105,14 @@ export default function Home() {
             n="01"
             title="Work"
             aside={
-              <Link
-                href="/work/"
+              <a
+                href={site.socials.find((s) => s.label === "GitHub")?.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-xs text-muted-foreground transition-colors duration-300 hover:text-foreground"
               >
-                All {projects.length} projects →
-              </Link>
+                More on GitHub ↗
+              </a>
             }
           >
             <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2">
