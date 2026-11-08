@@ -13,10 +13,19 @@ export function ThemeToggle() {
       ? root.dataset.theme === "dark"
       : window.matchMedia("(prefers-color-scheme: dark)").matches
     const next = isDark ? "light" : "dark"
-    root.dataset.theme = next
-    try {
-      localStorage.setItem("theme", next)
-    } catch {}
+    const apply = () => {
+      root.dataset.theme = next
+      try {
+        localStorage.setItem("theme", next)
+      } catch {}
+    }
+
+    if (!document.startViewTransition) return apply()
+
+    // One whole-page crossfade. Per-element color transitions are paused meanwhile,
+    // so nothing keeps shifting color underneath it.
+    root.classList.add("theme-switching")
+    document.startViewTransition(apply).finished.finally(() => root.classList.remove("theme-switching"))
   }
 
   return (

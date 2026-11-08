@@ -1,0 +1,45 @@
+# Builds, tests and publishes ahammadnafiz.com to the VPS on every push to main,
+# using the same deploy/deploy.sh as a manual deploy.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: SSH access to the VPS
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "147.93.170.52 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjxi/EcB5aLrZRgjwd+1xsnlHwzLBILwtOdwZaiAcXt" > ~/.ssh/known_hosts
+          printf 'Host vps\n  HostName 147.93.170.52\n  User nafiz\n  IdentityFile ~/.ssh/deploy_key\n  IdentitiesOnly yes\n' > ~/.ssh/config
+
+      - run: ./deploy/deploy.sh

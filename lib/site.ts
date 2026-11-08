@@ -47,7 +47,7 @@ export const experience = [
     role: "Jr. Software Engineer",
     date: "Sep 2025 – May 2026",
     current: false,
-    note: "Owned the LLM evaluation service and admin dashboard, automating RAG benchmarks on HotpotQA, MuSiQue, FinQA and CUAD. Built Deepen Answer, a production RAG pipeline: extended-thinking LLMs, an agent that fills its own knowledge gaps, and hybrid BM25 plus vector retrieval with reciprocal rank fusion. Built FastAPI services that improved retrieval accuracy and cut query latency.",
+    note: "Owned the LLM evaluation service, benchmarking RAG on HotpotQA, MuSiQue, FinQA and CUAD, and built Deepen Answer, a production RAG pipeline with hybrid BM25 and vector retrieval.",
   },
   {
     org: "United International University",

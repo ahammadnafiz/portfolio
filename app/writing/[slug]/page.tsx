@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { BackToTop } from "@/components/back-to-top"
 import { CodeCopy } from "@/components/code-copy"
 import { Container } from "@/components/frame"
 import { SiteFooter } from "@/components/site-footer"
@@ -79,6 +80,7 @@ export default async function PostPage({ params }: Props) {
             <div className="post mt-10" dangerouslySetInnerHTML={{ __html: html }} />
             <CodeCopy />
           </article>
+          <BackToTop />
 
           <nav aria-label="More writing" className="mt-16 grid grid-cols-2 gap-4">
             {older ? (

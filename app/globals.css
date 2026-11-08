@@ -189,6 +189,25 @@
 :root[data-theme="dark"] .theme-icon-sun { display: block; }
 :root[data-theme="dark"] .theme-icon-moon { display: none; }
 
+/* Theme switch: the new theme fades in over the old one as a single layer. */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+::view-transition-old(root) {
+  animation: none;
+}
+::view-transition-new(root) {
+  animation: theme-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation-duration: 200ms; }
+}
+
 /* Blog post body (HTML rendered from Markdown at build time). */
 .post {
   font-size: 1rem;
