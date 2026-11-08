@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter, Instrument_Serif } from "next/font/google"
 import { Analytics } from "@/components/analytics"
+import { SCROLL_RESET_SCRIPT } from "@/components/scroll-reset"
 import { THEME_SCRIPT } from "@/components/theme-toggle"
 import { SITE_URL, site } from "@/lib/site"
 import "./globals.css"
@@ -151,6 +152,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: SCROLL_RESET_SCRIPT }} />
       </head>
       <body className="min-h-screen font-sans antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
