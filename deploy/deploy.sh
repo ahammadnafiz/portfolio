@@ -18,7 +18,8 @@ if ! grep -q "googletagmanager.com/gtag/js?id=G-" out/index.html; then
 fi
 
 ssh "$HOST" "mkdir -p $DIR/site"
-rsync -az deploy/Caddyfile deploy/compose.yml "$HOST:$DIR/"
+# --inplace keeps the same file, so the container's bind mount of the Caddyfile sees the update.
+rsync -az --inplace deploy/Caddyfile deploy/compose.yml "$HOST:$DIR/"
 # --delay-updates moves every new file into place at the very end, so visitors don't see a half-copied site.
 rsync -az --delete-delay --delay-updates out/ "$HOST:$DIR/site/"
 ssh "$HOST" "cd $DIR && docker compose up -d && docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile"
