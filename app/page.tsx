@@ -1,4 +1,5 @@
 import { FileText, Github, Linkedin, Mail } from "lucide-react"
+import { BrandLink } from "@/components/brand-link"
 import { Container, Section } from "@/components/frame"
 import { XIcon } from "@/components/icons"
 import Link from "next/link"
@@ -43,11 +44,11 @@ export default function Home() {
             />
             <div className="min-w-0">
               <h1 className="font-serif text-[2.5rem] leading-[1.02] sm:text-[3.25rem]">{site.name}</h1>
-              <p className="mt-1.5 text-sm text-muted-foreground sm:text-base">
-                {site.title} · {site.location}
-                <span className="sm:hidden">
-                  {" "}
-                  · <DhakaClock />
+              <p className="mt-1.5 text-sm text-muted-foreground sm:text-base">{site.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {site.location} <span aria-hidden>·</span>{" "}
+                <span className="font-mono text-xs" title="Local time in Dhaka">
+                  <DhakaClock /> local time
                 </span>
               </p>
             </div>
@@ -56,7 +57,8 @@ export default function Home() {
           <ul className="mt-8 space-y-3 leading-relaxed sm:text-[17px]">
             <li>
               I&apos;m an AI engineer in Dhaka, working as an Associate Product Engineer at{" "}
-              <span className="hl hl-blue">Markopolo AI</span>. I work on DeepDive, an AI social listening platform, plus an AEO visibility tool and an AI data analysis agent.
+              <BrandLink brand="markopolo" />. I work on <BrandLink brand="deepdive" />, an AI social listening
+              platform, plus an AEO visibility tool and an AI data analysis agent.
             </li>
             <li>
               Before that I owned the eval service at <span className="hl hl-orange">AskTuring.ai</span> and built the
@@ -138,7 +140,7 @@ export default function Home() {
                 <li key={e.role} className="py-4 first:pt-0">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="font-medium">
-                      {e.org}
+                      {e.brand ? <BrandLink brand={e.brand} chip={false} /> : e.org}
                       {e.current && (
                         <span className="hl hl-green ml-2 align-middle text-[10px] font-medium uppercase tracking-wide">
                           Now

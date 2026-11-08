@@ -162,7 +162,7 @@
 }
 .post > * + * { margin-top: 1.25em; }
 .post h1, .post h2 {
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-serif), var(--font-bengali), Georgia, serif;
   font-size: 1.9rem;
   line-height: 1.15;
   margin-top: 2.2em;
@@ -201,6 +201,24 @@
   overflow-x: auto;
 }
 .post pre.shiki { background-color: hsl(var(--card)) !important; }
+.post .code-block { position: relative; }
+.copy-code {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  border-radius: 0.375rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  opacity: 0;
+  transition: opacity 0.3s, color 0.3s;
+}
+.code-block:hover .copy-code, .copy-code:focus-visible, .copy-code[data-state="done"] { opacity: 1; }
+.copy-code:hover, .copy-code[data-state="done"] { color: hsl(var(--foreground)); }
+/* Touch screens have no hover: keep the button visible. */
+@media (hover: none) { .copy-code { opacity: 1; } }
 .post table { display: block; overflow-x: auto; border-collapse: collapse; font-size: 0.9em; }
 .post th, .post td { border: 1px solid hsl(var(--border)); padding: 0.4em 0.7em; text-align: left; }
 /* Native MathML, drawn with math fonts already on the device (nothing to download). */

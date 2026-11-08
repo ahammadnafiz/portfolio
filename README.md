@@ -22,6 +22,10 @@ pnpm typecheck
 
 To add a project: add an entry to `lib/projects.ts` and a cover with the same slug in `lib/covers.ts`.
 
+## Write a blog post
+
+`pnpm new-post "Title"`, write it in `content/writing/`, then publish as below. Full guide: [docs/writing.md](docs/writing.md).
+
 ## Publish
 
 ```bash

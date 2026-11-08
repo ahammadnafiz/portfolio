@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest"
-import { getPost, getPosts, renderMarkdown } from "@/lib/writing"
+import fs from "node:fs"
+import path from "node:path"
+import { getPost, getPosts, isVisible, renderMarkdown } from "@/lib/writing"
 
 describe("writing", () => {
   it("lists every imported post, newest first, with what a listing needs", () => {
@@ -63,5 +65,39 @@ describe("writing", () => {
   it("never steps down more than one heading level at a time", async () => {
     const html = await renderMarkdown("## A\n\n#### B\n\n### C\n\n#### D\n")
     expect(html).toMatch(/<h2 id="a">[\s\S]*<h3 id="b">[\s\S]*<h3 id="c">[\s\S]*<h4 id="d">/)
+  })
+
+  it("gives every code block a copy button, but not inline code", async () => {
+    const html = await renderMarkdown("Use `x` here.\n\n```python\nprint(1)\n```\n")
+    expect(html.match(/<button[^>]*class="copy-code"/g)).toHaveLength(1)
+    expect(html).toMatch(/<div class="code-block">\s*<button[^>]*>[\s\S]*?<\/button>\s*<pre/)
+    expect(html).toContain("<code>x</code>")
+  })
+
+  it("hides drafts from the live build but shows them while previewing", () => {
+    const draft = { draft: true } as Parameters<typeof isVisible>[0]
+    expect(isVisible(draft, "production")).toBe(false)
+    expect(isVisible(draft, "development")).toBe(true)
+    expect(isVisible({ ...draft, draft: false }, "production")).toBe(true)
+  })
+
+  it("points images written as images/foo.png at the optimised WebP copy", async () => {
+    const html = await renderMarkdown("![Plot](images/loss-curve.png) and ![Gif](./images/Train-Run.gif)")
+    expect(html).toContain('src="/writing/images/loss-curve.webp"')
+    expect(html).toContain('src="/writing/images/train-run.webp"')
+  })
+
+  it("every post has the front matter the site needs, and its images exist", () => {
+    for (const p of getPosts()) {
+      expect(p.title.length, p.slug).toBeGreaterThan(3)
+      expect(p.description.length, `${p.slug}: description over 160 characters`).toBeLessThanOrEqual(160)
+      expect(Array.isArray(p.tags), p.slug).toBe(true)
+      for (const [, src] of p.body.matchAll(/!\[[^\]]*\]\(([^)\s]+)/g)) {
+        const file = src.startsWith("/writing/images/")
+          ? path.join("public", src)
+          : path.join("content/writing", decodeURIComponent(src))
+        expect(fs.existsSync(file), `${p.slug}: missing image ${src}`).toBe(true)
+      }
+    }
   })
 })

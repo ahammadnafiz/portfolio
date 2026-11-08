@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { CodeCopy } from "@/components/code-copy"
 import { Container } from "@/components/frame"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -69,6 +70,7 @@ export default async function PostPage({ params }: Props) {
             </p>
             <h1 className="mt-3 font-serif text-[2.3rem] leading-[1.08] sm:text-[3rem]">{post.title}</h1>
             <div className="post mt-10" dangerouslySetInnerHTML={{ __html: html }} />
+            <CodeCopy />
           </article>
 
           <nav aria-label="More writing" className="mt-16 grid grid-cols-2 gap-4">

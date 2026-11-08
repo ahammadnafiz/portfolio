@@ -15,9 +15,16 @@ export const site = {
   ],
 }
 
+/** Companies linked from the intro and Experience, with self-hosted logos. */
+export const brands = {
+  markopolo: { name: "Markopolo AI", href: "https://markopolo.ai/", logo: "/logos/markopolo.png" },
+  deepdive: { name: "DeepDive", href: "https://www.deepdiveplatform.com/", logo: "/logos/deepdive.png" },
+}
+
 export const experience = [
   {
     org: "Markopolo AI",
+    brand: "markopolo" as const,
     role: "Associate Product Engineer, DeepDive",
     date: "Aug 2026 – Present",
     current: true,

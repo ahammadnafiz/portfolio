@@ -12,8 +12,10 @@ import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import { unified } from "unified"
 import { rehypeCaptionAlt } from "./caption-alt"
+import { rehypeCodeCopy } from "./code-copy"
 import { rehypeHeadingLevels } from "./heading-levels"
 import { rehypeMathLetters } from "./math-letters"
+import { rehypePostImages } from "./post-images"
 
 export type Post = {
   slug: string
@@ -23,7 +25,13 @@ export type Post = {
   description: string
   tags: string[]
   minutes: number
+  /** Drafts show while previewing (pnpm dev) but are left out of the live build. */
+  draft: boolean
   body: string
+}
+
+export function isVisible(post: Pick<Post, "draft">, env = process.env.NODE_ENV): boolean {
+  return !post.draft || env !== "production"
 }
 
 const DIR = path.join(process.cwd(), "content/writing")
@@ -39,6 +47,7 @@ function load(file: string): Post {
     description: String(data.description ?? ""),
     tags: data.tags ?? [],
     minutes: Math.max(1, Math.round(words / 220)),
+    draft: data.draft === true,
     body: content,
   }
 }
@@ -51,6 +60,7 @@ export function getPosts(): Post[] {
     .readdirSync(DIR)
     .filter((f) => f.endsWith(".md"))
     .map(load)
+    .filter((p) => isVisible(p))
     .sort((a, b) => b.date.localeCompare(a.date))
   return cache
 }
@@ -69,6 +79,7 @@ export async function renderMarkdown(md: string): Promise<string> {
     .use(rehypeRaw)
     .use(rehypeHeadingLevels)
     .use(rehypeCaptionAlt)
+    .use(rehypePostImages)
     .use(rehypeSlug)
     // Native MathML: far lighter than KaTeX's HTML (no stylesheet, fonts or deep span trees).
     .use(rehypeKatex, { output: "mathml" })
@@ -79,6 +90,7 @@ export async function renderMarkdown(md: string): Promise<string> {
       defaultLanguage: "text",
       fallbackLanguage: "text",
     })
+    .use(rehypeCodeCopy)
     .use(rehypeStringify)
     .process(md)
   return String(file)

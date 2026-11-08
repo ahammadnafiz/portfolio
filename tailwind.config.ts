@@ -7,8 +7,8 @@ const config: Config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-  			serif: ['var(--font-serif)', 'Georgia', 'serif'],
+  			sans: ['var(--font-sans)', 'var(--font-bengali)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			serif: ['var(--font-serif)', 'var(--font-bengali)', 'Georgia', 'serif'],
   		},
   		screens: {
   			'xs': '475px',

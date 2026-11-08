@@ -1,13 +1,12 @@
 import Link from "next/link"
 import { Container } from "./frame"
-import { DhakaClock } from "./dhaka-clock"
 import { ThemeToggle } from "./theme-toggle"
 
 const NAV: { label: string; href: string; tiny?: string }[] = [
   { label: "Work", href: "/#work" },
   { label: "Writing", href: "/writing/" },
-  // Dropped on very narrow phones (under 400px) so the header fits on one line.
-  { label: "Experience", href: "/#experience", tiny: "max-[399px]:hidden" },
+  // Dropped on very narrow phones (under 390px) so the header fits on one line.
+  { label: "Experience", href: "/#experience", tiny: "max-[389px]:hidden" },
   { label: "Contact", href: "/#contact" },
 ]
 
@@ -24,9 +23,6 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <span className="hidden font-mono text-xs sm:inline" title="Local time in Dhaka">
-            <DhakaClock /> Dhaka
-          </span>
           <ThemeToggle />
         </nav>
       </Container>
