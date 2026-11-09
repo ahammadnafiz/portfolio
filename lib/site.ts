@@ -8,6 +8,15 @@ export const SHARE_IMAGE = {
   alt: "Ahammad Nafiz, AI and machine learning engineer in Dhaka",
 }
 
+export const OG_SIZE = { width: 1200, height: 630 }
+
+/** A post's or project's own share image, drawn at build time by app/og/. */
+export const ogFor = (kind: "writing" | "work", slug: string, alt: string) => ({
+  url: `${SITE_URL}/og/${kind}/${slug}.png`,
+  ...OG_SIZE,
+  alt,
+})
+
 export const site = {
   name: "Ahammad Nafiz",
   title: "Associate Product Engineer, DeepDive at Markopolo AI",

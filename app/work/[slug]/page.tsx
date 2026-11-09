@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { Status } from "@/components/status"
 import { getProject, projects } from "@/lib/projects"
-import { SHARE_IMAGE, SITE_URL } from "@/lib/site"
+import { SITE_URL, ogFor } from "@/lib/site"
 
 export const dynamicParams = false
 
@@ -24,11 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Lower-case the first letter for mid-title use, but leave acronyms like "AI" alone.
   const lead = /^[A-Z]{2}/.test(kind) ? kind : kind[0].toLowerCase() + kind.slice(1)
   const title = `${project.name}, ${lead}`
+  const image = ogFor("work", project.slug, title)
   return {
     title,
     description: project.summary,
     alternates: { canonical: `/work/${project.slug}/` },
-    openGraph: { title, description: project.summary, url: `/work/${project.slug}/`, images: [SHARE_IMAGE] },
+    openGraph: { title, description: project.summary, url: `/work/${project.slug}/`, images: [image] },
+    twitter: { title, description: project.summary, images: [image.url] },
   }
 }
 

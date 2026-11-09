@@ -2,7 +2,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
 import path from "node:path"
 import { describe, expect, it } from "vitest"
 import { projects } from "@/lib/projects"
-import { getPosts } from "@/lib/writing"
+import { getPosts, langOf } from "@/lib/writing"
 
 // Checks the static export in out/. Run with `pnpm test:build` after `pnpm build`.
 const OUT = path.resolve(__dirname, "../out")
@@ -34,12 +34,33 @@ describe("static build", () => {
 
   it("gives every page a share preview image for Facebook, LinkedIn and X", () => {
     const pages = textFiles(OUT).filter((f) => f.endsWith(".html") && !f.endsWith("404.html"))
+    const bangla = new Set(getPosts().filter((p) => langOf(p) === "bn").map((p) => p.slug))
     const missing = pages.filter((f) => {
       const html = readFileSync(f, "utf8")
-      return !html.includes('property="og:image" content="https://ahammadnafiz.com/og-image.png"') ||
-        !html.includes('name="twitter:image" content="https://ahammadnafiz.com/og-image.png"')
+      // Posts and projects get their own image (except Bangla posts); other pages share the site image.
+      const match = path.relative(OUT, f).match(/^(writing|work)\/([^/]+)\/index\.html$/)
+      const own = match && !bangla.has(match[2]) ? match : null
+      const image = own ? `https://ahammadnafiz.com/og/${own[1]}/${own[2]}.png` : "https://ahammadnafiz.com/og-image.png"
+      if (own && !existsSync(path.join(OUT, "og", own[1], `${own[2]}.png`))) return true
+      return !html.includes(`property="og:image" content="${image}"`) || !html.includes(`name="twitter:image" content="${image}"`)
     })
     expect(missing.map((f) => path.relative(OUT, f))).toEqual([])
+  })
+
+  it("draws each post's and project's share image as a 1200x630 PNG", () => {
+    const posts = getPosts().filter((p) => langOf(p) === "en")
+    const files = [...posts.map((p) => `writing/${p.slug}`), ...projects.map((p) => `work/${p.slug}`)]
+    for (const f of files) {
+      const png = readFileSync(path.join(OUT, "og", `${f}.png`))
+      expect(png.subarray(1, 4).toString(), f).toBe("PNG")
+      expect([png.readUInt32BE(16), png.readUInt32BE(20)], f).toEqual([1200, 630])
+    }
+  })
+
+  it("offers a site icon Google Search can use (a multiple of 48px)", () => {
+    const html = readFileSync(path.join(OUT, "index.html"), "utf8")
+    expect(html).toContain('<link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48"/>')
+    expect(existsSync(path.join(OUT, "favicon-48x48.png"))).toBe(true)
   })
 
   it("no longer points at the old GitHub Pages portfolio", () => {

@@ -6,7 +6,7 @@ import { CodeCopy } from "@/components/code-copy"
 import { Container } from "@/components/frame"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
-import { SHARE_IMAGE, SITE_URL } from "@/lib/site"
+import { SHARE_IMAGE, SITE_URL, ogFor } from "@/lib/site"
 import { formatDate, getPost, getPosts, langOf, renderMarkdown } from "@/lib/writing"
 
 export const dynamicParams = false
@@ -21,6 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost((await params).slug)
   if (!post) return {}
   const url = `/writing/${post.slug}/`
+  // Bangla posts have no image of their own (see app/og/writing).
+  const image = langOf(post) === "en" ? ogFor("writing", post.slug, post.title) : SHARE_IMAGE
   return {
     title: post.title,
     description: post.description,
@@ -32,8 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       url,
       publishedTime: post.date,
-      images: [SHARE_IMAGE],
+      images: [image],
     },
+    twitter: { title: post.title, description: post.description, images: [image.url] },
   }
 }
 
