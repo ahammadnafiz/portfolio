@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
   },
-  other: { me: ["mailto:ahammadnafiz86@gmail.com", "https://github.com/ahammadnafiz"] },
+  other: { me: ["mailto:hello@ahammadnafiz.com", "https://github.com/ahammadnafiz"] },
 }
 
 export const viewport: Viewport = {
@@ -96,7 +96,7 @@ const JSON_LD = {
       url: `${SITE_URL}/`,
       mainEntityOfPage: { "@id": `${SITE_URL}/#profilepage` },
       image: SHARE_IMAGE.url,
-      email: "mailto:ahammadnafiz86@gmail.com",
+      email: "mailto:hello@ahammadnafiz.com",
       jobTitle: "Associate Product Engineer, DeepDive",
       nationality: { "@type": "Country", name: "Bangladesh" },
       address: {

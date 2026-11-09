@@ -21,7 +21,7 @@ export const site = {
   name: "Ahammad Nafiz",
   title: "Associate Product Engineer, DeepDive at Markopolo AI",
   location: "Dhaka, Bangladesh",
-  email: "ahammadnafiz86@gmail.com",
+  email: "hello@ahammadnafiz.com",
   cv: "/Ahammad-Nafiz-CV.pdf",
   description:
     "Ahammad Nafiz is an AI and machine learning engineer in Dhaka, Bangladesh. Associate Product Engineer at Markopolo AI, building RAG systems, LLM agents and agent memory.",
