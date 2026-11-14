@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Container, Rule } from "./frame"
+import { Container } from "./frame"
 import { ThemeToggle } from "./theme-toggle"
 
 const NAV: { label: string; href: string; tiny?: string }[] = [
@@ -12,7 +12,7 @@ const NAV: { label: string; href: string; tiny?: string }[] = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 bg-background">
       <Container className="flex h-14 items-center justify-between gap-2 sm:gap-4">
         <Link href="/" className="font-serif text-[1.6rem] leading-none">
           Nafiz
@@ -26,9 +26,8 @@ export function SiteHeader() {
           <ThemeToggle />
         </nav>
       </Container>
-      <Container>
-        <Rule />
-      </Container>
+      {/* Content scrolling up fades out under the header instead of hitting a hard edge. */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-full h-10 bg-gradient-to-b from-background to-transparent" />
     </header>
   )
 }

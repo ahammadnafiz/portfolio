@@ -4,7 +4,7 @@ import { formatDate, langOf, type Post } from "@/lib/writing"
 /** Plain rows: title and date, with the description underneath. */
 export function PostList({ posts }: { posts: Post[] }) {
   return (
-    <ul className="divide-y">
+    <ul className="fade-divide">
       {posts.map((p) => (
         <li key={p.slug}>
           {/* No prefetch: math-heavy posts carry large page data, and a list shows many at once. */}

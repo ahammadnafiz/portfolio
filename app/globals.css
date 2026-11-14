@@ -144,10 +144,10 @@
   .hl-violet { --hl: var(--hl-violet); }
 }
 
-/* Hairline that fades in from the left and out to the right, past the text column where there's room. */
-.fade-rule {
-  @apply -mx-5 h-px sm:-mx-6 lg:-mx-16;
-  background: linear-gradient(90deg, transparent, hsl(var(--border)) 14%, hsl(var(--border)) 86%, transparent);
+/* Row dividers that fade in at the left and out at the right. */
+.fade-divide > * + * {
+  border-top: 1px solid;
+  border-image: linear-gradient(90deg, transparent, hsl(var(--border)) 15%, hsl(var(--border)) 85%, transparent) 1;
 }
 
 /* A soft light that sweeps across the job title, then rests off-text before the next pass. */

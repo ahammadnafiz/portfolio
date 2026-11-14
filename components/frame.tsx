@@ -5,12 +5,7 @@ export function Container({ children, className = "" }: { children: ReactNode; c
   return <div className={`mx-auto w-full max-w-[720px] px-5 sm:px-6 ${className}`}>{children}</div>
 }
 
-/** A sharp hairline that runs a little past the column and fades out at both ends. */
-export function Rule({ className = "" }: { className?: string }) {
-  return <div aria-hidden className={`fade-rule ${className}`} />
-}
-
-/** A numbered section: a rule, then "01  Title", then the content. */
+/** A numbered section: "01  Title", then the content. */
 export function Section({
   id,
   n,
@@ -25,8 +20,7 @@ export function Section({
   children: ReactNode
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="pt-12 sm:pt-16">
-      <Rule className="mb-8 sm:mb-10" />
+    <section id={id} aria-labelledby={`${id}-title`} className="pt-14 sm:pt-20">
       <div className="mb-6 flex items-baseline justify-between gap-4">
         <h2 id={`${id}-title`} className="flex items-baseline gap-3">
           <span className="font-mono text-xs text-muted-foreground">{n}</span>

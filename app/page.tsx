@@ -1,6 +1,6 @@
 import { FileText } from "lucide-react"
 import { BrandLink } from "@/components/brand-link"
-import { Container, Rule, Section } from "@/components/frame"
+import { Container, Section } from "@/components/frame"
 import { GitHubLogo, GmailLogo, LinkedInLogo, XLogo } from "@/components/icons"
 import Link from "next/link"
 import { PostList } from "@/components/post-list"
@@ -9,7 +9,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { DhakaClock } from "@/components/dhaka-clock"
 import { projects } from "@/lib/projects"
-import { experience, recognition, site } from "@/lib/site"
+import { experience, site } from "@/lib/site"
 import { getPosts } from "@/lib/writing"
 
 /** Each platform's own logo. The CV is a file, not a platform, so it gets a plain document icon. */
@@ -71,8 +71,7 @@ export default function Home() {
             </li>
           </ul>
 
-          <Rule className="mt-8" />
-          <nav aria-label="Links" className="grid grid-cols-5 divide-x">
+          <nav aria-label="Links" className="mt-8 grid grid-cols-5">
             {LINKS.map(({ label, href }) => {
               const Icon = LINK_ICONS[label]
               const external = href.startsWith("http")
@@ -98,7 +97,6 @@ export default function Home() {
               )
             })}
           </nav>
-          <Rule />
 
           <Section
             id="work"
@@ -115,7 +113,7 @@ export default function Home() {
               </a>
             }
           >
-            <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2">
+            <ul className="space-y-10">
               {projects.slice(0, 2).map((p) => (
                 <li key={p.slug}>
                   <ProjectCard project={p} />
@@ -141,7 +139,7 @@ export default function Home() {
           </Section>
 
           <Section id="experience" n="03" title="Experience">
-            <ul className="divide-y">
+            <ul className="fade-divide">
               {experience.map((e) => (
                 <li key={e.role} className="py-4 first:pt-0">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -162,21 +160,7 @@ export default function Home() {
             </ul>
           </Section>
 
-          <Section id="recognition" n="04" title="Recognition">
-            <ul className="divide-y">
-              {recognition.map((r) => (
-                <li key={r.title} className="flex items-baseline justify-between gap-4 py-3 first:pt-0">
-                  <div>
-                    <p className="text-sm font-medium">{r.title}</p>
-                    <p className="text-sm text-muted-foreground">{r.note}</p>
-                  </div>
-                  <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">{r.date}</span>
-                </li>
-              ))}
-            </ul>
-          </Section>
-
-          <Section id="contact" n="05" title="Contact">
+          <Section id="contact" n="04" title="Contact">
             <p className="max-w-[46ch] leading-relaxed text-muted-foreground">
               Hiring an AI or machine learning engineer, want to talk research, or have a good problem? My inbox is open.
             </p>
